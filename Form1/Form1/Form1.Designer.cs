@@ -44,6 +44,10 @@ namespace Form1
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.button5 = new System.Windows.Forms.Button();
+            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.button6 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -89,7 +93,6 @@ namespace Form1
             this.label1.Size = new System.Drawing.Size(89, 15);
             this.label1.TabIndex = 4;
             this.label1.Text = "productname";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
@@ -178,11 +181,51 @@ namespace Form1
             this.label5.TabIndex = 14;
             this.label5.Text = "検索CD";
             // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(259, 379);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(241, 109);
+            this.button5.TabIndex = 15;
+            this.button5.Text = "データ削除";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // textBox6
+            // 
+            this.textBox6.Location = new System.Drawing.Point(509, 466);
+            this.textBox6.Name = "textBox6";
+            this.textBox6.Size = new System.Drawing.Size(114, 22);
+            this.textBox6.TabIndex = 16;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(506, 448);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(57, 15);
+            this.label6.TabIndex = 17;
+            this.label6.Text = "検索CD";
+            // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(12, 379);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(241, 109);
+            this.button6.TabIndex = 18;
+            this.button6.Text = "テーブル削除";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 545);
+            this.Controls.Add(this.button6);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.textBox6);
+            this.Controls.Add(this.button5);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.textBox5);
             this.Controls.Add(this.textBox3);
@@ -224,6 +267,10 @@ namespace Form1
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button button6;
     }
 }
 

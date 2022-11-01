@@ -41,11 +41,6 @@ namespace Form1
 
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void button2_Click(object sender, EventArgs e)
         {
             using (SQLiteConnection con = new SQLiteConnection("Data Source=test.db"))
@@ -93,7 +88,7 @@ namespace Form1
                 {
                     SQLiteCommand cmd = con.CreateCommand();
                     // アップデート
-                    cmd.CommandText = "UPDATE FROM t_product set productname = @Product, price = @Price WHERE CD = @Cd";
+                    cmd.CommandText = "UPDATE t_product SET productname = @Product, price = @Price WHERE CD = @Cd";
                     // パラメータセット
                     cmd.Parameters.Add("Product", System.Data.DbType.String);
                     cmd.Parameters.Add("Price", System.Data.DbType.Int64);
@@ -102,6 +97,47 @@ namespace Form1
                     cmd.Parameters["Product"].Value = textBox3.Text;
                     cmd.Parameters["Price"].Value = int.Parse(textBox4.Text);
                     cmd.Parameters["Cd"].Value = int.Parse(textBox5.Text);
+                    cmd.ExecuteNonQuery();
+                    // コミット
+                    trans.Commit();
+                }
+                // con閉じる
+                con.Close();
+            }
+        }
+        private void button5_Click(object sender, EventArgs e)
+        {
+            using (SQLiteConnection con = new SQLiteConnection("Data Source=test.db"))
+            {
+                con.Open();// con開く
+                using (SQLiteTransaction trans = con.BeginTransaction())
+                {
+                    SQLiteCommand cmd = con.CreateCommand();
+                    // デリート
+                    cmd.CommandText = "DELETE FROM t_product WHERE CD = @Cd";
+                    // パラメータセット
+                    cmd.Parameters.Add("Cd", System.Data.DbType.Int64);
+                    // データ追加
+                    cmd.Parameters["Cd"].Value = int.Parse(textBox6.Text);
+                    cmd.ExecuteNonQuery();
+                    // コミット
+                    trans.Commit();
+                }
+                // con閉じる
+                con.Close();
+            }
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            using (SQLiteConnection con = new SQLiteConnection("Data Source=test.db"))
+            {
+                con.Open();// con開く
+                using (SQLiteTransaction trans = con.BeginTransaction())
+                {
+                    SQLiteCommand cmd = con.CreateCommand();
+                    // テーブル削除
+                    cmd.CommandText = "DROP TABLE t_product";
                     cmd.ExecuteNonQuery();
                     // コミット
                     trans.Commit();
