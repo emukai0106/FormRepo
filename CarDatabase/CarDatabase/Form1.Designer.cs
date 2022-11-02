@@ -29,13 +29,33 @@ namespace CarDatabase
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.createTableButton = new System.Windows.Forms.Button();
+            this.SuspendLayout();
+            // 
+            // createTableButton
+            // 
+            this.createTableButton.Location = new System.Drawing.Point(12, 12);
+            this.createTableButton.Name = "createTableButton";
+            this.createTableButton.Size = new System.Drawing.Size(130, 66);
+            this.createTableButton.TabIndex = 0;
+            this.createTableButton.Text = "テーブル作成";
+            this.createTableButton.Click += new System.EventHandler(this.createTableButton_Click);
+            // 
+            // Form1
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.createTableButton);
+            this.Name = "Form1";
             this.Text = "Form1";
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private System.Windows.Forms.Button createTableButton;
     }
 }
 
