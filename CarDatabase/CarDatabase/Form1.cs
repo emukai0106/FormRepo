@@ -18,22 +18,34 @@ namespace CarDatabase
             InitializeComponent();
         }
 
+        /// <summary>
+        /// createTableButtonがクリックされたとき
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void createTableButton_Click(object sender, EventArgs e)
         {
-            // SQLiteConnectionの引数はstring型
+            if (System.IO.File.Exists("database.db"))
+            {
+
+            }
+
+            // SQLiteConnectionの引数はstring型でコマンドを格納
             using (SQLiteConnection connection = new SQLiteConnection("Data Source=database.db"))
             {
+                // コネクションを開く
                 connection.Open();
                 using (SQLiteCommand command = connection.CreateCommand())
                 {
-                    //テーブルm_vehicleを作成
-                    command.CommandText = ("CREATE TABLE m_vehicle(ID INTEGER AUTOINCREMENT, name TEXT, manufacturer_id INTEGER, model_year INTEGER)");
+                    // テーブルm_vehicleが存在しなければ作成する(CREATE TABLE IF NOT EXISTS)
+                    command.CommandText = ("CREATE TABLE IF NOT EXISTS m_vehicle(ID INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, manufacturer_id INTEGER, model_year INTEGER)");
                     command.ExecuteNonQuery();
 
-                    //テーブルm_manufacturerを作成
-                    //command.CommandText = ("CREATE TABLE m_manufacturer(ID INTEGER AUTOINCREMENT, name TEXT, country TEXT)");
-                    //command.ExecuteNonQuery();
+                    // テーブルm_manufacturerが存在しなければ作成する(CREATE TABLE IF NOT EXISTS)
+                    command.CommandText = ("CREATE TABLE IF NOT EXISTS m_manufacturer(ID INTEGER PRIMARY KEY  AUTOINCREMENT, name TEXT, country TEXT)");
+                    command.ExecuteNonQuery();
                 }
+                // コネクションを閉じる
                 connection.Close();
             }
         }

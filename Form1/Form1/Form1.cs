@@ -32,7 +32,7 @@ namespace Form1
                 con.Open();
                 using (SQLiteCommand command = con.CreateCommand())
                 {
-                    command.CommandText = "create table t_product(CD INTEGER PRIMARY KEY AUTOINCREMENT, productname TEXT, price INTEGER)";
+                    command.CommandText = "CREATE TABELE t_product(CD INTEGER PRIMARY KEY AUTOINCREMENT, productname TEXT, price INTEGER)";
                     command.ExecuteNonQuery();
                 }
                 // con閉じる
