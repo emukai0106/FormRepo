@@ -93,6 +93,9 @@ namespace CarDatabase
                     cmd.Parameters.Add("ManufactureId", System.Data.DbType.Int64);
                     cmd.Parameters.Add("ModelYear", System.Data.DbType.Int64);
 
+
+                    // 現状nullを処理できないため対処が必要
+
                     // データ追加
                     cmd.Parameters["Name"].Value = GetDbString(registerVehicleNameTextbox.Text);
                     cmd.Parameters["ManufactureId"].Value = int.Parse(GetDbString(registerVehicleManufactureIdTextbox.Text));
