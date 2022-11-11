@@ -25,13 +25,14 @@ namespace CarDatabase
         /// <returns></returns>
         private string GetDbString(String data)
         {
+            // 文字列が空白かnullならnullを返す
             if (String.IsNullOrEmpty(data))
             {
                 return null;
             }
-
             else
             {
+                // {0}にdataを代入して返す
                 return String.Format("{0}", data);
             }
 
@@ -200,6 +201,7 @@ namespace CarDatabase
                     if (GetDbString(deleteSearchVehicleIdTextbox.Text) == null)
                     {
                         // コマンド文字列指定
+                        // 年式がMinModelYearからMaxModelYearまでを削除
                         cmd.CommandText = "DELETE FROM m_vehicle WHERE model_year BETWEEN @MinModelYear AND @MaxModelYear";
 
                         // パラメータ追加
@@ -235,7 +237,15 @@ namespace CarDatabase
         {
             //削除用検索のチェックボックスを全項目チェックする
         }
-    }
 
-    
+        private void showForm1Button_Click(object sender, EventArgs e)
+        {
+            // 現在の画面を非表示にする
+            this.Visible = false;
+
+            // Form2を表示
+            Form2 f2 = new Form2();
+            f2.Show();
+        }
+    }    
 }

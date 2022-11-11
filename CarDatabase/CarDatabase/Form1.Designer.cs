@@ -59,6 +59,7 @@ namespace CarDatabase
             this.deleteSearchVehicleMaxModelYearTextbox = new System.Windows.Forms.TextBox();
             this.deleteSearchVehicleMaxModelYearLabel = new System.Windows.Forms.Label();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.showForm1Button = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.vehicleDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -306,11 +307,22 @@ namespace CarDatabase
             this.checkBox1.Text = "checkBox1";
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
+            // showForm1Button
+            // 
+            this.showForm1Button.Location = new System.Drawing.Point(916, 582);
+            this.showForm1Button.Name = "showForm1Button";
+            this.showForm1Button.Size = new System.Drawing.Size(130, 93);
+            this.showForm1Button.TabIndex = 30;
+            this.showForm1Button.Text = "Form1";
+            this.showForm1Button.UseVisualStyleBackColor = true;
+            this.showForm1Button.Click += new System.EventHandler(this.showForm1Button_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1058, 687);
+            this.Controls.Add(this.showForm1Button);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.deleteSearchVehicleMaxModelYearLabel);
             this.Controls.Add(this.deleteSearchVehicleMaxModelYearTextbox);
@@ -378,6 +390,7 @@ namespace CarDatabase
         private System.Windows.Forms.TextBox deleteSearchVehicleMaxModelYearTextbox;
         private System.Windows.Forms.Label deleteSearchVehicleMaxModelYearLabel;
         private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.Button showForm1Button;
     }
 }
 
