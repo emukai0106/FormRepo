@@ -41,18 +41,13 @@ namespace CarDatabase
         }
 
         /// <summary>
-        /// createTableButtonがクリックされたとき
+        /// createVehicleTableButtonがクリックされたとき
         /// テーブルを作成する
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void createTableButton_Click(object sender, EventArgs e)
         {
-            if (System.IO.File.Exists("database.db"))
-            {
-
-            }
-
             // SQLiteConnectionの引数はstring型でコマンドを格納
             using (SQLiteConnection con = new SQLiteConnection("Data Source=database.db"))
             {
@@ -62,10 +57,6 @@ namespace CarDatabase
                 {
                     // テーブルm_vehicleが存在しなければ作成する(CREATE TABLE IF NOT EXISTS)
                     cmd.CommandText = ("CREATE TABLE IF NOT EXISTS m_vehicle(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, manufacturer_id INTEGER, model_year INTEGER)");
-                    cmd.ExecuteNonQuery();
-
-                    // テーブルm_manufacturerが存在しなければ作成する(CREATE TABLE IF NOT EXISTS)
-                    cmd.CommandText = ("CREATE TABLE IF NOT EXISTS m_manufacturer(id INTEGER PRIMARY KEY  AUTOINCREMENT, name TEXT NOT NULL, country TEXT)");
                     cmd.ExecuteNonQuery();
                 }
                 // コネクションを閉じる
@@ -89,11 +80,11 @@ namespace CarDatabase
                     SQLiteCommand cmd = con.CreateCommand();
 
                     // インサート
-                    cmd.CommandText = "INSERT INTO m_vehicle (name, manufacturer_id, model_year) VALUES (@Name, @ManufactureId, @ModelYear)";
+                    cmd.CommandText = "INSERT INTO m_vehicle (name, manufacturer_id, model_year) VALUES (@Name, @ManufacturerId, @ModelYear)";
 
                     // パラメータセット
                     cmd.Parameters.Add("Name", System.Data.DbType.String);
-                    cmd.Parameters.Add("ManufactureId", System.Data.DbType.Int64);
+                    cmd.Parameters.Add("ManufacturerId", System.Data.DbType.Int64);
                     cmd.Parameters.Add("ModelYear", System.Data.DbType.Int64);
 
 
@@ -101,7 +92,7 @@ namespace CarDatabase
 
                     // データ追加
                     cmd.Parameters["Name"].Value = GetDbString(registerVehicleNameTextbox.Text);
-                    cmd.Parameters["ManufactureId"].Value = int.Parse(GetDbString(registerVehicleManufactureIdTextbox.Text));
+                    cmd.Parameters["ManufacturerId"].Value = int.Parse(GetDbString(registerVehicleManufactureIdTextbox.Text));
                     cmd.Parameters["ModelYear"].Value = int.Parse(GetDbString(registerVehicleModelYearTextbox.Text));
                     cmd.ExecuteNonQuery();
 
@@ -114,7 +105,7 @@ namespace CarDatabase
         }
 
         /// <summary>
-        /// deleteTableButtonがクリックされたとき
+        /// deleteVehicleTableButtonがクリックされたとき
         /// テーブルを削除する
         /// </summary>
         /// <param name="sender"></param>
@@ -130,10 +121,6 @@ namespace CarDatabase
 
                     // テーブルm_vehicleが存在すれば削除
                     cmd.CommandText = "DROP TABLE IF EXISTS m_vehicle";
-                    cmd.ExecuteNonQuery();
-
-                    // テーブルm_vehicleが存在すれば削除
-                    cmd.CommandText = "DROP TABLE IF EXISTS m_manufacture";
                     cmd.ExecuteNonQuery();
 
                     // コミット
@@ -153,17 +140,17 @@ namespace CarDatabase
                 {
                     SQLiteCommand cmd = con.CreateCommand();
                     // インサート
-                    cmd.CommandText = "UPDATE m_vehicle SET name = @Name, manufacturer_id = @ManufactureId, model_year = @ModelYear WHERE id = @Id";
+                    cmd.CommandText = "UPDATE m_vehicle SET name = @Name, manufacturer_id = @ManufacturerId, model_year = @ModelYear WHERE id = @Id";
 
                     // パラメータセット
                     cmd.Parameters.Add("Name", System.Data.DbType.String);
-                    cmd.Parameters.Add("ManufactureId", System.Data.DbType.Int64);
+                    cmd.Parameters.Add("ManufacturerId", System.Data.DbType.Int64);
                     cmd.Parameters.Add("ModelYear", System.Data.DbType.Int64);
                     cmd.Parameters.Add("Id", System.Data.DbType.Int64);
 
                     // データ追加
                     cmd.Parameters["Name"].Value = GetDbString(updateVehicleNameTextbox.Text);
-                    cmd.Parameters["ManufactureId"].Value = int.Parse(GetDbString(updateVehicleManufactureIdTextbox.Text));
+                    cmd.Parameters["ManufacturerId"].Value = int.Parse(GetDbString(updateVehicleManufactureIdTextbox.Text));
                     cmd.Parameters["ModelYear"].Value = int.Parse(GetDbString(updateVehicleModelYearTextbox.Text));
                     cmd.Parameters["Id"].Value = int.Parse(GetDbString(updateSearchVehicleIdTextbox.Text));
                     cmd.ExecuteNonQuery();
@@ -184,7 +171,9 @@ namespace CarDatabase
                 DataTable dataTable = new DataTable();
 
                 // 表示
-                SQLiteDataAdapter adapter = new SQLiteDataAdapter("SELECT * FROM m_vehicle", con);
+                // メーカーIDが入力されていればm_manufacturerを参照して結合(V = m_vehicle, M = m_manufacturer)
+                SQLiteDataAdapter adapter = new SQLiteDataAdapter("SELECT V.ID AS '車両ID', V.name AS '車両名', M.name AS 'メーカー名', " +
+                    "V.model_year AS '年式' FROM m_vehicle AS V LEFT OUTER JOIN m_manufacturer AS M ON V.manufacturer_id = M.ID", con);
                 adapter.Fill(dataTable);
                 vehicleDataGridView.DataSource = dataTable;
             }
@@ -204,15 +193,18 @@ namespace CarDatabase
 
                     string commandText = "DELETE FROM m_vehicle WHERE ";
 
+                    // IDで検索する場合
                     if (checks.deleteChecks.id)
                     {
+                        string min = GetDbString(deleteSearchVehicleMinIdTextbox.Text);
+                        string max = GetDbString(deleteSearchVehicleMaxIdTextbox.Text);
+
                         // パラメータ追加
                         cmd.Parameters.Add("MinId", System.Data.DbType.Int64);
                         cmd.Parameters.Add("MaxId", System.Data.DbType.Int64);
 
                         // 上限、下限ともに未入力の場合
-                        if (GetDbString(deleteSearchVehicleMinIdTextbox.Text) == null
-                            & GetDbString(deleteSearchVehicleMaxIdTextbox.Text) == null)
+                        if (min == null & max == null)
                         {
                             // 何もしない
                             return;
@@ -220,13 +212,13 @@ namespace CarDatabase
                         }
 
                         // 下限が未入力の場合
-                        else if (GetDbString(deleteSearchVehicleMinIdTextbox.Text) == null)
+                        else if (min == null)
                         {
                             // IDがMaxId以下を削除
                             commandText = commandText + "id <= @MaxId AND ";
 
                             // パラメータを設定
-                            cmd.Parameters["MaxId"].Value = int.Parse(GetDbString(deleteSearchVehicleMaxIdTextbox.Text));
+                            cmd.Parameters["MaxId"].Value = int.Parse(max);
                         }
 
                         // 上限が未入力の場合
@@ -236,7 +228,7 @@ namespace CarDatabase
                             commandText = commandText + "id >= @MinId AND ";
 
                             // パラメータを設定
-                            cmd.Parameters["MinId"].Value = int.Parse(GetDbString(deleteSearchVehicleMinIdTextbox.Text));
+                            cmd.Parameters["MinId"].Value = int.Parse(min);
                         }
                         // 上限、下限ともに入力されている場合
                         else
@@ -245,31 +237,90 @@ namespace CarDatabase
                             commandText = commandText + "id BETWEEN @MinId AND @MaxId AND ";
 
                             // パラメータを設定
-                            cmd.Parameters["MinId"].Value = int.Parse(GetDbString(deleteSearchVehicleMinIdTextbox.Text));
-                            cmd.Parameters["MaxId"].Value = int.Parse(GetDbString(deleteSearchVehicleMaxIdTextbox.Text));
+                            cmd.Parameters["MinId"].Value = int.Parse(min);
+                            cmd.Parameters["MaxId"].Value = int.Parse(max);
                         }
                     }
 
                     // 年式で検索する場合
                     if (checks.deleteChecks.modelYear)
                     {
-                        // コマンド文字列指定
-                        // 年式がMinModelYearからMaxModelYearまでを削除
-                        commandText = commandText + "model_year BETWEEN @MinModelYear AND @MaxModelYear AND ";
+                        string min = GetDbString(deleteSearchVehicleMinModelYearTextbox.Text);
+                        string max = GetDbString(deleteSearchVehicleMaxModelYearTextbox.Text);
 
                         // パラメータ追加
                         cmd.Parameters.Add("MinModelYear", System.Data.DbType.Int64);
                         cmd.Parameters.Add("MaxModelYear", System.Data.DbType.Int64);
 
-                        // パラメータを設定
-                        cmd.Parameters["MinModelYear"].Value = int.Parse(GetDbString(deleteSearchVehicleMinModelYearTextbox.Text));
-                        cmd.Parameters["MaxModelYear"].Value = int.Parse(GetDbString(deleteSearchVehicleMaxModelYearTextbox.Text));
+                        // 上限、下限ともに未入力の場合
+                        if (min == null & max == null)
+                        {
+                            // 何もしない
+                            return;
+                            // 本来はポップアップを表示する
+                        }
+
+                        // 下限が未入力の場合
+                        else if (min == null)
+                        {
+                            // IDがMaxId以下を削除
+                            commandText = commandText + "model_year <= @MaxModelYear AND ";
+
+                            // パラメータを設定
+                            cmd.Parameters["MaxModelYear"].Value = int.Parse(max);
+                        }
+
+                        // 上限が未入力の場合
+                        else if (max == null)
+                        {
+                            // IDがMinId以上を削除
+                            commandText = commandText + "model_year >= @MinModelYear AND ";
+
+                            // パラメータを設定
+                            cmd.Parameters["MinModelYear"].Value = int.Parse(min);
+                        }
+                        // 上限、下限ともに入力されている場合
+                        else
+                        {
+                            // IDがMinIdからMaxIdまでを削除
+                            commandText = commandText + "model_year BETWEEN @MinModelYear AND @MaxModelYear AND ";
+
+                            // パラメータを設定
+                            cmd.Parameters["MinModelYear"].Value = int.Parse(min);
+                            cmd.Parameters["MaxModelYear"].Value = int.Parse(max);
+                        }
+                    }
+
+                    // 名前で検索する場合
+                    if (checks.deleteChecks.name)
+                    {
+                        string name = GetDbString(deleteSearchVehicleNameTextbox.Text);
+
+                        // パラメータ追加
+                        cmd.Parameters.Add("Name", System.Data.DbType.String);
+
+                        // 車両名が未入力の場合
+                        if (name == null)
+                        {
+                            // 何もしない
+                            return;
+                            // 本来はポップアップを表示する
+                        }
+                        // 上限、下限ともに入力されている場合
+                        else
+                        {
+                            // 車両名がNameに一致するものを削除
+                            commandText = commandText + "name LIKE '%' || @Name || '%' AND ";
+
+                            // パラメータを設定
+                            cmd.Parameters["Name"].Value = name;
+                        }
                     }
 
                     // コマンドがANDで終わっていれば末尾を削除
-                    if (commandText.EndsWith("AND "))
+                    if (commandText.EndsWith(" AND "))
                     {
-                        const int REMOVE_CHARS = 4;
+                        const int REMOVE_CHARS = 5;
 
                         commandText = commandText.Remove(commandText.Length - REMOVE_CHARS);
                     }
@@ -290,6 +341,7 @@ namespace CarDatabase
         {
             //削除用絞り込みチェックボックスを全項目確認する
             checks.deleteChecks.id = deleteSearchVehicleIdCheckBox.Checked;
+            checks.deleteChecks.name = deleteSearchVehicleNameCheckBox.Checked;
             checks.deleteChecks.modelYear = deleteSearchVehicleModelYearCheckBox.Checked;
         }
 
