@@ -63,7 +63,7 @@ namespace CarDatabase
                 using (SQLiteCommand cmd = con.CreateCommand())
                 {
                     // テーブルm_manufacturerが存在しなければ作成する(CREATE TABLE IF NOT EXISTS)
-                    cmd.CommandText = ("CREATE TABLE IF NOT EXISTS m_manufacturer(id INTEGER PRIMARY KEY  AUTOINCREMENT, name TEXT NOT NULL, country TEXT)");
+                    cmd.CommandText = ("CREATE TABLE IF NOT EXISTS m_manufacturer(id INTEGER PRIMARY KEY  AUTOINCREMENT, name TEXT NOT NULL UNIQUE, country TEXT)");
                     cmd.ExecuteNonQuery();
                 }
                 // コネクションを閉じる
