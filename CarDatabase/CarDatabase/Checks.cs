@@ -22,6 +22,7 @@ namespace CarDatabase
             public bool torque = false;
             public bool length = false;
             public bool width = false;
+            public bool dateTime = false;
         }
         public DeleteChecks deleteChecks = new DeleteChecks();
 
