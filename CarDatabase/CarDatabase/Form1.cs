@@ -86,12 +86,14 @@ namespace CarDatabase
                     SQLiteCommand cmd = con.CreateCommand();
 
                     // インサート
-                    cmd.CommandText = "INSERT INTO m_vehicle (name, manufacturer_id, model_year, date_time) VALUES (@Name, @ManufacturerId, @ModelYear, CURRENT_TIMESTAMP)";
+                    cmd.CommandText = "INSERT INTO m_vehicle (name, manufacturer_id, model_year, date_time) VALUES (@Name, @ManufacturerId, @ModelYear, " +
+                        "CONVERT(DATETIME, @DateTime))";
 
                     // パラメータセット
                     cmd.Parameters.Add("Name", System.Data.DbType.String);
                     cmd.Parameters.Add("ManufacturerId", System.Data.DbType.Int64);
                     cmd.Parameters.Add("ModelYear", System.Data.DbType.Int64);
+                    cmd.Parameters.Add("DateTime", System.Data.DbType.String);
 
 
                     // 現状nullを処理できないため対処が必要
@@ -100,6 +102,8 @@ namespace CarDatabase
                     cmd.Parameters["Name"].Value = GetDbString(registerVehicleNameTextbox.Text);
                     cmd.Parameters["ManufacturerId"].Value = int.Parse(GetDbString(registerVehicleManufactureIdTextbox.Text));
                     cmd.Parameters["ModelYear"].Value = int.Parse(GetDbString(registerVehicleModelYearTextbox.Text));
+                    cmd.Parameters["DateTime"].Value = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+
                     cmd.ExecuteNonQuery();
 
                     // コミット
@@ -147,19 +151,21 @@ namespace CarDatabase
                     SQLiteCommand cmd = con.CreateCommand();
                     // インサート
                     cmd.CommandText = "UPDATE m_vehicle SET name = @Name, manufacturer_id = @ManufacturerId, model_year = @ModelYear, " +
-                        "date_time = CURRENT_TIMESTAMP WHERE id = @Id";
+                        "date_time = (CONVERT(DATETIME, @DateTime)) WHERE id = @Id";
 
                     // パラメータセット
+                    cmd.Parameters.Add("Id", System.Data.DbType.Int64);
                     cmd.Parameters.Add("Name", System.Data.DbType.String);
                     cmd.Parameters.Add("ManufacturerId", System.Data.DbType.Int64);
                     cmd.Parameters.Add("ModelYear", System.Data.DbType.Int64);
-                    cmd.Parameters.Add("Id", System.Data.DbType.Int64);
+                    cmd.Parameters.Add("DateTime", System.Data.DbType.String);
 
                     // データ追加
+                    cmd.Parameters["Id"].Value = int.Parse(GetDbString(updateSearchVehicleIdTextbox.Text));
                     cmd.Parameters["Name"].Value = GetDbString(updateVehicleNameTextbox.Text);
                     cmd.Parameters["ManufacturerId"].Value = int.Parse(GetDbString(updateVehicleManufactureIdTextbox.Text));
                     cmd.Parameters["ModelYear"].Value = int.Parse(GetDbString(updateVehicleModelYearTextbox.Text));
-                    cmd.Parameters["Id"].Value = int.Parse(GetDbString(updateSearchVehicleIdTextbox.Text));
+                    cmd.Parameters["DateTime"].Value = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                     cmd.ExecuteNonQuery();
 
                     // コミット
@@ -366,7 +372,7 @@ namespace CarDatabase
                     dialogResult = popUp1.ShowDialog();
 
                     //キャンセルが押された場合は何もせずreturn
-                    if(dialogResult == DialogResult.Cancel)
+                    if (dialogResult == DialogResult.Cancel)
                     {
                         return;
                     }
@@ -392,14 +398,14 @@ namespace CarDatabase
             checks.deleteChecks.modelYear = deleteSearchVehicleModelYearCheckBox.Checked;
         }
 
-        private void showForm1Button_Click(object sender, EventArgs e)
+        private void ShowDeleteFormButton_Click(object sender, EventArgs e)
         {
             // 現在の画面を非表示にする
             this.Visible = false;
 
             // Form2を表示
-            Form2 f2 = new Form2();
-            f2.Show();
+            DeleteVehicle deleteVehicle = new DeleteVehicle();
+            deleteVehicle.Show();
         }
     }
 }
