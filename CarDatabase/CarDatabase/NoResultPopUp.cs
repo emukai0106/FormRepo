@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace CarDatabase
 {
-    public partial class PopUp1 : Form
+    public partial class NoResultPopUp : Form
     {
-        public PopUp1()
+        public NoResultPopUp()
         {
             InitializeComponent();
         }

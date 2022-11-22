@@ -15,6 +15,11 @@ namespace CarDatabase
     {
         private Checks checks = new Checks();
 
+        private string selectComandText = "SELECT * FROM m_vehicle WHERE ";
+
+        private string countComandText = "SELECT COUNT (*) FROM m_vehicle WHERE ";
+
+        private string deleteComandText = "DELETE FROM m_vehicle WHERE ";
         public Form1()
         {
             InitializeComponent();
@@ -56,7 +61,8 @@ namespace CarDatabase
                 using (SQLiteCommand cmd = con.CreateCommand())
                 {
                     // テーブルm_vehicleが存在しなければ作成する(CREATE TABLE IF NOT EXISTS)
-                    cmd.CommandText = ("CREATE TABLE IF NOT EXISTS m_vehicle(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, manufacturer_id INTEGER, model_year INTEGER)");
+                    cmd.CommandText = ("CREATE TABLE IF NOT EXISTS m_vehicle(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, " +
+                        "manufacturer_id INTEGER, model_year INTEGER, date_time TEXT NOT NULL)");
                     cmd.ExecuteNonQuery();
                 }
                 // コネクションを閉じる
@@ -80,7 +86,7 @@ namespace CarDatabase
                     SQLiteCommand cmd = con.CreateCommand();
 
                     // インサート
-                    cmd.CommandText = "INSERT INTO m_vehicle (name, manufacturer_id, model_year) VALUES (@Name, @ManufacturerId, @ModelYear)";
+                    cmd.CommandText = "INSERT INTO m_vehicle (name, manufacturer_id, model_year, date_time) VALUES (@Name, @ManufacturerId, @ModelYear, CURRENT_TIMESTAMP)";
 
                     // パラメータセット
                     cmd.Parameters.Add("Name", System.Data.DbType.String);
@@ -140,7 +146,8 @@ namespace CarDatabase
                 {
                     SQLiteCommand cmd = con.CreateCommand();
                     // インサート
-                    cmd.CommandText = "UPDATE m_vehicle SET name = @Name, manufacturer_id = @ManufacturerId, model_year = @ModelYear WHERE id = @Id";
+                    cmd.CommandText = "UPDATE m_vehicle SET name = @Name, manufacturer_id = @ManufacturerId, model_year = @ModelYear, " +
+                        "date_time = CURRENT_TIMESTAMP WHERE id = @Id";
 
                     // パラメータセット
                     cmd.Parameters.Add("Name", System.Data.DbType.String);
@@ -173,7 +180,7 @@ namespace CarDatabase
                 // 表示
                 // メーカーIDが入力されていればm_manufacturerを参照して結合(V = m_vehicle, M = m_manufacturer)
                 SQLiteDataAdapter adapter = new SQLiteDataAdapter("SELECT V.ID AS '車両ID', V.name AS '車両名', M.name AS 'メーカー名', " +
-                    "V.model_year AS '年式' FROM m_vehicle AS V LEFT OUTER JOIN m_manufacturer AS M ON V.manufacturer_id = M.ID", con);
+                    "V.model_year AS '年式' ,DATETIME(V.date_time) AS '更新日時' FROM m_vehicle AS V LEFT OUTER JOIN m_manufacturer AS M ON V.manufacturer_id = M.ID", con);
                 adapter.Fill(dataTable);
                 vehicleDataGridView.DataSource = dataTable;
             }
@@ -191,7 +198,7 @@ namespace CarDatabase
                 {
                     SQLiteCommand cmd = con.CreateCommand();
 
-                    string commandText = "DELETE FROM m_vehicle WHERE ";
+                    string commandText = "";
 
                     // IDで検索する場合
                     if (checks.deleteChecks.id)
@@ -316,7 +323,6 @@ namespace CarDatabase
                             cmd.Parameters["Name"].Value = name;
                         }
                     }
-
                     // コマンドがANDで終わっていれば末尾を削除
                     if (commandText.EndsWith(" AND "))
                     {
@@ -324,7 +330,45 @@ namespace CarDatabase
 
                         commandText = commandText.Remove(commandText.Length - REMOVE_CHARS);
                     }
-                    cmd.CommandText = commandText;
+                    DialogResult dialogResult;
+
+                    cmd.CommandText = countComandText + commandText;
+
+                    if (cmd.ExecuteScalar() == 0)
+                    {
+                        NoResultPopUp noResultPopUp = new NoResultPopUp();
+                        dialogResult = noResultPopUp.ShowDialog();
+                        if (dialogResult == DialogResult.OK)
+                        {
+                            return;
+                        }
+                    }
+
+
+                    // データテーブル生成
+                    DataTable dataTable = new DataTable();
+
+                    // 表示
+                    cmd.CommandText = selectComandText + commandText;
+                    SQLiteDataAdapter adapter = new SQLiteDataAdapter(cmd);
+                    adapter.Fill(dataTable);
+
+                    //削除確認ポップアップを表示
+                    PopUp1 popUp1 = new PopUp1();
+
+                    //ポップアップのDataSourceを指定
+                    popUp1.PopUpSql(dataTable);
+
+                    //ポップアップを表示し、DialogResultを設定
+                    dialogResult = popUp1.ShowDialog();
+
+                    //キャンセルが押された場合は何もせずreturn
+                    if(dialogResult == DialogResult.Cancel)
+                    {
+                        return;
+                    }
+
+                    cmd.CommandText = deleteComandText + commandText;
                     cmd.ExecuteNonQuery();
 
                     // コミット
