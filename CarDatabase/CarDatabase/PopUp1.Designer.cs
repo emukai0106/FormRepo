@@ -29,34 +29,34 @@ namespace CarDatabase
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.cancelButton = new System.Windows.Forms.Button();
+            this.continueButton = new System.Windows.Forms.Button();
             this.deleteVehicleDataGridView = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.deleteVehicleDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
-            // button1
+            // cancelButton
             // 
-            this.button1.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.button1.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.button1.Location = new System.Drawing.Point(81, 243);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(114, 38);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "キャンセル";
-            this.button1.UseVisualStyleBackColor = true;
+            this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.cancelButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.cancelButton.Location = new System.Drawing.Point(81, 243);
+            this.cancelButton.Name = "cancelButton";
+            this.cancelButton.Size = new System.Drawing.Size(114, 38);
+            this.cancelButton.TabIndex = 0;
+            this.cancelButton.Text = "キャンセル";
+            this.cancelButton.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // continueButton
             // 
-            this.button2.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.button2.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.button2.Location = new System.Drawing.Point(201, 243);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(114, 38);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "続行";
-            this.button2.UseVisualStyleBackColor = true;
+            this.continueButton.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.continueButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.continueButton.Location = new System.Drawing.Point(201, 243);
+            this.continueButton.Name = "continueButton";
+            this.continueButton.Size = new System.Drawing.Size(114, 38);
+            this.continueButton.TabIndex = 1;
+            this.continueButton.Text = "続行";
+            this.continueButton.UseVisualStyleBackColor = true;
             // 
             // deleteVehicleDataGridView
             // 
@@ -84,8 +84,8 @@ namespace CarDatabase
             this.ClientSize = new System.Drawing.Size(402, 373);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.deleteVehicleDataGridView);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.continueButton);
+            this.Controls.Add(this.cancelButton);
             this.Name = "PopUp1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form3";
@@ -97,8 +97,8 @@ namespace CarDatabase
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button cancelButton;
+        private System.Windows.Forms.Button continueButton;
         private System.Windows.Forms.DataGridView deleteVehicleDataGridView;
         private System.Windows.Forms.Label label1;
     }
