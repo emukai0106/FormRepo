@@ -43,11 +43,6 @@ namespace CarDatabase
             this.deleteSearchVehicleIdLabel = new System.Windows.Forms.Label();
             this.deleteSearchVehicleMinIdTextbox = new System.Windows.Forms.TextBox();
             this.deleteVehicleButton = new System.Windows.Forms.Button();
-            this.deleteSearchVehicleDateTimeCheckBox = new System.Windows.Forms.CheckBox();
-            this.deleteSearchVehicleMaxDateTimeLabel = new System.Windows.Forms.Label();
-            this.deleteSearchVehicleMaxDateTimeTextbox = new System.Windows.Forms.TextBox();
-            this.deleteSearchVehicleMinDateTimeLabel = new System.Windows.Forms.Label();
-            this.deleteSearchVehicleMinDateTimeTextbox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // deleteSearchVehicleNameLabel
@@ -168,60 +163,12 @@ namespace CarDatabase
             this.deleteVehicleButton.TabIndex = 37;
             this.deleteVehicleButton.Text = "車両情報削除";
             this.deleteVehicleButton.UseVisualStyleBackColor = true;
-            this.deleteVehicleButton.Click += new System.EventHandler(this.deleteVehicleButton_Click);
-            // 
-            // deleteSearchVehicleDateTimeCheckBox
-            // 
-            this.deleteSearchVehicleDateTimeCheckBox.AutoSize = true;
-            this.deleteSearchVehicleDateTimeCheckBox.Location = new System.Drawing.Point(657, 207);
-            this.deleteSearchVehicleDateTimeCheckBox.Name = "deleteSearchVehicleDateTimeCheckBox";
-            this.deleteSearchVehicleDateTimeCheckBox.Size = new System.Drawing.Size(155, 19);
-            this.deleteSearchVehicleDateTimeCheckBox.TabIndex = 51;
-            this.deleteSearchVehicleDateTimeCheckBox.Text = "更新日時で検索する";
-            this.deleteSearchVehicleDateTimeCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // deleteSearchVehicleMaxDateTimeLabel
-            // 
-            this.deleteSearchVehicleMaxDateTimeLabel.AutoSize = true;
-            this.deleteSearchVehicleMaxDateTimeLabel.Location = new System.Drawing.Point(258, 275);
-            this.deleteSearchVehicleMaxDateTimeLabel.Name = "deleteSearchVehicleMaxDateTimeLabel";
-            this.deleteSearchVehicleMaxDateTimeLabel.Size = new System.Drawing.Size(107, 15);
-            this.deleteSearchVehicleMaxDateTimeLabel.TabIndex = 55;
-            this.deleteSearchVehicleMaxDateTimeLabel.Text = "更新日時(上限)";
-            // 
-            // deleteSearchVehicleMaxDateTimeTextbox
-            // 
-            this.deleteSearchVehicleMaxDateTimeTextbox.Location = new System.Drawing.Point(261, 293);
-            this.deleteSearchVehicleMaxDateTimeTextbox.Name = "deleteSearchVehicleMaxDateTimeTextbox";
-            this.deleteSearchVehicleMaxDateTimeTextbox.Size = new System.Drawing.Size(100, 22);
-            this.deleteSearchVehicleMaxDateTimeTextbox.TabIndex = 54;
-            // 
-            // deleteSearchVehicleMinDateTimeLabel
-            // 
-            this.deleteSearchVehicleMinDateTimeLabel.AutoSize = true;
-            this.deleteSearchVehicleMinDateTimeLabel.Location = new System.Drawing.Point(155, 275);
-            this.deleteSearchVehicleMinDateTimeLabel.Name = "deleteSearchVehicleMinDateTimeLabel";
-            this.deleteSearchVehicleMinDateTimeLabel.Size = new System.Drawing.Size(107, 15);
-            this.deleteSearchVehicleMinDateTimeLabel.TabIndex = 53;
-            this.deleteSearchVehicleMinDateTimeLabel.Text = "更新日時(下限)";
-            // 
-            // deleteSearchVehicleMinDateTimeTextbox
-            // 
-            this.deleteSearchVehicleMinDateTimeTextbox.Location = new System.Drawing.Point(155, 293);
-            this.deleteSearchVehicleMinDateTimeTextbox.Name = "deleteSearchVehicleMinDateTimeTextbox";
-            this.deleteSearchVehicleMinDateTimeTextbox.Size = new System.Drawing.Size(100, 22);
-            this.deleteSearchVehicleMinDateTimeTextbox.TabIndex = 52;
             // 
             // DeleteVehicle
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(861, 450);
-            this.Controls.Add(this.deleteSearchVehicleMaxDateTimeLabel);
-            this.Controls.Add(this.deleteSearchVehicleMaxDateTimeTextbox);
-            this.Controls.Add(this.deleteSearchVehicleMinDateTimeLabel);
-            this.Controls.Add(this.deleteSearchVehicleMinDateTimeTextbox);
-            this.Controls.Add(this.deleteSearchVehicleDateTimeCheckBox);
+            this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.deleteSearchVehicleNameLabel);
             this.Controls.Add(this.deleteSearchVehicleNameTextbox);
             this.Controls.Add(this.deleteSearchVehicleNameCheckBox);
@@ -259,10 +206,5 @@ namespace CarDatabase
         private System.Windows.Forms.Label deleteSearchVehicleIdLabel;
         private System.Windows.Forms.TextBox deleteSearchVehicleMinIdTextbox;
         private System.Windows.Forms.Button deleteVehicleButton;
-        private System.Windows.Forms.CheckBox deleteSearchVehicleDateTimeCheckBox;
-        private System.Windows.Forms.Label deleteSearchVehicleMaxDateTimeLabel;
-        private System.Windows.Forms.TextBox deleteSearchVehicleMaxDateTimeTextbox;
-        private System.Windows.Forms.Label deleteSearchVehicleMinDateTimeLabel;
-        private System.Windows.Forms.TextBox deleteSearchVehicleMinDateTimeTextbox;
     }
 }

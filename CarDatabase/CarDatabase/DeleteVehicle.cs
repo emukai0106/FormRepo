@@ -183,56 +183,6 @@ namespace CarDatabase
                             cmd.Parameters["Name"].Value = name;
                         }
                     }
-
-                    //更新日時にチェックされていた時
-                    if (checks.deleteChecks.dateTime)
-                    {
-                        string min = DateTime.Parse(GetDbString(deleteSearchVehicleMinDateTimeTextbox.Text)).ToString("yyyy/MM/dd HH:mm:ss");
-                        string max = DateTime.Parse(GetDbString(deleteSearchVehicleMaxDateTimeTextbox.Text)).ToString("yyyy/MM/dd HH:mm:ss");
-
-                        // パラメータ追加
-                        cmd.Parameters.Add("MinDateTime", System.Data.DbType.String);
-                        cmd.Parameters.Add("MaxDatetime", System.Data.DbType.String);
-
-                        // 上限、下限ともに未入力の場合
-                        if (min == null & max == null)
-                        {
-                            // 何もしない
-                            return;
-                            // 本来はポップアップを表示する
-                        }
-
-                        // 下限が未入力の場合
-                        else if (min == null)
-                        {
-                            // IDがMaxId以下を削除
-                            commandText = commandText + "date_time <= @MaxDateTime AND ";
-
-                            // パラメータを設定
-                            cmd.Parameters["MaxDateTime"].Value = max;
-                        }
-
-                        // 上限が未入力の場合
-                        else if (GetDbString(deleteSearchVehicleMaxIdTextbox.Text) == null)
-                        {
-                            // IDがMinId以上を削除
-                            commandText = commandText + "date_time >= @MinDateTime AND ";
-
-                            // パラメータを設定
-                            cmd.Parameters["MinDateTime"].Value = min;
-                        }
-                        // 上限、下限ともに入力されている場合
-                        else
-                        {
-                            // IDがMinIdからMaxIdまでを削除
-                            commandText = commandText + "date_time BETWEEN @MinDateTime AND @MaxDateTime AND ";
-
-                            // パラメータを設定
-                            cmd.Parameters["MinDateTime"].Value = min;
-                            cmd.Parameters["MaxDateTime"].Value = max;
-                        }
-                    }
-
                     // コマンドがANDで終わっていれば末尾を削除
                     if (commandText.EndsWith(" AND "))
                     {
@@ -297,7 +247,6 @@ namespace CarDatabase
             checks.deleteChecks.id = deleteSearchVehicleIdCheckBox.Checked;
             checks.deleteChecks.name = deleteSearchVehicleNameCheckBox.Checked;
             checks.deleteChecks.modelYear = deleteSearchVehicleModelYearCheckBox.Checked;
-            checks.deleteChecks.dateTime = deleteSearchVehicleDateTimeCheckBox.Checked;
         }
     }
 }

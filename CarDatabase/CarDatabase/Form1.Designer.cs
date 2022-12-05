@@ -59,7 +59,7 @@ namespace CarDatabase
             this.deleteSearchVehicleMaxModelYearTextbox = new System.Windows.Forms.TextBox();
             this.deleteSearchVehicleMaxModelYearLabel = new System.Windows.Forms.Label();
             this.deleteSearchVehicleIdCheckBox = new System.Windows.Forms.CheckBox();
-            this.ShowDeleteFormButton = new System.Windows.Forms.Button();
+            this.showForm1Button = new System.Windows.Forms.Button();
             this.deleteSearchVehicleModelYearCheckBox = new System.Windows.Forms.CheckBox();
             this.deleteSearchVehicleMaxIdTextbox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -314,15 +314,15 @@ namespace CarDatabase
             this.deleteSearchVehicleIdCheckBox.Text = "車両IDで検索する";
             this.deleteSearchVehicleIdCheckBox.UseVisualStyleBackColor = true;
             // 
-            // ShowDeleteFormButton
+            // showForm1Button
             // 
-            this.ShowDeleteFormButton.Location = new System.Drawing.Point(916, 408);
-            this.ShowDeleteFormButton.Name = "ShowDeleteFormButton";
-            this.ShowDeleteFormButton.Size = new System.Drawing.Size(130, 93);
-            this.ShowDeleteFormButton.TabIndex = 30;
-            this.ShowDeleteFormButton.Text = "削除画面へ";
-            this.ShowDeleteFormButton.UseVisualStyleBackColor = true;
-            this.ShowDeleteFormButton.Click += new System.EventHandler(this.ShowDeleteFormButton_Click);
+            this.showForm1Button.Location = new System.Drawing.Point(916, 582);
+            this.showForm1Button.Name = "showForm1Button";
+            this.showForm1Button.Size = new System.Drawing.Size(130, 93);
+            this.showForm1Button.TabIndex = 30;
+            this.showForm1Button.Text = "Form1";
+            this.showForm1Button.UseVisualStyleBackColor = true;
+            this.showForm1Button.Click += new System.EventHandler(this.showForm1Button_Click);
             // 
             // deleteSearchVehicleModelYearCheckBox
             // 
@@ -387,7 +387,7 @@ namespace CarDatabase
             this.Controls.Add(this.label1);
             this.Controls.Add(this.deleteSearchVehicleMaxIdTextbox);
             this.Controls.Add(this.deleteSearchVehicleModelYearCheckBox);
-            this.Controls.Add(this.ShowDeleteFormButton);
+            this.Controls.Add(this.showForm1Button);
             this.Controls.Add(this.deleteSearchVehicleIdCheckBox);
             this.Controls.Add(this.deleteSearchVehicleMaxModelYearLabel);
             this.Controls.Add(this.deleteSearchVehicleMaxModelYearTextbox);
@@ -456,7 +456,7 @@ namespace CarDatabase
         private System.Windows.Forms.TextBox deleteSearchVehicleMaxModelYearTextbox;
         private System.Windows.Forms.Label deleteSearchVehicleMaxModelYearLabel;
         private System.Windows.Forms.CheckBox deleteSearchVehicleIdCheckBox;
-        private System.Windows.Forms.Button ShowDeleteFormButton;
+        private System.Windows.Forms.Button showForm1Button;
         private System.Windows.Forms.CheckBox deleteSearchVehicleModelYearCheckBox;
         private System.Windows.Forms.TextBox deleteSearchVehicleMaxIdTextbox;
         private System.Windows.Forms.Label label1;
