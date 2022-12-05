@@ -86,7 +86,12 @@ namespace CarDatabase
                     SQLiteCommand cmd = con.CreateCommand();
 
                     // インサート
+<<<<<<< HEAD
                     cmd.CommandText = "INSERT INTO m_vehicle (name, manufacturer_id, model_year, date_time) VALUES (@Name, @ManufacturerId, @ModelYear, CURRENT_TIMESTAMP)";
+=======
+                    cmd.CommandText = "INSERT INTO m_vehicle (name, manufacturer_id, model_year, date_time) VALUES (@Name, @ManufacturerId, @ModelYear, " +
+                        "@DateTime)";
+>>>>>>> 開発用
 
                     // パラメータセット
                     cmd.Parameters.Add("Name", System.Data.DbType.String);
@@ -98,8 +103,15 @@ namespace CarDatabase
 
                     // データ追加
                     cmd.Parameters["Name"].Value = GetDbString(registerVehicleNameTextbox.Text);
-                    cmd.Parameters["ManufacturerId"].Value = int.Parse(GetDbString(registerVehicleManufactureIdTextbox.Text));
+                    cmd.Parameters["ManufacturerId"].Value = int.Parse(GetDbString(registerVehicleManufacturerIdTextbox.Text));
                     cmd.Parameters["ModelYear"].Value = int.Parse(GetDbString(registerVehicleModelYearTextbox.Text));
+<<<<<<< HEAD
+=======
+                    cmd.Parameters["DateTime"].Value = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+
+                    MessageBox.Show(DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss"));
+
+>>>>>>> 開発用
                     cmd.ExecuteNonQuery();
 
                     // コミット
@@ -157,7 +169,7 @@ namespace CarDatabase
 
                     // データ追加
                     cmd.Parameters["Name"].Value = GetDbString(updateVehicleNameTextbox.Text);
-                    cmd.Parameters["ManufacturerId"].Value = int.Parse(GetDbString(updateVehicleManufactureIdTextbox.Text));
+                    cmd.Parameters["ManufacturerId"].Value = int.Parse(GetDbString(updateVehicleManufacturerIdTextbox.Text));
                     cmd.Parameters["ModelYear"].Value = int.Parse(GetDbString(updateVehicleModelYearTextbox.Text));
                     cmd.Parameters["Id"].Value = int.Parse(GetDbString(updateSearchVehicleIdTextbox.Text));
                     cmd.ExecuteNonQuery();
@@ -180,12 +192,13 @@ namespace CarDatabase
                 // 表示
                 // メーカーIDが入力されていればm_manufacturerを参照して結合(V = m_vehicle, M = m_manufacturer)
                 SQLiteDataAdapter adapter = new SQLiteDataAdapter("SELECT V.ID AS '車両ID', V.name AS '車両名', M.name AS 'メーカー名', " +
-                    "V.model_year AS '年式' ,DATETIME(V.date_time) AS '更新日時' FROM m_vehicle AS V LEFT OUTER JOIN m_manufacturer AS M ON V.manufacturer_id = M.ID", con);
+                    "V.model_year AS '年式' ,V.date_time AS '更新日時' FROM m_vehicle AS V LEFT OUTER JOIN m_manufacturer AS M ON V.manufacturer_id = M.ID", con);
                 adapter.Fill(dataTable);
                 vehicleDataGridView.DataSource = dataTable;
             }
         }
 
+<<<<<<< HEAD
         private void deleteVehicleButton_Click(object sender, EventArgs e)
         {
             // 削除用チェックボックスの状態を取得
@@ -393,6 +406,9 @@ namespace CarDatabase
         }
 
         private void showForm1Button_Click(object sender, EventArgs e)
+=======
+        private void ShowDeleteFormButton_Click(object sender, EventArgs e)
+>>>>>>> 開発用
         {
             // 現在の画面を非表示にする
             this.Visible = false;

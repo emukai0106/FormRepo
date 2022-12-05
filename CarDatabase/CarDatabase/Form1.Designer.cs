@@ -34,13 +34,12 @@ namespace CarDatabase
             this.registerVehicleButton = new System.Windows.Forms.Button();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.registerVehicleNameTextbox = new System.Windows.Forms.TextBox();
-            this.registerVehicleManufactureIdTextbox = new System.Windows.Forms.TextBox();
+            this.registerVehicleManufacturerIdTextbox = new System.Windows.Forms.TextBox();
             this.registerVehicleModelYearTextbox = new System.Windows.Forms.TextBox();
             this.registerVehicleNameLabel = new System.Windows.Forms.Label();
             this.registerVehicleManufactureIdLabel = new System.Windows.Forms.Label();
             this.registerVehicleModelYearLabel = new System.Windows.Forms.Label();
             this.viewVehicleButton = new System.Windows.Forms.Button();
-            this.deleteVehicleButton = new System.Windows.Forms.Button();
             this.updateVehicleButton = new System.Windows.Forms.Button();
             this.deleteVehicleTableButton = new System.Windows.Forms.Button();
             this.vehicleDataGridView = new System.Windows.Forms.DataGridView();
@@ -48,10 +47,11 @@ namespace CarDatabase
             this.updateVehicleNameTextbox = new System.Windows.Forms.TextBox();
             this.updateSearchVehicleIdLabel = new System.Windows.Forms.Label();
             this.updateVehicleNameLabel = new System.Windows.Forms.Label();
-            this.updateVehicleManufactureIdTextbox = new System.Windows.Forms.TextBox();
+            this.updateVehicleManufacturerIdTextbox = new System.Windows.Forms.TextBox();
             this.updateVehicleManufactureIdLabel = new System.Windows.Forms.Label();
             this.updateVehicleModelYearTextbox = new System.Windows.Forms.TextBox();
             this.updateVehicleModelYearLabel = new System.Windows.Forms.Label();
+<<<<<<< HEAD
             this.deleteSearchVehicleMinIdTextbox = new System.Windows.Forms.TextBox();
             this.deleteSearchVehicleIdLabel = new System.Windows.Forms.Label();
             this.deleteSearchVehicleMinModelYearTextbox = new System.Windows.Forms.TextBox();
@@ -66,6 +66,9 @@ namespace CarDatabase
             this.deleteSearchVehicleNameCheckBox = new System.Windows.Forms.CheckBox();
             this.deleteSearchVehicleNameTextbox = new System.Windows.Forms.TextBox();
             this.deleteSearchVehicleNameLabel = new System.Windows.Forms.Label();
+=======
+            this.ShowDeleteFormButton = new System.Windows.Forms.Button();
+>>>>>>> 開発用
             ((System.ComponentModel.ISupportInitialize)(this.vehicleDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -101,12 +104,12 @@ namespace CarDatabase
             this.registerVehicleNameTextbox.Size = new System.Drawing.Size(100, 22);
             this.registerVehicleNameTextbox.TabIndex = 3;
             // 
-            // registerVehicleManufactureIdTextbox
+            // registerVehicleManufacturerIdTextbox
             // 
-            this.registerVehicleManufactureIdTextbox.Location = new System.Drawing.Point(390, 83);
-            this.registerVehicleManufactureIdTextbox.Name = "registerVehicleManufactureIdTextbox";
-            this.registerVehicleManufactureIdTextbox.Size = new System.Drawing.Size(100, 22);
-            this.registerVehicleManufactureIdTextbox.TabIndex = 4;
+            this.registerVehicleManufacturerIdTextbox.Location = new System.Drawing.Point(390, 83);
+            this.registerVehicleManufacturerIdTextbox.Name = "registerVehicleManufacturerIdTextbox";
+            this.registerVehicleManufacturerIdTextbox.Size = new System.Drawing.Size(100, 22);
+            this.registerVehicleManufacturerIdTextbox.TabIndex = 4;
             // 
             // registerVehicleModelYearTextbox
             // 
@@ -151,16 +154,6 @@ namespace CarDatabase
             this.viewVehicleButton.Text = "車両情報表示";
             this.viewVehicleButton.UseVisualStyleBackColor = true;
             this.viewVehicleButton.Click += new System.EventHandler(this.viewVehicleButton_Click);
-            // 
-            // deleteVehicleButton
-            // 
-            this.deleteVehicleButton.Location = new System.Drawing.Point(148, 210);
-            this.deleteVehicleButton.Name = "deleteVehicleButton";
-            this.deleteVehicleButton.Size = new System.Drawing.Size(130, 93);
-            this.deleteVehicleButton.TabIndex = 10;
-            this.deleteVehicleButton.Text = "車両情報削除";
-            this.deleteVehicleButton.UseVisualStyleBackColor = true;
-            this.deleteVehicleButton.Click += new System.EventHandler(this.deleteVehicleButton_Click);
             // 
             // updateVehicleButton
             // 
@@ -224,12 +217,12 @@ namespace CarDatabase
             this.updateVehicleNameLabel.TabIndex = 17;
             this.updateVehicleNameLabel.Text = "車両名";
             // 
-            // updateVehicleManufactureIdTextbox
+            // updateVehicleManufacturerIdTextbox
             // 
-            this.updateVehicleManufactureIdTextbox.Location = new System.Drawing.Point(390, 182);
-            this.updateVehicleManufactureIdTextbox.Name = "updateVehicleManufactureIdTextbox";
-            this.updateVehicleManufactureIdTextbox.Size = new System.Drawing.Size(100, 22);
-            this.updateVehicleManufactureIdTextbox.TabIndex = 18;
+            this.updateVehicleManufacturerIdTextbox.Location = new System.Drawing.Point(390, 182);
+            this.updateVehicleManufacturerIdTextbox.Name = "updateVehicleManufacturerIdTextbox";
+            this.updateVehicleManufacturerIdTextbox.Size = new System.Drawing.Size(100, 22);
+            this.updateVehicleManufacturerIdTextbox.TabIndex = 18;
             // 
             // updateVehicleManufactureIdLabel
             // 
@@ -256,6 +249,7 @@ namespace CarDatabase
             this.updateVehicleModelYearLabel.TabIndex = 21;
             this.updateVehicleModelYearLabel.Text = "年式";
             // 
+<<<<<<< HEAD
             // deleteSearchVehicleMinIdTextbox
             // 
             this.deleteSearchVehicleMinIdTextbox.Location = new System.Drawing.Point(284, 238);
@@ -315,6 +309,9 @@ namespace CarDatabase
             this.deleteSearchVehicleIdCheckBox.UseVisualStyleBackColor = true;
             // 
             // showForm1Button
+=======
+            // ShowDeleteFormButton
+>>>>>>> 開発用
             // 
             this.showForm1Button.Location = new System.Drawing.Point(916, 582);
             this.showForm1Button.Name = "showForm1Button";
@@ -324,63 +321,12 @@ namespace CarDatabase
             this.showForm1Button.UseVisualStyleBackColor = true;
             this.showForm1Button.Click += new System.EventHandler(this.showForm1Button_Click);
             // 
-            // deleteSearchVehicleModelYearCheckBox
-            // 
-            this.deleteSearchVehicleModelYearCheckBox.AutoSize = true;
-            this.deleteSearchVehicleModelYearCheckBox.Location = new System.Drawing.Point(786, 220);
-            this.deleteSearchVehicleModelYearCheckBox.Name = "deleteSearchVehicleModelYearCheckBox";
-            this.deleteSearchVehicleModelYearCheckBox.Size = new System.Drawing.Size(125, 19);
-            this.deleteSearchVehicleModelYearCheckBox.TabIndex = 31;
-            this.deleteSearchVehicleModelYearCheckBox.Text = "年式で検索する";
-            this.deleteSearchVehicleModelYearCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // deleteSearchVehicleMaxIdTextbox
-            // 
-            this.deleteSearchVehicleMaxIdTextbox.Location = new System.Drawing.Point(390, 238);
-            this.deleteSearchVehicleMaxIdTextbox.Name = "deleteSearchVehicleMaxIdTextbox";
-            this.deleteSearchVehicleMaxIdTextbox.Size = new System.Drawing.Size(100, 22);
-            this.deleteSearchVehicleMaxIdTextbox.TabIndex = 32;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(387, 220);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(91, 15);
-            this.label1.TabIndex = 33;
-            this.label1.Text = "車両ID(上限)";
-            // 
-            // deleteSearchVehicleNameCheckBox
-            // 
-            this.deleteSearchVehicleNameCheckBox.AutoSize = true;
-            this.deleteSearchVehicleNameCheckBox.Location = new System.Drawing.Point(641, 238);
-            this.deleteSearchVehicleNameCheckBox.Name = "deleteSearchVehicleNameCheckBox";
-            this.deleteSearchVehicleNameCheckBox.Size = new System.Drawing.Size(140, 19);
-            this.deleteSearchVehicleNameCheckBox.TabIndex = 34;
-            this.deleteSearchVehicleNameCheckBox.Text = "車両名で検索する";
-            this.deleteSearchVehicleNameCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // deleteSearchVehicleNameTextbox
-            // 
-            this.deleteSearchVehicleNameTextbox.Location = new System.Drawing.Point(496, 238);
-            this.deleteSearchVehicleNameTextbox.Name = "deleteSearchVehicleNameTextbox";
-            this.deleteSearchVehicleNameTextbox.Size = new System.Drawing.Size(100, 22);
-            this.deleteSearchVehicleNameTextbox.TabIndex = 35;
-            // 
-            // deleteSearchVehicleNameLabel
-            // 
-            this.deleteSearchVehicleNameLabel.AutoSize = true;
-            this.deleteSearchVehicleNameLabel.Location = new System.Drawing.Point(493, 220);
-            this.deleteSearchVehicleNameLabel.Name = "deleteSearchVehicleNameLabel";
-            this.deleteSearchVehicleNameLabel.Size = new System.Drawing.Size(52, 15);
-            this.deleteSearchVehicleNameLabel.TabIndex = 36;
-            this.deleteSearchVehicleNameLabel.Text = "車両名";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1058, 687);
+<<<<<<< HEAD
             this.Controls.Add(this.deleteSearchVehicleNameLabel);
             this.Controls.Add(this.deleteSearchVehicleNameTextbox);
             this.Controls.Add(this.deleteSearchVehicleNameCheckBox);
@@ -395,10 +341,13 @@ namespace CarDatabase
             this.Controls.Add(this.deleteSearchVehicleMinModelYearTextbox);
             this.Controls.Add(this.deleteSearchVehicleIdLabel);
             this.Controls.Add(this.deleteSearchVehicleMinIdTextbox);
+=======
+            this.Controls.Add(this.ShowDeleteFormButton);
+>>>>>>> 開発用
             this.Controls.Add(this.updateVehicleModelYearLabel);
             this.Controls.Add(this.updateVehicleModelYearTextbox);
             this.Controls.Add(this.updateVehicleManufactureIdLabel);
-            this.Controls.Add(this.updateVehicleManufactureIdTextbox);
+            this.Controls.Add(this.updateVehicleManufacturerIdTextbox);
             this.Controls.Add(this.updateVehicleNameLabel);
             this.Controls.Add(this.updateSearchVehicleIdLabel);
             this.Controls.Add(this.updateVehicleNameTextbox);
@@ -406,13 +355,12 @@ namespace CarDatabase
             this.Controls.Add(this.vehicleDataGridView);
             this.Controls.Add(this.deleteVehicleTableButton);
             this.Controls.Add(this.updateVehicleButton);
-            this.Controls.Add(this.deleteVehicleButton);
             this.Controls.Add(this.viewVehicleButton);
             this.Controls.Add(this.registerVehicleModelYearLabel);
             this.Controls.Add(this.registerVehicleManufactureIdLabel);
             this.Controls.Add(this.registerVehicleNameLabel);
             this.Controls.Add(this.registerVehicleModelYearTextbox);
-            this.Controls.Add(this.registerVehicleManufactureIdTextbox);
+            this.Controls.Add(this.registerVehicleManufacturerIdTextbox);
             this.Controls.Add(this.registerVehicleNameTextbox);
             this.Controls.Add(this.registerVehicleButton);
             this.Controls.Add(this.createVehicleTableButton);
@@ -431,13 +379,12 @@ namespace CarDatabase
         private System.Windows.Forms.Button registerVehicleButton;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.TextBox registerVehicleNameTextbox;
-        private System.Windows.Forms.TextBox registerVehicleManufactureIdTextbox;
+        private System.Windows.Forms.TextBox registerVehicleManufacturerIdTextbox;
         private System.Windows.Forms.TextBox registerVehicleModelYearTextbox;
         private System.Windows.Forms.Label registerVehicleNameLabel;
         private System.Windows.Forms.Label registerVehicleManufactureIdLabel;
         private System.Windows.Forms.Label registerVehicleModelYearLabel;
         private System.Windows.Forms.Button viewVehicleButton;
-        private System.Windows.Forms.Button deleteVehicleButton;
         private System.Windows.Forms.Button updateVehicleButton;
         private System.Windows.Forms.Button deleteVehicleTableButton;
         private System.Windows.Forms.DataGridView vehicleDataGridView;
@@ -445,10 +392,11 @@ namespace CarDatabase
         private System.Windows.Forms.TextBox updateVehicleNameTextbox;
         private System.Windows.Forms.Label updateSearchVehicleIdLabel;
         private System.Windows.Forms.Label updateVehicleNameLabel;
-        private System.Windows.Forms.TextBox updateVehicleManufactureIdTextbox;
+        private System.Windows.Forms.TextBox updateVehicleManufacturerIdTextbox;
         private System.Windows.Forms.Label updateVehicleManufactureIdLabel;
         private System.Windows.Forms.TextBox updateVehicleModelYearTextbox;
         private System.Windows.Forms.Label updateVehicleModelYearLabel;
+<<<<<<< HEAD
         private System.Windows.Forms.TextBox deleteSearchVehicleMinIdTextbox;
         private System.Windows.Forms.Label deleteSearchVehicleIdLabel;
         private System.Windows.Forms.TextBox deleteSearchVehicleMinModelYearTextbox;
@@ -463,6 +411,9 @@ namespace CarDatabase
         private System.Windows.Forms.CheckBox deleteSearchVehicleNameCheckBox;
         private System.Windows.Forms.TextBox deleteSearchVehicleNameTextbox;
         private System.Windows.Forms.Label deleteSearchVehicleNameLabel;
+=======
+        private System.Windows.Forms.Button ShowDeleteFormButton;
+>>>>>>> 開発用
     }
 }
 
