@@ -245,8 +245,6 @@ namespace CarDatabase
                             }
                         }
                     }
-<<<<<<< HEAD
-=======
                     #endregion
 
                     #region メーカー名検索
@@ -254,7 +252,7 @@ namespace CarDatabase
                     //メーカー名にチェックされていた時
                     else
                     {
-                        name=
+                        //name=
                     }
                     #endregion
 
@@ -348,7 +346,6 @@ namespace CarDatabase
                     //コマンドから削除する文字数
                     int removeChars;
 
->>>>>>> 開発用
                     // コマンドがANDで終わっていれば末尾を削除
                     if (commandText.EndsWith(" AND "))
                     {
@@ -420,15 +417,5 @@ namespace CarDatabase
                 con.Close();
             }
         }
-<<<<<<< HEAD
-        private void GetDeleteCheckBoxChecked()
-        {
-            //削除用絞り込みチェックボックスを全項目確認する
-            checks.deleteChecks.id = deleteSearchVehicleIdCheckBox.Checked;
-            checks.deleteChecks.name = deleteSearchVehicleNameCheckBox.Checked;
-            checks.deleteChecks.modelYear = deleteSearchVehicleModelYearCheckBox.Checked;
-        }
-=======
->>>>>>> 開発用
     }
 }
