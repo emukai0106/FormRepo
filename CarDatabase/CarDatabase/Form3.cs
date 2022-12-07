@@ -11,7 +11,7 @@ using System.Data.SQLite;
 
 namespace CarDatabase
 {
-    public partial class DeleteVehicle : Form
+    public partial class Form3 : Form
     {
         private Checks checks = new Checks();
 
@@ -41,7 +41,7 @@ namespace CarDatabase
             }
         }
 
-        public DeleteVehicle()
+        public Form3()
         {
             InitializeComponent();
         }
@@ -73,14 +73,14 @@ namespace CarDatabase
                     #region ID検索
 
                     // 上限・下限取得
-                    min = GetDbString(deleteSearchVehicleMinIdTextbox.Text);
-                    max = GetDbString(deleteSearchVehicleMaxIdTextbox.Text);
+                    min = GetDbString(minIdTextbox.Text);
+                    max = GetDbString(maxIdTextbox.Text);
 
                     // 上限・下限どちらか片方でも入力されている場合
                     if (min != null || max != null)
                     {
                         // 上限が未入力の場合
-                        if (GetDbString(deleteSearchVehicleMaxIdTextbox.Text) == null)
+                        if (GetDbString(maxIdTextbox.Text) == null)
                         {
                             // IDがMinId以上を削除
                             commandText = commandText + "id >= @MinId AND ";
@@ -245,8 +245,6 @@ namespace CarDatabase
                             }
                         }
                     }
-<<<<<<< HEAD
-=======
                     #endregion
 
                     #region メーカー名検索
@@ -254,7 +252,7 @@ namespace CarDatabase
                     //メーカー名にチェックされていた時
                     else
                     {
-                        name=
+                        //name=
                     }
                     #endregion
 
@@ -291,6 +289,7 @@ namespace CarDatabase
                             // minをDataTimeに変換できなかった場合
                             else
                             {
+                                // エラー通知ダイアログ表示
                                 MessageBox.Show("日付の入力形式が間違っています。\n入力例:2022/01/01", "入力形式エラー",
                                     MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 return;
@@ -317,8 +316,9 @@ namespace CarDatabase
                             // maxをDataTimeに変換できなかった場合
                             else
                             {
-                                MessageBox.Show("日付の入力形式が間違っています。\n入力例:2022/01/01","入力形式エラー",
-                                    MessageBoxButtons.OK,MessageBoxIcon.Error);
+                                // エラー通知ダイアログ表示
+                                MessageBox.Show("日付の入力形式が間違っています。\n入力例:2022/01/01", "入力形式エラー",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 return;
                             }
                         }
@@ -348,7 +348,6 @@ namespace CarDatabase
                     //コマンドから削除する文字数
                     int removeChars;
 
->>>>>>> 開発用
                     // コマンドがANDで終わっていれば末尾を削除
                     if (commandText.EndsWith(" AND "))
                     {
@@ -387,21 +386,23 @@ namespace CarDatabase
                     // データテーブル生成
                     DataTable dataTable = new DataTable();
 
-                    // 表示
+                    // 検索用コマンド文字列を結合
                     cmd.CommandText = selectComandText + commandText;
+
+                    // 削除確認ポップアップ用アダプターを作成
                     SQLiteDataAdapter adapter = new SQLiteDataAdapter(cmd);
                     adapter.Fill(dataTable);
 
-                    //削除確認ポップアップを表示
+                    // 削除確認ポップアップを表示
                     PopUp1 popUp1 = new PopUp1();
 
-                    //ポップアップのDataSourceを指定
+                    // ポップアップのDataSourceを指定
                     popUp1.PopUpSql(dataTable);
 
-                    //ポップアップを表示し、DialogResultを設定
+                    // ポップアップを表示し、DialogResultを設定
                     dialogResult = popUp1.ShowDialog();
 
-                    //キャンセルが押された場合は何もせずreturn
+                    // キャンセルが押された場合は何もせずreturn
                     if (dialogResult == DialogResult.Cancel)
                     {
                         return;
@@ -420,15 +421,5 @@ namespace CarDatabase
                 con.Close();
             }
         }
-<<<<<<< HEAD
-        private void GetDeleteCheckBoxChecked()
-        {
-            //削除用絞り込みチェックボックスを全項目確認する
-            checks.deleteChecks.id = deleteSearchVehicleIdCheckBox.Checked;
-            checks.deleteChecks.name = deleteSearchVehicleNameCheckBox.Checked;
-            checks.deleteChecks.modelYear = deleteSearchVehicleModelYearCheckBox.Checked;
-        }
-=======
->>>>>>> 開発用
     }
 }
