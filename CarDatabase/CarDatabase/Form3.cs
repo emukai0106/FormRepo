@@ -252,7 +252,7 @@ namespace CarDatabase
                     //メーカー名にチェックされていた時
                     else
                     {
-                        //name=
+                        name = manufacturerNameTextbox.Text;
                     }
                     #endregion
 

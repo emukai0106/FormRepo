@@ -15,11 +15,11 @@ namespace CarDatabase
     {
         private Checks checks = new Checks();
 
-        //private string selectComandText = "SELECT * FROM m_vehicle WHERE ";
+        private string selectComandText = "SELECT * FROM m_vehicle WHERE ";
 
-        //private string countComandText = "SELECT COUNT (*) FROM m_vehicle WHERE ";
+        private string countComandText = "SELECT COUNT (*) FROM m_vehicle WHERE ";
 
-        //private string deleteComandText = "DELETE FROM m_vehicle WHERE ";
+        private string deleteComandText = "DELETE FROM m_vehicle WHERE ";
         public Form1()
         {
             InitializeComponent();
@@ -93,6 +93,7 @@ namespace CarDatabase
                     cmd.Parameters.Add("Name", System.Data.DbType.String);
                     cmd.Parameters.Add("ManufacturerId", System.Data.DbType.Int64);
                     cmd.Parameters.Add("ModelYear", System.Data.DbType.Int64);
+                    cmd.Parameters.Add("DateTime", System.Data.DbType.String);
 
 
                     // 現状nullを処理できないため対処が必要
@@ -102,6 +103,9 @@ namespace CarDatabase
                     cmd.Parameters["ManufacturerId"].Value = int.Parse(GetDbString(registerVehicleManufacturerIdTextbox.Text));
                     cmd.Parameters["ModelYear"].Value = int.Parse(GetDbString(registerVehicleModelYearTextbox.Text));
                     cmd.Parameters["DateTime"].Value = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+
+                    MessageBox.Show(DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss"));
+
                     cmd.ExecuteNonQuery();
 
                     // コミット
@@ -149,19 +153,21 @@ namespace CarDatabase
                     SQLiteCommand cmd = con.CreateCommand();
                     // インサート
                     cmd.CommandText = "UPDATE m_vehicle SET name = @Name, manufacturer_id = @ManufacturerId, model_year = @ModelYear, " +
-                        "date_time = CURRENT_TIMESTAMP WHERE id = @Id";
+                        "date_time = (CONVERT(DATETIME, @DateTime)) WHERE id = @Id";
 
                     // パラメータセット
+                    cmd.Parameters.Add("Id", System.Data.DbType.Int64);
                     cmd.Parameters.Add("Name", System.Data.DbType.String);
                     cmd.Parameters.Add("ManufacturerId", System.Data.DbType.Int64);
                     cmd.Parameters.Add("ModelYear", System.Data.DbType.Int64);
-                    cmd.Parameters.Add("Id", System.Data.DbType.Int64);
+                    cmd.Parameters.Add("DateTime", System.Data.DbType.String);
 
                     // データ追加
+                    cmd.Parameters["Id"].Value = int.Parse(GetDbString(updateSearchVehicleIdTextbox.Text));
                     cmd.Parameters["Name"].Value = GetDbString(updateVehicleNameTextbox.Text);
                     cmd.Parameters["ManufacturerId"].Value = int.Parse(GetDbString(updateVehicleManufacturerIdTextbox.Text));
                     cmd.Parameters["ModelYear"].Value = int.Parse(GetDbString(updateVehicleModelYearTextbox.Text));
-                    cmd.Parameters["Id"].Value = int.Parse(GetDbString(updateSearchVehicleIdTextbox.Text));
+                    cmd.Parameters["DateTime"].Value = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                     cmd.ExecuteNonQuery();
 
                     // コミット
@@ -193,9 +199,9 @@ namespace CarDatabase
             // 現在の画面を非表示にする
             this.Visible = false;
 
-            // Form2を表示
-            Form3 f2 = new Form3();
-            f2.Show();
+            // 削除画面を表示
+            Form3 f3 = new Form3();
+            f3.Show();
         }
     }
 }
