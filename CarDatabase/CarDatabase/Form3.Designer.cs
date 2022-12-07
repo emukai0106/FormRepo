@@ -51,9 +51,9 @@ namespace CarDatabase
             this.maxManufacturerIdLabel = new System.Windows.Forms.Label();
             this.minManufacturerIdTextBox = new System.Windows.Forms.TextBox();
             this.minManufacturerIdLabel = new System.Windows.Forms.Label();
+            this.manufacturerNameRadioButton = new System.Windows.Forms.RadioButton();
             this.manufacturerNameGroupBox = new System.Windows.Forms.GroupBox();
             this.manufacturerNameLabel = new System.Windows.Forms.Label();
-            this.manufacturerNameRadioButton = new System.Windows.Forms.RadioButton();
             this.manufacturerNameTextbox = new System.Windows.Forms.TextBox();
             this.groupBox = new System.Windows.Forms.GroupBox();
             this.id = new System.Windows.Forms.Label();
@@ -192,31 +192,32 @@ namespace CarDatabase
             // deleteSearchVehicleManufacturerGroupBox
             // 
             this.deleteSearchVehicleManufacturerGroupBox.Controls.Add(this.manufacturerIdGroupBox);
+            this.deleteSearchVehicleManufacturerGroupBox.Controls.Add(this.manufacturerIdRadioButton);
+            this.deleteSearchVehicleManufacturerGroupBox.Controls.Add(this.manufacturerNameRadioButton);
             this.deleteSearchVehicleManufacturerGroupBox.Controls.Add(this.manufacturerNameGroupBox);
             this.deleteSearchVehicleManufacturerGroupBox.Location = new System.Drawing.Point(155, 172);
             this.deleteSearchVehicleManufacturerGroupBox.Name = "deleteSearchVehicleManufacturerGroupBox";
-            this.deleteSearchVehicleManufacturerGroupBox.Size = new System.Drawing.Size(514, 99);
+            this.deleteSearchVehicleManufacturerGroupBox.Size = new System.Drawing.Size(514, 96);
             this.deleteSearchVehicleManufacturerGroupBox.TabIndex = 56;
             this.deleteSearchVehicleManufacturerGroupBox.TabStop = false;
             // 
             // manufacturerIdGroupBox
             // 
-            this.manufacturerIdGroupBox.Controls.Add(this.label2);
-            this.manufacturerIdGroupBox.Controls.Add(this.manufacturerIdRadioButton);
             this.manufacturerIdGroupBox.Controls.Add(this.maxManufacturerIdTextBox);
-            this.manufacturerIdGroupBox.Controls.Add(this.maxManufacturerIdLabel);
-            this.manufacturerIdGroupBox.Controls.Add(this.minManufacturerIdTextBox);
+            this.manufacturerIdGroupBox.Controls.Add(this.label2);
             this.manufacturerIdGroupBox.Controls.Add(this.minManufacturerIdLabel);
+            this.manufacturerIdGroupBox.Controls.Add(this.minManufacturerIdTextBox);
+            this.manufacturerIdGroupBox.Controls.Add(this.maxManufacturerIdLabel);
             this.manufacturerIdGroupBox.Location = new System.Drawing.Point(6, 19);
             this.manufacturerIdGroupBox.Name = "manufacturerIdGroupBox";
-            this.manufacturerIdGroupBox.Size = new System.Drawing.Size(248, 74);
+            this.manufacturerIdGroupBox.Size = new System.Drawing.Size(248, 68);
             this.manufacturerIdGroupBox.TabIndex = 64;
             this.manufacturerIdGroupBox.TabStop = false;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(107, 49);
+            this.label2.Location = new System.Drawing.Point(110, 43);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(22, 15);
             this.label2.TabIndex = 65;
@@ -225,18 +226,16 @@ namespace CarDatabase
             // manufacturerIdRadioButton
             // 
             this.manufacturerIdRadioButton.AutoSize = true;
-            this.manufacturerIdRadioButton.Checked = true;
             this.manufacturerIdRadioButton.Location = new System.Drawing.Point(0, 0);
             this.manufacturerIdRadioButton.Name = "manufacturerIdRadioButton";
             this.manufacturerIdRadioButton.Size = new System.Drawing.Size(129, 19);
             this.manufacturerIdRadioButton.TabIndex = 0;
-            this.manufacturerIdRadioButton.TabStop = true;
             this.manufacturerIdRadioButton.Text = "メーカーIDで検索";
             this.manufacturerIdRadioButton.UseVisualStyleBackColor = true;
             // 
             // maxManufacturerIdTextBox
             // 
-            this.maxManufacturerIdTextBox.Location = new System.Drawing.Point(135, 46);
+            this.maxManufacturerIdTextBox.Location = new System.Drawing.Point(138, 40);
             this.maxManufacturerIdTextBox.Name = "maxManufacturerIdTextBox";
             this.maxManufacturerIdTextBox.Size = new System.Drawing.Size(100, 22);
             this.maxManufacturerIdTextBox.TabIndex = 63;
@@ -244,7 +243,7 @@ namespace CarDatabase
             // maxManufacturerIdLabel
             // 
             this.maxManufacturerIdLabel.AutoSize = true;
-            this.maxManufacturerIdLabel.Location = new System.Drawing.Point(132, 28);
+            this.maxManufacturerIdLabel.Location = new System.Drawing.Point(135, 22);
             this.maxManufacturerIdLabel.Name = "maxManufacturerIdLabel";
             this.maxManufacturerIdLabel.Size = new System.Drawing.Size(37, 15);
             this.maxManufacturerIdLabel.TabIndex = 64;
@@ -252,7 +251,7 @@ namespace CarDatabase
             // 
             // minManufacturerIdTextBox
             // 
-            this.minManufacturerIdTextBox.Location = new System.Drawing.Point(6, 46);
+            this.minManufacturerIdTextBox.Location = new System.Drawing.Point(9, 40);
             this.minManufacturerIdTextBox.Name = "minManufacturerIdTextBox";
             this.minManufacturerIdTextBox.Size = new System.Drawing.Size(95, 22);
             this.minManufacturerIdTextBox.TabIndex = 61;
@@ -260,45 +259,44 @@ namespace CarDatabase
             // minManufacturerIdLabel
             // 
             this.minManufacturerIdLabel.AutoSize = true;
-            this.minManufacturerIdLabel.Location = new System.Drawing.Point(3, 28);
+            this.minManufacturerIdLabel.Location = new System.Drawing.Point(6, 22);
             this.minManufacturerIdLabel.Name = "minManufacturerIdLabel";
             this.minManufacturerIdLabel.Size = new System.Drawing.Size(37, 15);
             this.minManufacturerIdLabel.TabIndex = 62;
             this.minManufacturerIdLabel.Text = "下限";
             // 
-            // manufacturerNameGroupBox
-            // 
-            this.manufacturerNameGroupBox.Controls.Add(this.manufacturerNameLabel);
-            this.manufacturerNameGroupBox.Controls.Add(this.manufacturerNameRadioButton);
-            this.manufacturerNameGroupBox.Controls.Add(this.manufacturerNameTextbox);
-            this.manufacturerNameGroupBox.Location = new System.Drawing.Point(260, 19);
-            this.manufacturerNameGroupBox.Name = "manufacturerNameGroupBox";
-            this.manufacturerNameGroupBox.Size = new System.Drawing.Size(248, 74);
-            this.manufacturerNameGroupBox.TabIndex = 63;
-            this.manufacturerNameGroupBox.TabStop = false;
-            // 
-            // manufacturerNameLabel
-            // 
-            this.manufacturerNameLabel.AutoSize = true;
-            this.manufacturerNameLabel.Location = new System.Drawing.Point(3, 28);
-            this.manufacturerNameLabel.Name = "manufacturerNameLabel";
-            this.manufacturerNameLabel.Size = new System.Drawing.Size(67, 15);
-            this.manufacturerNameLabel.TabIndex = 67;
-            this.manufacturerNameLabel.Text = "メーカー名";
-            // 
             // manufacturerNameRadioButton
             // 
             this.manufacturerNameRadioButton.AutoSize = true;
-            this.manufacturerNameRadioButton.Location = new System.Drawing.Point(0, 0);
+            this.manufacturerNameRadioButton.Location = new System.Drawing.Point(257, 0);
             this.manufacturerNameRadioButton.Name = "manufacturerNameRadioButton";
             this.manufacturerNameRadioButton.Size = new System.Drawing.Size(130, 19);
             this.manufacturerNameRadioButton.TabIndex = 1;
             this.manufacturerNameRadioButton.Text = "メーカー名で検索";
             this.manufacturerNameRadioButton.UseVisualStyleBackColor = true;
             // 
+            // manufacturerNameGroupBox
+            // 
+            this.manufacturerNameGroupBox.Controls.Add(this.manufacturerNameLabel);
+            this.manufacturerNameGroupBox.Controls.Add(this.manufacturerNameTextbox);
+            this.manufacturerNameGroupBox.Location = new System.Drawing.Point(260, 19);
+            this.manufacturerNameGroupBox.Name = "manufacturerNameGroupBox";
+            this.manufacturerNameGroupBox.Size = new System.Drawing.Size(248, 68);
+            this.manufacturerNameGroupBox.TabIndex = 63;
+            this.manufacturerNameGroupBox.TabStop = false;
+            // 
+            // manufacturerNameLabel
+            // 
+            this.manufacturerNameLabel.AutoSize = true;
+            this.manufacturerNameLabel.Location = new System.Drawing.Point(5, 22);
+            this.manufacturerNameLabel.Name = "manufacturerNameLabel";
+            this.manufacturerNameLabel.Size = new System.Drawing.Size(67, 15);
+            this.manufacturerNameLabel.TabIndex = 67;
+            this.manufacturerNameLabel.Text = "メーカー名";
+            // 
             // manufacturerNameTextbox
             // 
-            this.manufacturerNameTextbox.Location = new System.Drawing.Point(6, 46);
+            this.manufacturerNameTextbox.Location = new System.Drawing.Point(8, 40);
             this.manufacturerNameTextbox.Name = "manufacturerNameTextbox";
             this.manufacturerNameTextbox.Size = new System.Drawing.Size(100, 22);
             this.manufacturerNameTextbox.TabIndex = 66;
@@ -442,6 +440,7 @@ namespace CarDatabase
             this.Name = "Form3";
             this.Text = "DeleteVehicle";
             this.deleteSearchVehicleManufacturerGroupBox.ResumeLayout(false);
+            this.deleteSearchVehicleManufacturerGroupBox.PerformLayout();
             this.manufacturerIdGroupBox.ResumeLayout(false);
             this.manufacturerIdGroupBox.PerformLayout();
             this.manufacturerNameGroupBox.ResumeLayout(false);

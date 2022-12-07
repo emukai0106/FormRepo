@@ -252,8 +252,21 @@ namespace CarDatabase
                     //メーカー名にチェックされていた時
                     else
                     {
-                        name = manufacturerNameTextbox.Text;
+                        name = GetDbString(manufacturerNameTextbox.Text);
+
+                        // メーカー名が入力されている場合
+                        if (name != null)
+                        {
+                            commandText = commandText + "manufacturer_id IN (SELECT id FROM m_manufacturer WHERE name LIKE '%' || @ManufacturerName || '%')";
+
+                            // パラメータ追加
+                            cmd.Parameters.Add("ManufacturerName", System.Data.DbType.String);
+
+                            // パラメータを設定
+                            cmd.Parameters["ManufacturerName"].Value = name;
+                        }
                     }
+                    
                     #endregion
 
                     #region 更新日時検索
@@ -371,6 +384,8 @@ namespace CarDatabase
 
                     // 件数取得用コマンド文字列を結合
                     cmd.CommandText = countComandText + commandText;
+
+                    MessageBox.Show(cmd.CommandText);
 
                     //検索結果の件数(int64型のためlong)が0の場合
                     if ((long)cmd.ExecuteScalar() == 0)

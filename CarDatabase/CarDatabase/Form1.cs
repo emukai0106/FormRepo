@@ -203,5 +203,15 @@ namespace CarDatabase
             Form3 f3 = new Form3();
             f3.Show();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            // 現在の画面を非表示にする
+            this.Visible = false;
+
+            // 削除画面を表示
+            Form2 f2 = new Form2();
+            f2.Show();
+        }
     }
 }
