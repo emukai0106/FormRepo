@@ -31,14 +31,7 @@ namespace CarDatabase
         {
             this.components = new System.ComponentModel.Container();
             this.createVehicleTableButton = new System.Windows.Forms.Button();
-            this.registerVehicleButton = new System.Windows.Forms.Button();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.registerVehicleNameTextbox = new System.Windows.Forms.TextBox();
-            this.registerVehicleManufacturerIdTextbox = new System.Windows.Forms.TextBox();
-            this.registerVehicleModelYearTextbox = new System.Windows.Forms.TextBox();
-            this.registerVehicleNameLabel = new System.Windows.Forms.Label();
-            this.registerVehicleManufactureIdLabel = new System.Windows.Forms.Label();
-            this.registerVehicleModelYearLabel = new System.Windows.Forms.Label();
             this.viewVehicleButton = new System.Windows.Forms.Button();
             this.updateVehicleButton = new System.Windows.Forms.Button();
             this.deleteVehicleTableButton = new System.Windows.Forms.Button();
@@ -53,6 +46,7 @@ namespace CarDatabase
             this.updateVehicleModelYearLabel = new System.Windows.Forms.Label();
             this.ShowDeleteFormButton = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.vehicleDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -65,69 +59,11 @@ namespace CarDatabase
             this.createVehicleTableButton.Text = "テーブル作成";
             this.createVehicleTableButton.Click += new System.EventHandler(this.createTableButton_Click);
             // 
-            // registerVehicleButton
-            // 
-            this.registerVehicleButton.Location = new System.Drawing.Point(148, 12);
-            this.registerVehicleButton.Name = "registerVehicleButton";
-            this.registerVehicleButton.Size = new System.Drawing.Size(130, 93);
-            this.registerVehicleButton.TabIndex = 1;
-            this.registerVehicleButton.Text = "車両情報登録";
-            this.registerVehicleButton.UseVisualStyleBackColor = true;
-            this.registerVehicleButton.Click += new System.EventHandler(this.registerVehicleButton_Click);
-            // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
-            // 
-            // registerVehicleNameTextbox
-            // 
-            this.registerVehicleNameTextbox.Location = new System.Drawing.Point(284, 83);
-            this.registerVehicleNameTextbox.Name = "registerVehicleNameTextbox";
-            this.registerVehicleNameTextbox.Size = new System.Drawing.Size(100, 22);
-            this.registerVehicleNameTextbox.TabIndex = 3;
-            // 
-            // registerVehicleManufacturerIdTextbox
-            // 
-            this.registerVehicleManufacturerIdTextbox.Location = new System.Drawing.Point(390, 83);
-            this.registerVehicleManufacturerIdTextbox.Name = "registerVehicleManufacturerIdTextbox";
-            this.registerVehicleManufacturerIdTextbox.Size = new System.Drawing.Size(100, 22);
-            this.registerVehicleManufacturerIdTextbox.TabIndex = 4;
-            // 
-            // registerVehicleModelYearTextbox
-            // 
-            this.registerVehicleModelYearTextbox.Location = new System.Drawing.Point(496, 83);
-            this.registerVehicleModelYearTextbox.Name = "registerVehicleModelYearTextbox";
-            this.registerVehicleModelYearTextbox.Size = new System.Drawing.Size(100, 22);
-            this.registerVehicleModelYearTextbox.TabIndex = 5;
-            // 
-            // registerVehicleNameLabel
-            // 
-            this.registerVehicleNameLabel.AutoSize = true;
-            this.registerVehicleNameLabel.Location = new System.Drawing.Point(281, 65);
-            this.registerVehicleNameLabel.Name = "registerVehicleNameLabel";
-            this.registerVehicleNameLabel.Size = new System.Drawing.Size(52, 15);
-            this.registerVehicleNameLabel.TabIndex = 6;
-            this.registerVehicleNameLabel.Text = "車両名";
-            // 
-            // registerVehicleManufactureIdLabel
-            // 
-            this.registerVehicleManufactureIdLabel.AutoSize = true;
-            this.registerVehicleManufactureIdLabel.Location = new System.Drawing.Point(387, 65);
-            this.registerVehicleManufactureIdLabel.Name = "registerVehicleManufactureIdLabel";
-            this.registerVehicleManufactureIdLabel.Size = new System.Drawing.Size(66, 15);
-            this.registerVehicleManufactureIdLabel.TabIndex = 7;
-            this.registerVehicleManufactureIdLabel.Text = "メーカーID";
-            // 
-            // registerVehicleModelYearLabel
-            // 
-            this.registerVehicleModelYearLabel.AutoSize = true;
-            this.registerVehicleModelYearLabel.Location = new System.Drawing.Point(493, 65);
-            this.registerVehicleModelYearLabel.Name = "registerVehicleModelYearLabel";
-            this.registerVehicleModelYearLabel.Size = new System.Drawing.Size(37, 15);
-            this.registerVehicleModelYearLabel.TabIndex = 8;
-            this.registerVehicleModelYearLabel.Text = "年式";
             // 
             // viewVehicleButton
             // 
@@ -253,11 +189,22 @@ namespace CarDatabase
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(780, 408);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(130, 93);
+            this.button2.TabIndex = 32;
+            this.button2.Text = "登録画面へ";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1058, 687);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.ShowDeleteFormButton);
             this.Controls.Add(this.updateVehicleModelYearLabel);
@@ -272,13 +219,6 @@ namespace CarDatabase
             this.Controls.Add(this.deleteVehicleTableButton);
             this.Controls.Add(this.updateVehicleButton);
             this.Controls.Add(this.viewVehicleButton);
-            this.Controls.Add(this.registerVehicleModelYearLabel);
-            this.Controls.Add(this.registerVehicleManufactureIdLabel);
-            this.Controls.Add(this.registerVehicleNameLabel);
-            this.Controls.Add(this.registerVehicleModelYearTextbox);
-            this.Controls.Add(this.registerVehicleManufacturerIdTextbox);
-            this.Controls.Add(this.registerVehicleNameTextbox);
-            this.Controls.Add(this.registerVehicleButton);
             this.Controls.Add(this.createVehicleTableButton);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -292,14 +232,7 @@ namespace CarDatabase
         #endregion
 
         private System.Windows.Forms.Button createVehicleTableButton;
-        private System.Windows.Forms.Button registerVehicleButton;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-        private System.Windows.Forms.TextBox registerVehicleNameTextbox;
-        private System.Windows.Forms.TextBox registerVehicleManufacturerIdTextbox;
-        private System.Windows.Forms.TextBox registerVehicleModelYearTextbox;
-        private System.Windows.Forms.Label registerVehicleNameLabel;
-        private System.Windows.Forms.Label registerVehicleManufactureIdLabel;
-        private System.Windows.Forms.Label registerVehicleModelYearLabel;
         private System.Windows.Forms.Button viewVehicleButton;
         private System.Windows.Forms.Button updateVehicleButton;
         private System.Windows.Forms.Button deleteVehicleTableButton;
@@ -314,6 +247,7 @@ namespace CarDatabase
         private System.Windows.Forms.Label updateVehicleModelYearLabel;
         private System.Windows.Forms.Button ShowDeleteFormButton;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
     }
 }
 

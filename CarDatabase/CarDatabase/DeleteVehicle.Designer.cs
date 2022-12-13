@@ -31,60 +31,57 @@ namespace CarDatabase
         {
             this.nameTextbox = new System.Windows.Forms.TextBox();
             this.minIdLabel = new System.Windows.Forms.Label();
-            this.deleteSearchVehicleMaxIdTextbox = new System.Windows.Forms.TextBox();
+            this.maxIdTextbox = new System.Windows.Forms.TextBox();
             this.maxModelYearLabel = new System.Windows.Forms.Label();
             this.maxModelYearTextbox = new System.Windows.Forms.TextBox();
             this.minModelYearLabel = new System.Windows.Forms.Label();
             this.minModelYearTextbox = new System.Windows.Forms.TextBox();
             this.maxIdLabel = new System.Windows.Forms.Label();
-            this.deleteSearchVehicleMinIdTextbox = new System.Windows.Forms.TextBox();
+            this.minIdTextbox = new System.Windows.Forms.TextBox();
             this.deleteVehicleButton = new System.Windows.Forms.Button();
-<<<<<<< HEAD
-=======
             this.maxDateTimeLabel = new System.Windows.Forms.Label();
             this.maxDateTimeTextbox = new System.Windows.Forms.TextBox();
             this.minDateTimeLabel = new System.Windows.Forms.Label();
             this.minDateTimeTextbox = new System.Windows.Forms.TextBox();
             this.deleteSearchVehicleManufacturerGroupBox = new System.Windows.Forms.GroupBox();
-            this.manufacturer = new System.Windows.Forms.CheckBox();
-            this.deleteSearchVehicleManufacturerIdGroupBox = new System.Windows.Forms.GroupBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.manufacturerIdRadioButton = new System.Windows.Forms.RadioButton();
+            this.manufacturerIdGroupBox = new System.Windows.Forms.GroupBox();
             this.maxManufacturerIdTextBox = new System.Windows.Forms.TextBox();
-            this.maxManufacturerIdLabel = new System.Windows.Forms.Label();
-            this.minManufacturerIdTextBox = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.minManufacturerIdLabel = new System.Windows.Forms.Label();
-            this.deleteSearchVehicleManufacturerNameGroupBox = new System.Windows.Forms.GroupBox();
+            this.minManufacturerIdTextBox = new System.Windows.Forms.TextBox();
+            this.maxManufacturerIdLabel = new System.Windows.Forms.Label();
+            this.manufacturerIdRadioButton = new System.Windows.Forms.RadioButton();
             this.manufacturerNameRadioButton = new System.Windows.Forms.RadioButton();
-            this.deleteSearchVehicleIdGroupBox = new System.Windows.Forms.GroupBox();
+            this.manufacturerNameGroupBox = new System.Windows.Forms.GroupBox();
+            this.manufacturerNameLabel = new System.Windows.Forms.Label();
+            this.manufacturerNameTextbox = new System.Windows.Forms.TextBox();
+            this.idGroupBox = new System.Windows.Forms.GroupBox();
             this.id = new System.Windows.Forms.Label();
             this.waveLabel1 = new System.Windows.Forms.Label();
-            this.deleteSearchVehicleModelYearGroupBox = new System.Windows.Forms.GroupBox();
+            this.modelYearGroupBox = new System.Windows.Forms.GroupBox();
             this.waveLabel2 = new System.Windows.Forms.Label();
             this.modelYear = new System.Windows.Forms.Label();
-            this.deleteSearchVehicleDateTimeGroupBox = new System.Windows.Forms.GroupBox();
+            this.dateTimeGroupBox = new System.Windows.Forms.GroupBox();
             this.dateTime = new System.Windows.Forms.Label();
             this.waveLabel3 = new System.Windows.Forms.Label();
-            this.deleteSearchVehicleNameGroupBox = new System.Windows.Forms.GroupBox();
+            this.nameGroupBox = new System.Windows.Forms.GroupBox();
             this.nameLabel = new System.Windows.Forms.Label();
             this.name = new System.Windows.Forms.Label();
-            this.ManufacturerNameLabel = new System.Windows.Forms.Label();
-            this.manufacturerNameTextbox = new System.Windows.Forms.TextBox();
+            this.showRegisterForm = new System.Windows.Forms.Button();
             this.deleteSearchVehicleManufacturerGroupBox.SuspendLayout();
-            this.deleteSearchVehicleManufacturerIdGroupBox.SuspendLayout();
-            this.deleteSearchVehicleManufacturerNameGroupBox.SuspendLayout();
-            this.deleteSearchVehicleIdGroupBox.SuspendLayout();
-            this.deleteSearchVehicleModelYearGroupBox.SuspendLayout();
-            this.deleteSearchVehicleDateTimeGroupBox.SuspendLayout();
-            this.deleteSearchVehicleNameGroupBox.SuspendLayout();
->>>>>>> 開発用
+            this.manufacturerIdGroupBox.SuspendLayout();
+            this.manufacturerNameGroupBox.SuspendLayout();
+            this.idGroupBox.SuspendLayout();
+            this.modelYearGroupBox.SuspendLayout();
+            this.dateTimeGroupBox.SuspendLayout();
+            this.nameGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // nameTextbox
             // 
             this.nameTextbox.Location = new System.Drawing.Point(11, 46);
             this.nameTextbox.Name = "nameTextbox";
-            this.nameTextbox.Size = new System.Drawing.Size(100, 22);
+            this.nameTextbox.Size = new System.Drawing.Size(234, 22);
             this.nameTextbox.TabIndex = 49;
             // 
             // minIdLabel
@@ -96,12 +93,12 @@ namespace CarDatabase
             this.minIdLabel.TabIndex = 47;
             this.minIdLabel.Text = "上限";
             // 
-            // deleteSearchVehicleMaxIdTextbox
+            // maxIdTextbox
             // 
-            this.deleteSearchVehicleMaxIdTextbox.Location = new System.Drawing.Point(144, 46);
-            this.deleteSearchVehicleMaxIdTextbox.Name = "deleteSearchVehicleMaxIdTextbox";
-            this.deleteSearchVehicleMaxIdTextbox.Size = new System.Drawing.Size(100, 22);
-            this.deleteSearchVehicleMaxIdTextbox.TabIndex = 46;
+            this.maxIdTextbox.Location = new System.Drawing.Point(144, 46);
+            this.maxIdTextbox.Name = "maxIdTextbox";
+            this.maxIdTextbox.Size = new System.Drawing.Size(100, 22);
+            this.maxIdTextbox.TabIndex = 46;
             // 
             // maxModelYearLabel
             // 
@@ -144,12 +141,12 @@ namespace CarDatabase
             this.maxIdLabel.TabIndex = 39;
             this.maxIdLabel.Text = "下限";
             // 
-            // deleteSearchVehicleMinIdTextbox
+            // minIdTextbox
             // 
-            this.deleteSearchVehicleMinIdTextbox.Location = new System.Drawing.Point(10, 46);
-            this.deleteSearchVehicleMinIdTextbox.Name = "deleteSearchVehicleMinIdTextbox";
-            this.deleteSearchVehicleMinIdTextbox.Size = new System.Drawing.Size(100, 22);
-            this.deleteSearchVehicleMinIdTextbox.TabIndex = 38;
+            this.minIdTextbox.Location = new System.Drawing.Point(10, 46);
+            this.minIdTextbox.Name = "minIdTextbox";
+            this.minIdTextbox.Size = new System.Drawing.Size(100, 22);
+            this.minIdTextbox.TabIndex = 38;
             // 
             // deleteVehicleButton
             // 
@@ -159,8 +156,6 @@ namespace CarDatabase
             this.deleteVehicleButton.TabIndex = 37;
             this.deleteVehicleButton.Text = "車両情報削除";
             this.deleteVehicleButton.UseVisualStyleBackColor = true;
-<<<<<<< HEAD
-=======
             this.deleteVehicleButton.Click += new System.EventHandler(this.deleteVehicleButton_Click);
             // 
             // maxDateTimeLabel
@@ -197,126 +192,129 @@ namespace CarDatabase
             // 
             // deleteSearchVehicleManufacturerGroupBox
             // 
-            this.deleteSearchVehicleManufacturerGroupBox.Controls.Add(this.manufacturer);
-            this.deleteSearchVehicleManufacturerGroupBox.Controls.Add(this.deleteSearchVehicleManufacturerIdGroupBox);
-            this.deleteSearchVehicleManufacturerGroupBox.Controls.Add(this.deleteSearchVehicleManufacturerNameGroupBox);
-            this.deleteSearchVehicleManufacturerGroupBox.Location = new System.Drawing.Point(152, 172);
+            this.deleteSearchVehicleManufacturerGroupBox.Controls.Add(this.manufacturerIdGroupBox);
+            this.deleteSearchVehicleManufacturerGroupBox.Controls.Add(this.manufacturerIdRadioButton);
+            this.deleteSearchVehicleManufacturerGroupBox.Controls.Add(this.manufacturerNameRadioButton);
+            this.deleteSearchVehicleManufacturerGroupBox.Controls.Add(this.manufacturerNameGroupBox);
+            this.deleteSearchVehicleManufacturerGroupBox.Location = new System.Drawing.Point(155, 172);
             this.deleteSearchVehicleManufacturerGroupBox.Name = "deleteSearchVehicleManufacturerGroupBox";
-            this.deleteSearchVehicleManufacturerGroupBox.Size = new System.Drawing.Size(514, 99);
+            this.deleteSearchVehicleManufacturerGroupBox.Size = new System.Drawing.Size(514, 96);
             this.deleteSearchVehicleManufacturerGroupBox.TabIndex = 56;
             this.deleteSearchVehicleManufacturerGroupBox.TabStop = false;
             // 
-            // manufacturer
+            // manufacturerIdGroupBox
             // 
-            this.manufacturer.AutoSize = true;
-            this.manufacturer.Location = new System.Drawing.Point(0, 0);
-            this.manufacturer.Name = "manufacturer";
-            this.manufacturer.Size = new System.Drawing.Size(116, 19);
-            this.manufacturer.TabIndex = 61;
-            this.manufacturer.Text = "メーカーで検索";
-            this.manufacturer.UseVisualStyleBackColor = true;
+            this.manufacturerIdGroupBox.Controls.Add(this.maxManufacturerIdTextBox);
+            this.manufacturerIdGroupBox.Controls.Add(this.label2);
+            this.manufacturerIdGroupBox.Controls.Add(this.minManufacturerIdLabel);
+            this.manufacturerIdGroupBox.Controls.Add(this.minManufacturerIdTextBox);
+            this.manufacturerIdGroupBox.Controls.Add(this.maxManufacturerIdLabel);
+            this.manufacturerIdGroupBox.Location = new System.Drawing.Point(6, 19);
+            this.manufacturerIdGroupBox.Name = "manufacturerIdGroupBox";
+            this.manufacturerIdGroupBox.Size = new System.Drawing.Size(248, 68);
+            this.manufacturerIdGroupBox.TabIndex = 64;
+            this.manufacturerIdGroupBox.TabStop = false;
             // 
-            // deleteSearchVehicleManufacturerIdGroupBox
+            // maxManufacturerIdTextBox
             // 
-            this.deleteSearchVehicleManufacturerIdGroupBox.Controls.Add(this.label2);
-            this.deleteSearchVehicleManufacturerIdGroupBox.Controls.Add(this.manufacturerIdRadioButton);
-            this.deleteSearchVehicleManufacturerIdGroupBox.Controls.Add(this.maxManufacturerIdTextBox);
-            this.deleteSearchVehicleManufacturerIdGroupBox.Controls.Add(this.maxManufacturerIdLabel);
-            this.deleteSearchVehicleManufacturerIdGroupBox.Controls.Add(this.minManufacturerIdTextBox);
-            this.deleteSearchVehicleManufacturerIdGroupBox.Controls.Add(this.minManufacturerIdLabel);
-            this.deleteSearchVehicleManufacturerIdGroupBox.Location = new System.Drawing.Point(6, 19);
-            this.deleteSearchVehicleManufacturerIdGroupBox.Name = "deleteSearchVehicleManufacturerIdGroupBox";
-            this.deleteSearchVehicleManufacturerIdGroupBox.Size = new System.Drawing.Size(248, 74);
-            this.deleteSearchVehicleManufacturerIdGroupBox.TabIndex = 64;
-            this.deleteSearchVehicleManufacturerIdGroupBox.TabStop = false;
+            this.maxManufacturerIdTextBox.Location = new System.Drawing.Point(138, 40);
+            this.maxManufacturerIdTextBox.Name = "maxManufacturerIdTextBox";
+            this.maxManufacturerIdTextBox.Size = new System.Drawing.Size(100, 22);
+            this.maxManufacturerIdTextBox.TabIndex = 63;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(107, 49);
+            this.label2.Location = new System.Drawing.Point(110, 43);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(22, 15);
             this.label2.TabIndex = 65;
             this.label2.Text = "～";
             // 
-            // manufacturerIdRadioButton
-            // 
-            this.manufacturerIdRadioButton.AutoSize = true;
-            this.manufacturerIdRadioButton.Checked = true;
-            this.manufacturerIdRadioButton.Location = new System.Drawing.Point(0, 0);
-            this.manufacturerIdRadioButton.Name = "manufacturerIdRadioButton";
-            this.manufacturerIdRadioButton.Size = new System.Drawing.Size(129, 19);
-            this.manufacturerIdRadioButton.TabIndex = 0;
-            this.manufacturerIdRadioButton.TabStop = true;
-            this.manufacturerIdRadioButton.Text = "メーカーIDで検索";
-            this.manufacturerIdRadioButton.UseVisualStyleBackColor = true;
-            // 
-            // maxManufacturerIdTextBox
-            // 
-            this.maxManufacturerIdTextBox.Location = new System.Drawing.Point(135, 46);
-            this.maxManufacturerIdTextBox.Name = "maxManufacturerIdTextBox";
-            this.maxManufacturerIdTextBox.Size = new System.Drawing.Size(100, 22);
-            this.maxManufacturerIdTextBox.TabIndex = 63;
-            // 
-            // maxManufacturerIdLabel
-            // 
-            this.maxManufacturerIdLabel.AutoSize = true;
-            this.maxManufacturerIdLabel.Location = new System.Drawing.Point(132, 28);
-            this.maxManufacturerIdLabel.Name = "maxManufacturerIdLabel";
-            this.maxManufacturerIdLabel.Size = new System.Drawing.Size(37, 15);
-            this.maxManufacturerIdLabel.TabIndex = 64;
-            this.maxManufacturerIdLabel.Text = "上限";
-            // 
-            // minManufacturerIdTextBox
-            // 
-            this.minManufacturerIdTextBox.Location = new System.Drawing.Point(6, 46);
-            this.minManufacturerIdTextBox.Name = "minManufacturerIdTextBox";
-            this.minManufacturerIdTextBox.Size = new System.Drawing.Size(95, 22);
-            this.minManufacturerIdTextBox.TabIndex = 61;
-            // 
             // minManufacturerIdLabel
             // 
             this.minManufacturerIdLabel.AutoSize = true;
-            this.minManufacturerIdLabel.Location = new System.Drawing.Point(3, 28);
+            this.minManufacturerIdLabel.Location = new System.Drawing.Point(6, 22);
             this.minManufacturerIdLabel.Name = "minManufacturerIdLabel";
             this.minManufacturerIdLabel.Size = new System.Drawing.Size(37, 15);
             this.minManufacturerIdLabel.TabIndex = 62;
             this.minManufacturerIdLabel.Text = "下限";
             // 
-            // deleteSearchVehicleManufacturerNameGroupBox
+            // minManufacturerIdTextBox
             // 
-            this.deleteSearchVehicleManufacturerNameGroupBox.Controls.Add(this.ManufacturerNameLabel);
-            this.deleteSearchVehicleManufacturerNameGroupBox.Controls.Add(this.manufacturerNameRadioButton);
-            this.deleteSearchVehicleManufacturerNameGroupBox.Controls.Add(this.manufacturerNameTextbox);
-            this.deleteSearchVehicleManufacturerNameGroupBox.Location = new System.Drawing.Point(260, 19);
-            this.deleteSearchVehicleManufacturerNameGroupBox.Name = "deleteSearchVehicleManufacturerNameGroupBox";
-            this.deleteSearchVehicleManufacturerNameGroupBox.Size = new System.Drawing.Size(248, 74);
-            this.deleteSearchVehicleManufacturerNameGroupBox.TabIndex = 63;
-            this.deleteSearchVehicleManufacturerNameGroupBox.TabStop = false;
+            this.minManufacturerIdTextBox.Location = new System.Drawing.Point(9, 40);
+            this.minManufacturerIdTextBox.Name = "minManufacturerIdTextBox";
+            this.minManufacturerIdTextBox.Size = new System.Drawing.Size(95, 22);
+            this.minManufacturerIdTextBox.TabIndex = 61;
+            // 
+            // maxManufacturerIdLabel
+            // 
+            this.maxManufacturerIdLabel.AutoSize = true;
+            this.maxManufacturerIdLabel.Location = new System.Drawing.Point(135, 22);
+            this.maxManufacturerIdLabel.Name = "maxManufacturerIdLabel";
+            this.maxManufacturerIdLabel.Size = new System.Drawing.Size(37, 15);
+            this.maxManufacturerIdLabel.TabIndex = 64;
+            this.maxManufacturerIdLabel.Text = "上限";
+            // 
+            // manufacturerIdRadioButton
+            // 
+            this.manufacturerIdRadioButton.AutoSize = true;
+            this.manufacturerIdRadioButton.Location = new System.Drawing.Point(0, 0);
+            this.manufacturerIdRadioButton.Name = "manufacturerIdRadioButton";
+            this.manufacturerIdRadioButton.Size = new System.Drawing.Size(129, 19);
+            this.manufacturerIdRadioButton.TabIndex = 0;
+            this.manufacturerIdRadioButton.Text = "メーカーIDで検索";
+            this.manufacturerIdRadioButton.UseVisualStyleBackColor = true;
             // 
             // manufacturerNameRadioButton
             // 
             this.manufacturerNameRadioButton.AutoSize = true;
-            this.manufacturerNameRadioButton.Location = new System.Drawing.Point(0, 0);
+            this.manufacturerNameRadioButton.Location = new System.Drawing.Point(257, 0);
             this.manufacturerNameRadioButton.Name = "manufacturerNameRadioButton";
             this.manufacturerNameRadioButton.Size = new System.Drawing.Size(130, 19);
             this.manufacturerNameRadioButton.TabIndex = 1;
             this.manufacturerNameRadioButton.Text = "メーカー名で検索";
             this.manufacturerNameRadioButton.UseVisualStyleBackColor = true;
             // 
-            // deleteSearchVehicleIdGroupBox
+            // manufacturerNameGroupBox
             // 
-            this.deleteSearchVehicleIdGroupBox.Controls.Add(this.id);
-            this.deleteSearchVehicleIdGroupBox.Controls.Add(this.waveLabel1);
-            this.deleteSearchVehicleIdGroupBox.Controls.Add(this.maxIdLabel);
-            this.deleteSearchVehicleIdGroupBox.Controls.Add(this.deleteSearchVehicleMinIdTextbox);
-            this.deleteSearchVehicleIdGroupBox.Controls.Add(this.deleteSearchVehicleMaxIdTextbox);
-            this.deleteSearchVehicleIdGroupBox.Controls.Add(this.minIdLabel);
-            this.deleteSearchVehicleIdGroupBox.Location = new System.Drawing.Point(155, 12);
-            this.deleteSearchVehicleIdGroupBox.Name = "deleteSearchVehicleIdGroupBox";
-            this.deleteSearchVehicleIdGroupBox.Size = new System.Drawing.Size(251, 74);
-            this.deleteSearchVehicleIdGroupBox.TabIndex = 57;
-            this.deleteSearchVehicleIdGroupBox.TabStop = false;
+            this.manufacturerNameGroupBox.Controls.Add(this.manufacturerNameLabel);
+            this.manufacturerNameGroupBox.Controls.Add(this.manufacturerNameTextbox);
+            this.manufacturerNameGroupBox.Location = new System.Drawing.Point(260, 19);
+            this.manufacturerNameGroupBox.Name = "manufacturerNameGroupBox";
+            this.manufacturerNameGroupBox.Size = new System.Drawing.Size(248, 68);
+            this.manufacturerNameGroupBox.TabIndex = 63;
+            this.manufacturerNameGroupBox.TabStop = false;
+            // 
+            // manufacturerNameLabel
+            // 
+            this.manufacturerNameLabel.AutoSize = true;
+            this.manufacturerNameLabel.Location = new System.Drawing.Point(5, 22);
+            this.manufacturerNameLabel.Name = "manufacturerNameLabel";
+            this.manufacturerNameLabel.Size = new System.Drawing.Size(67, 15);
+            this.manufacturerNameLabel.TabIndex = 67;
+            this.manufacturerNameLabel.Text = "メーカー名";
+            // 
+            // manufacturerNameTextbox
+            // 
+            this.manufacturerNameTextbox.Location = new System.Drawing.Point(8, 40);
+            this.manufacturerNameTextbox.Name = "manufacturerNameTextbox";
+            this.manufacturerNameTextbox.Size = new System.Drawing.Size(234, 22);
+            this.manufacturerNameTextbox.TabIndex = 66;
+            // 
+            // idGroupBox
+            // 
+            this.idGroupBox.Controls.Add(this.maxIdTextbox);
+            this.idGroupBox.Controls.Add(this.minIdTextbox);
+            this.idGroupBox.Controls.Add(this.id);
+            this.idGroupBox.Controls.Add(this.waveLabel1);
+            this.idGroupBox.Controls.Add(this.maxIdLabel);
+            this.idGroupBox.Controls.Add(this.minIdLabel);
+            this.idGroupBox.Location = new System.Drawing.Point(155, 12);
+            this.idGroupBox.Name = "idGroupBox";
+            this.idGroupBox.Size = new System.Drawing.Size(251, 74);
+            this.idGroupBox.TabIndex = 57;
+            this.idGroupBox.TabStop = false;
             // 
             // id
             // 
@@ -336,19 +334,19 @@ namespace CarDatabase
             this.waveLabel1.TabIndex = 59;
             this.waveLabel1.Text = "～";
             // 
-            // deleteSearchVehicleModelYearGroupBox
+            // modelYearGroupBox
             // 
-            this.deleteSearchVehicleModelYearGroupBox.Controls.Add(this.waveLabel2);
-            this.deleteSearchVehicleModelYearGroupBox.Controls.Add(this.minModelYearTextbox);
-            this.deleteSearchVehicleModelYearGroupBox.Controls.Add(this.modelYear);
-            this.deleteSearchVehicleModelYearGroupBox.Controls.Add(this.minModelYearLabel);
-            this.deleteSearchVehicleModelYearGroupBox.Controls.Add(this.maxModelYearTextbox);
-            this.deleteSearchVehicleModelYearGroupBox.Controls.Add(this.maxModelYearLabel);
-            this.deleteSearchVehicleModelYearGroupBox.Location = new System.Drawing.Point(155, 92);
-            this.deleteSearchVehicleModelYearGroupBox.Name = "deleteSearchVehicleModelYearGroupBox";
-            this.deleteSearchVehicleModelYearGroupBox.Size = new System.Drawing.Size(251, 74);
-            this.deleteSearchVehicleModelYearGroupBox.TabIndex = 58;
-            this.deleteSearchVehicleModelYearGroupBox.TabStop = false;
+            this.modelYearGroupBox.Controls.Add(this.waveLabel2);
+            this.modelYearGroupBox.Controls.Add(this.minModelYearTextbox);
+            this.modelYearGroupBox.Controls.Add(this.modelYear);
+            this.modelYearGroupBox.Controls.Add(this.minModelYearLabel);
+            this.modelYearGroupBox.Controls.Add(this.maxModelYearTextbox);
+            this.modelYearGroupBox.Controls.Add(this.maxModelYearLabel);
+            this.modelYearGroupBox.Location = new System.Drawing.Point(155, 92);
+            this.modelYearGroupBox.Name = "modelYearGroupBox";
+            this.modelYearGroupBox.Size = new System.Drawing.Size(251, 74);
+            this.modelYearGroupBox.TabIndex = 58;
+            this.modelYearGroupBox.TabStop = false;
             // 
             // waveLabel2
             // 
@@ -368,19 +366,19 @@ namespace CarDatabase
             this.modelYear.TabIndex = 65;
             this.modelYear.Text = "年式";
             // 
-            // deleteSearchVehicleDateTimeGroupBox
+            // dateTimeGroupBox
             // 
-            this.deleteSearchVehicleDateTimeGroupBox.Controls.Add(this.dateTime);
-            this.deleteSearchVehicleDateTimeGroupBox.Controls.Add(this.waveLabel3);
-            this.deleteSearchVehicleDateTimeGroupBox.Controls.Add(this.maxDateTimeTextbox);
-            this.deleteSearchVehicleDateTimeGroupBox.Controls.Add(this.minDateTimeLabel);
-            this.deleteSearchVehicleDateTimeGroupBox.Controls.Add(this.minDateTimeTextbox);
-            this.deleteSearchVehicleDateTimeGroupBox.Controls.Add(this.maxDateTimeLabel);
-            this.deleteSearchVehicleDateTimeGroupBox.Location = new System.Drawing.Point(412, 12);
-            this.deleteSearchVehicleDateTimeGroupBox.Name = "deleteSearchVehicleDateTimeGroupBox";
-            this.deleteSearchVehicleDateTimeGroupBox.Size = new System.Drawing.Size(251, 74);
-            this.deleteSearchVehicleDateTimeGroupBox.TabIndex = 61;
-            this.deleteSearchVehicleDateTimeGroupBox.TabStop = false;
+            this.dateTimeGroupBox.Controls.Add(this.dateTime);
+            this.dateTimeGroupBox.Controls.Add(this.waveLabel3);
+            this.dateTimeGroupBox.Controls.Add(this.maxDateTimeTextbox);
+            this.dateTimeGroupBox.Controls.Add(this.minDateTimeLabel);
+            this.dateTimeGroupBox.Controls.Add(this.minDateTimeTextbox);
+            this.dateTimeGroupBox.Controls.Add(this.maxDateTimeLabel);
+            this.dateTimeGroupBox.Location = new System.Drawing.Point(412, 12);
+            this.dateTimeGroupBox.Name = "dateTimeGroupBox";
+            this.dateTimeGroupBox.Size = new System.Drawing.Size(251, 74);
+            this.dateTimeGroupBox.TabIndex = 61;
+            this.dateTimeGroupBox.TabStop = false;
             // 
             // dateTime
             // 
@@ -400,16 +398,16 @@ namespace CarDatabase
             this.waveLabel3.TabIndex = 60;
             this.waveLabel3.Text = "～";
             // 
-            // deleteSearchVehicleNameGroupBox
+            // nameGroupBox
             // 
-            this.deleteSearchVehicleNameGroupBox.Controls.Add(this.nameLabel);
-            this.deleteSearchVehicleNameGroupBox.Controls.Add(this.name);
-            this.deleteSearchVehicleNameGroupBox.Controls.Add(this.nameTextbox);
-            this.deleteSearchVehicleNameGroupBox.Location = new System.Drawing.Point(412, 92);
-            this.deleteSearchVehicleNameGroupBox.Name = "deleteSearchVehicleNameGroupBox";
-            this.deleteSearchVehicleNameGroupBox.Size = new System.Drawing.Size(251, 74);
-            this.deleteSearchVehicleNameGroupBox.TabIndex = 62;
-            this.deleteSearchVehicleNameGroupBox.TabStop = false;
+            this.nameGroupBox.Controls.Add(this.nameLabel);
+            this.nameGroupBox.Controls.Add(this.name);
+            this.nameGroupBox.Controls.Add(this.nameTextbox);
+            this.nameGroupBox.Location = new System.Drawing.Point(412, 92);
+            this.nameGroupBox.Name = "nameGroupBox";
+            this.nameGroupBox.Size = new System.Drawing.Size(251, 74);
+            this.nameGroupBox.TabIndex = 62;
+            this.nameGroupBox.TabStop = false;
             // 
             // nameLabel
             // 
@@ -429,67 +427,44 @@ namespace CarDatabase
             this.name.TabIndex = 64;
             this.name.Text = "車両名";
             // 
-            // ManufacturerNameLabel
+            // showRegisterForm
             // 
-            this.ManufacturerNameLabel.AutoSize = true;
-            this.ManufacturerNameLabel.Location = new System.Drawing.Point(3, 28);
-            this.ManufacturerNameLabel.Name = "ManufacturerNameLabel";
-            this.ManufacturerNameLabel.Size = new System.Drawing.Size(67, 15);
-            this.ManufacturerNameLabel.TabIndex = 67;
-            this.ManufacturerNameLabel.Text = "メーカー名";
-            // 
-            // manufacturerNameTextbox
-            // 
-            this.manufacturerNameTextbox.Location = new System.Drawing.Point(6, 46);
-            this.manufacturerNameTextbox.Name = "manufacturerNameTextbox";
-            this.manufacturerNameTextbox.Size = new System.Drawing.Size(100, 22);
-            this.manufacturerNameTextbox.TabIndex = 66;
->>>>>>> 開発用
+            this.showRegisterForm.Location = new System.Drawing.Point(719, 345);
+            this.showRegisterForm.Name = "showRegisterForm";
+            this.showRegisterForm.Size = new System.Drawing.Size(130, 93);
+            this.showRegisterForm.TabIndex = 64;
+            this.showRegisterForm.Text = "登録画面へ";
+            this.showRegisterForm.UseVisualStyleBackColor = true;
+            this.showRegisterForm.Click += new System.EventHandler(this.showRegisterForm_Click);
             // 
             // DeleteVehicle
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-<<<<<<< HEAD
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.deleteSearchVehicleNameLabel);
-            this.Controls.Add(this.deleteSearchVehicleNameTextbox);
-            this.Controls.Add(this.deleteSearchVehicleNameCheckBox);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.deleteSearchVehicleMaxIdTextbox);
-            this.Controls.Add(this.deleteSearchVehicleModelYearCheckBox);
-            this.Controls.Add(this.deleteSearchVehicleIdCheckBox);
-            this.Controls.Add(this.deleteSearchVehicleMaxModelYearLabel);
-            this.Controls.Add(this.deleteSearchVehicleMaxModelYearTextbox);
-            this.Controls.Add(this.deleteSearchVehicleMinModelYearLabel);
-            this.Controls.Add(this.deleteSearchVehicleMinModelYearTextbox);
-            this.Controls.Add(this.deleteSearchVehicleIdLabel);
-            this.Controls.Add(this.deleteSearchVehicleMinIdTextbox);
-=======
             this.ClientSize = new System.Drawing.Size(861, 450);
-            this.Controls.Add(this.deleteSearchVehicleNameGroupBox);
-            this.Controls.Add(this.deleteSearchVehicleDateTimeGroupBox);
-            this.Controls.Add(this.deleteSearchVehicleModelYearGroupBox);
-            this.Controls.Add(this.deleteSearchVehicleIdGroupBox);
+            this.Controls.Add(this.showRegisterForm);
+            this.Controls.Add(this.nameGroupBox);
+            this.Controls.Add(this.dateTimeGroupBox);
+            this.Controls.Add(this.modelYearGroupBox);
+            this.Controls.Add(this.idGroupBox);
             this.Controls.Add(this.deleteSearchVehicleManufacturerGroupBox);
->>>>>>> 開発用
             this.Controls.Add(this.deleteVehicleButton);
             this.Name = "DeleteVehicle";
             this.Text = "DeleteVehicle";
             this.deleteSearchVehicleManufacturerGroupBox.ResumeLayout(false);
             this.deleteSearchVehicleManufacturerGroupBox.PerformLayout();
-            this.deleteSearchVehicleManufacturerIdGroupBox.ResumeLayout(false);
-            this.deleteSearchVehicleManufacturerIdGroupBox.PerformLayout();
-            this.deleteSearchVehicleManufacturerNameGroupBox.ResumeLayout(false);
-            this.deleteSearchVehicleManufacturerNameGroupBox.PerformLayout();
-            this.deleteSearchVehicleIdGroupBox.ResumeLayout(false);
-            this.deleteSearchVehicleIdGroupBox.PerformLayout();
-            this.deleteSearchVehicleModelYearGroupBox.ResumeLayout(false);
-            this.deleteSearchVehicleModelYearGroupBox.PerformLayout();
-            this.deleteSearchVehicleDateTimeGroupBox.ResumeLayout(false);
-            this.deleteSearchVehicleDateTimeGroupBox.PerformLayout();
-            this.deleteSearchVehicleNameGroupBox.ResumeLayout(false);
-            this.deleteSearchVehicleNameGroupBox.PerformLayout();
+            this.manufacturerIdGroupBox.ResumeLayout(false);
+            this.manufacturerIdGroupBox.PerformLayout();
+            this.manufacturerNameGroupBox.ResumeLayout(false);
+            this.manufacturerNameGroupBox.PerformLayout();
+            this.idGroupBox.ResumeLayout(false);
+            this.idGroupBox.PerformLayout();
+            this.modelYearGroupBox.ResumeLayout(false);
+            this.modelYearGroupBox.PerformLayout();
+            this.dateTimeGroupBox.ResumeLayout(false);
+            this.dateTimeGroupBox.PerformLayout();
+            this.nameGroupBox.ResumeLayout(false);
+            this.nameGroupBox.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -497,16 +472,14 @@ namespace CarDatabase
         #endregion
         private System.Windows.Forms.TextBox nameTextbox;
         private System.Windows.Forms.Label minIdLabel;
-        private System.Windows.Forms.TextBox deleteSearchVehicleMaxIdTextbox;
+        private System.Windows.Forms.TextBox maxIdTextbox;
         private System.Windows.Forms.Label maxModelYearLabel;
         private System.Windows.Forms.TextBox maxModelYearTextbox;
         private System.Windows.Forms.Label minModelYearLabel;
         private System.Windows.Forms.TextBox minModelYearTextbox;
         private System.Windows.Forms.Label maxIdLabel;
-        private System.Windows.Forms.TextBox deleteSearchVehicleMinIdTextbox;
+        private System.Windows.Forms.TextBox minIdTextbox;
         private System.Windows.Forms.Button deleteVehicleButton;
-<<<<<<< HEAD
-=======
         private System.Windows.Forms.Label maxDateTimeLabel;
         private System.Windows.Forms.TextBox maxDateTimeTextbox;
         private System.Windows.Forms.Label minDateTimeLabel;
@@ -514,16 +487,15 @@ namespace CarDatabase
         private System.Windows.Forms.GroupBox deleteSearchVehicleManufacturerGroupBox;
         private System.Windows.Forms.RadioButton manufacturerNameRadioButton;
         private System.Windows.Forms.RadioButton manufacturerIdRadioButton;
-        private System.Windows.Forms.GroupBox deleteSearchVehicleIdGroupBox;
-        private System.Windows.Forms.GroupBox deleteSearchVehicleModelYearGroupBox;
+        private System.Windows.Forms.GroupBox idGroupBox;
+        private System.Windows.Forms.GroupBox modelYearGroupBox;
         private System.Windows.Forms.Label waveLabel1;
         private System.Windows.Forms.Label waveLabel2;
-        private System.Windows.Forms.GroupBox deleteSearchVehicleDateTimeGroupBox;
+        private System.Windows.Forms.GroupBox dateTimeGroupBox;
         private System.Windows.Forms.Label waveLabel3;
-        private System.Windows.Forms.GroupBox deleteSearchVehicleNameGroupBox;
-        private System.Windows.Forms.GroupBox deleteSearchVehicleManufacturerIdGroupBox;
-        private System.Windows.Forms.GroupBox deleteSearchVehicleManufacturerNameGroupBox;
-        private System.Windows.Forms.CheckBox manufacturer;
+        private System.Windows.Forms.GroupBox nameGroupBox;
+        private System.Windows.Forms.GroupBox manufacturerIdGroupBox;
+        private System.Windows.Forms.GroupBox manufacturerNameGroupBox;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox maxManufacturerIdTextBox;
         private System.Windows.Forms.Label maxManufacturerIdLabel;
@@ -534,8 +506,8 @@ namespace CarDatabase
         private System.Windows.Forms.Label name;
         private System.Windows.Forms.Label modelYear;
         private System.Windows.Forms.Label nameLabel;
-        private System.Windows.Forms.Label ManufacturerNameLabel;
+        private System.Windows.Forms.Label manufacturerNameLabel;
         private System.Windows.Forms.TextBox manufacturerNameTextbox;
->>>>>>> 開発用
+        private System.Windows.Forms.Button showRegisterForm;
     }
 }

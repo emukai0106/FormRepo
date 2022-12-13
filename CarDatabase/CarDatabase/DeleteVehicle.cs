@@ -13,12 +13,13 @@ namespace CarDatabase
 {
     public partial class DeleteVehicle : Form
     {
-        private Checks checks = new Checks();
-
+        // SELECT文用コマンド
         private string selectComandText = "SELECT * FROM m_vehicle";
 
+        // 件数取得用コマンド
         private string countComandText = "SELECT COUNT (*) FROM m_vehicle";
 
+        //DELETE文用コマンド
         private string deleteComandText = "DELETE FROM m_vehicle";
 
         /// <summary>
@@ -26,7 +27,7 @@ namespace CarDatabase
         /// </summary>
         /// <param name="data">対象となる文字列</param>
         /// <returns></returns>
-        private string GetDbString(String data)
+        private string ConvertString(String data)
         {
             // 文字列が空白かnullならnullを返す
             if (String.IsNullOrEmpty(data))
@@ -46,16 +47,22 @@ namespace CarDatabase
             InitializeComponent();
         }
 
+        /// <summary>
+        /// 車両情報削除ボタンが押されたときの動作
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void deleteVehicleButton_Click(object sender, EventArgs e)
         {
-            //// 削除用チェックボックスの状態を取得
-            //GetDeleteCheckBoxChecked();
-
+            // database.dbを使用
             using (SQLiteConnection con = new SQLiteConnection("Data Source=database.db"))
             {
-                con.Open();// コネクションを開く
+                // コネクションを開く
+                con.Open();
+
                 using (SQLiteTransaction trans = con.BeginTransaction())
                 {
+                    // コマンド定義
                     SQLiteCommand cmd = con.CreateCommand();
 
                     // コマンド文字列初期化
@@ -70,19 +77,19 @@ namespace CarDatabase
                     // 名前検索文字列初期化
                     string name = "";
 
-                    #region ID検索
+                    #region 車両ID検索
 
                     // 上限・下限取得
-                    min = GetDbString(deleteSearchVehicleMinIdTextbox.Text);
-                    max = GetDbString(deleteSearchVehicleMaxIdTextbox.Text);
+                    min = ConvertString(minIdTextbox.Text);
+                    max = ConvertString(maxIdTextbox.Text);
 
                     // 上限・下限どちらか片方でも入力されている場合
                     if (min != null || max != null)
                     {
                         // 上限が未入力の場合
-                        if (GetDbString(deleteSearchVehicleMaxIdTextbox.Text) == null)
+                        if (ConvertString(maxIdTextbox.Text) == null)
                         {
-                            // IDがMinId以上を削除
+                            // 車両IDが下限以上のものを指定
                             commandText = commandText + "id >= @MinId AND ";
 
                             // パラメータ追加
@@ -94,7 +101,7 @@ namespace CarDatabase
                         // 下限が未入力の場合
                         else if (min == null)
                         {
-                            // IDがMaxId以下を削除
+                            // 車両IDが上限以下ものを指定
                             commandText = commandText + "id <= @MaxId AND ";
 
                             // パラメータ追加
@@ -107,7 +114,7 @@ namespace CarDatabase
                         // 上限・下限ともに入力されている場合
                         else
                         {
-                            // IDがMinIdからMaxIdまでを削除
+                            // 車両IDが下限から上限までのものを指定
                             commandText = commandText + "id BETWEEN @MinId AND @MaxId AND ";
 
                             // パラメータ追加
@@ -124,8 +131,8 @@ namespace CarDatabase
                     #region 年式検索
 
                     // 上限・下限取得
-                    min = GetDbString(minModelYearTextbox.Text);
-                    max = GetDbString(maxModelYearTextbox.Text);
+                    min = ConvertString(minModelYearTextbox.Text);
+                    max = ConvertString(maxModelYearTextbox.Text);
 
                     // 上限・下限どちらか片方でも入力されている場合
                     if (min != null || max != null)
@@ -133,7 +140,7 @@ namespace CarDatabase
                         // 上限が未入力の場合
                         if (max == null)
                         {
-                            // 年式がmin以上のものを指定
+                            // 年式が下限以上のものを指定
                             commandText = commandText + "model_year >= @MinModelYear AND ";
 
                             // パラメータ追加
@@ -146,7 +153,7 @@ namespace CarDatabase
                         // 下限が未入力の場合
                         else if (min == null)
                         {
-                            // 年式がmax以下のものを指定
+                            // 年式が上限以下のものを指定
                             commandText = commandText + "model_year <= @MaxModelYear AND ";
 
                             // パラメータ追加
@@ -159,7 +166,7 @@ namespace CarDatabase
                         // 上限、下限ともに入力されている場合
                         else
                         {
-                            // 年式がから上限までのものを指定
+                            // 年式が下限から上限までのものを指定
                             commandText = commandText + "model_year BETWEEN @MinModelYear AND @MaxModelYear AND ";
 
                             // パラメータ追加
@@ -175,7 +182,8 @@ namespace CarDatabase
 
                     #region 名前検索
 
-                    name = GetDbString(nameTextbox.Text);
+                    // 車両名を取得
+                    name = ConvertString(nameTextbox.Text);
 
                     // 車両名が入力されている場合
                     if (name != null)
@@ -195,10 +203,11 @@ namespace CarDatabase
                     #region メーカーID検索
 
                     // メーカーIDにチェックされていた時
-                    if (checks.deleteChecks.manufactureIdRadioCheck)
+                    if (manufacturerIdRadioButton.Checked)
                     {
-                        min = GetDbString(minManufacturerIdTextBox.Text);
-                        max = GetDbString(maxManufacturerIdTextBox.Text);
+                        // 上限・下限取得
+                        min = ConvertString(minManufacturerIdTextBox.Text);
+                        max = ConvertString(maxManufacturerIdTextBox.Text);
 
                         // 上限・下限どちらか片方でも入力されている場合
                         if (min != null || max != null)
@@ -206,7 +215,7 @@ namespace CarDatabase
                             // 上限が未入力の場合
                             if (max == null)
                             {
-                                // IDがMinId以上を削除
+                                // メーカーIDが下限以上のものを指定
                                 commandText = commandText + "manufacturer_id >= @MinManufacturerId AND ";
 
                                 // パラメータ追加
@@ -219,7 +228,7 @@ namespace CarDatabase
                             // 下限が未入力の場合
                             else if (min == null)
                             {
-                                // 年式がmax以下のものを指定
+                                // メーカーIDが上限以下のものを指定
                                 commandText = commandText + "manufacturer_id <= @MaxModelYear AND ";
 
                                 // パラメータ追加
@@ -245,8 +254,6 @@ namespace CarDatabase
                             }
                         }
                     }
-<<<<<<< HEAD
-=======
                     #endregion
 
                     #region メーカー名検索
@@ -254,14 +261,30 @@ namespace CarDatabase
                     //メーカー名にチェックされていた時
                     else
                     {
-                        name=
+                        // メーカー名を取得
+                        name = ConvertString(manufacturerNameTextbox.Text);
+
+                        // メーカー名が入力されている場合
+                        if (name != null)
+                        {
+                            // メーカー名が一致するデータのメーカーIDをm_manufacturerから取得して指定
+                            commandText = commandText + "manufacturer_id IN (SELECT id FROM m_manufacturer WHERE name LIKE '%' || @ManufacturerName || '%')";
+
+                            // パラメータ追加
+                            cmd.Parameters.Add("ManufacturerName", System.Data.DbType.String);
+
+                            // パラメータを設定
+                            cmd.Parameters["ManufacturerName"].Value = name;
+                        }
                     }
+
                     #endregion
 
                     #region 更新日時検索
 
-                    min = GetDbString(minDateTimeTextbox.Text);
-                    max = GetDbString(maxDateTimeTextbox.Text);
+                    // 上限・下限取得
+                    min = ConvertString(minDateTimeTextbox.Text);
+                    max = ConvertString(maxDateTimeTextbox.Text);
 
                     // 上限・下限のDateTime型を定義
                     DateTime maxDateTime;
@@ -273,13 +296,13 @@ namespace CarDatabase
                         // 下限のみ入力されている場合
                         if (max == null)
                         {
-                            // minをDataTimeに変換できた場合
+                            // 下限をDataTimeに変換できた場合
                             if (DateTime.TryParse(min, out minDateTime))
                             {
-                                // 文字列を日付型に変換(Parse)→文字列型に変換(ToString)
+                                // 文字列を日付型に変換(Parse)→文字列型に再変換(ToString)
                                 min = minDateTime.ToString("yyyy/MM/dd HH:mm:ss");
 
-                                // 更新日時がmin以上のものを指定
+                                // 更新日時が下限以上のものを指定
                                 commandText = commandText + "date_time >= @MinDateTime AND ";
 
                                 // パラメータ追加
@@ -291,6 +314,7 @@ namespace CarDatabase
                             // minをDataTimeに変換できなかった場合
                             else
                             {
+                                // エラー通知ダイアログ表示
                                 MessageBox.Show("日付の入力形式が間違っています。\n入力例:2022/01/01", "入力形式エラー",
                                     MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 return;
@@ -299,13 +323,13 @@ namespace CarDatabase
                         // 上限のみ入力されている場合
                         else if (min == null)
                         {
-                            //maxをDataTimeに変換できた場合
+                            // 上限をDataTimeに変換できた場合
                             if (DateTime.TryParse(max, out maxDateTime))
                             {
-                                //文字列を日付型に変換(Parse)→文字列型に変換(ToString)
+                                // 文字列を日付型に変換(Parse)→文字列型に再変換(ToString)
                                 max = maxDateTime.ToString("yyyy/MM/dd HH:mm:ss");
 
-                                // 更新日時がmax以下のものを指定
+                                // 更新日時が上限以下のものを指定
                                 commandText = commandText + "date_time <= @MaxDateTime AND ";
 
                                 // パラメータ追加
@@ -317,17 +341,17 @@ namespace CarDatabase
                             // maxをDataTimeに変換できなかった場合
                             else
                             {
-                                MessageBox.Show("日付の入力形式が間違っています。\n入力例:2022/01/01","入力形式エラー",
-                                    MessageBoxButtons.OK,MessageBoxIcon.Error);
+                                // エラー通知ダイアログ表示
+                                MessageBox.Show("日付の入力形式が間違っています。\n入力例:2022/01/01", "入力形式エラー",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 return;
                             }
                         }
                         // 上限、下限ともに入力されている場合
                         else
                         {
-                            //文字列を日付型に変換(Parse)→文字列型に変換(ToString)
+                            // 文字列を日付型に変換(Parse)→文字列型に再変換(ToString)
                             min = DateTime.Parse(min).ToString("yyyy/MM/dd HH:mm:ss");
-                            //文字列を日付型に変換(Parse)→文字列型に変換(ToString)
                             max = DateTime.Parse(max).ToString("yyyy/MM/dd HH:mm:ss");
 
                             // IDがMinIdからMaxIdまでを削除
@@ -341,14 +365,13 @@ namespace CarDatabase
                             cmd.Parameters["MinDateTime"].Value = min;
                             cmd.Parameters["MaxDateTime"].Value = max;
                         }
-                        //MaxDateTime、MinDateTimeはstring型で読み込まれるが、SQL内では日付として処理される
+                        // MaxDateTime、MinDateTimeはstring型で読み込まれるが、SQL内では日付として処理される
                     }
                     #endregion
 
-                    //コマンドから削除する文字数
+                    // コマンドから削除する文字数
                     int removeChars;
 
->>>>>>> 開発用
                     // コマンドがANDで終わっていれば末尾を削除
                     if (commandText.EndsWith(" AND "))
                     {
@@ -373,7 +396,9 @@ namespace CarDatabase
                     // 件数取得用コマンド文字列を結合
                     cmd.CommandText = countComandText + commandText;
 
-                    //検索結果の件数(int64型のためlong)が0の場合
+                    MessageBox.Show(cmd.CommandText);
+
+                    // 検索結果の件数(int64型のためlong)が0の場合
                     if ((long)cmd.ExecuteScalar() == 0)
                     {
                         // NoResultPopUpを表示し、入力結果をdialogResultに格納
@@ -387,21 +412,23 @@ namespace CarDatabase
                     // データテーブル生成
                     DataTable dataTable = new DataTable();
 
-                    // 表示
+                    // 検索用コマンド文字列を結合
                     cmd.CommandText = selectComandText + commandText;
+
+                    // 削除確認ポップアップ用アダプターを作成
                     SQLiteDataAdapter adapter = new SQLiteDataAdapter(cmd);
                     adapter.Fill(dataTable);
 
-                    //削除確認ポップアップを表示
+                    // 削除確認ポップアップを表示
                     PopUp1 popUp1 = new PopUp1();
 
-                    //ポップアップのDataSourceを指定
+                    // ポップアップのDataSourceを指定
                     popUp1.PopUpSql(dataTable);
 
-                    //ポップアップを表示し、DialogResultを設定
+                    // ポップアップを表示し、DialogResultを設定
                     dialogResult = popUp1.ShowDialog();
 
-                    //キャンセルが押された場合は何もせずreturn
+                    // キャンセルが押された場合は何もせずreturn
                     if (dialogResult == DialogResult.Cancel)
                     {
                         return;
@@ -420,15 +447,20 @@ namespace CarDatabase
                 con.Close();
             }
         }
-<<<<<<< HEAD
-        private void GetDeleteCheckBoxChecked()
+
+        /// <summary>
+        /// 車両登録画面を表示する
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void showRegisterForm_Click(object sender, EventArgs e)
         {
-            //削除用絞り込みチェックボックスを全項目確認する
-            checks.deleteChecks.id = deleteSearchVehicleIdCheckBox.Checked;
-            checks.deleteChecks.name = deleteSearchVehicleNameCheckBox.Checked;
-            checks.deleteChecks.modelYear = deleteSearchVehicleModelYearCheckBox.Checked;
+            // 現在の画面を非表示にする
+            this.Visible = false;
+
+            // 登録画面を表示
+            RegisterVehicle form = new RegisterVehicle();
+            form.Show();
         }
-=======
->>>>>>> 開発用
     }
 }
