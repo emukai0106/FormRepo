@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SQLite;
 
@@ -13,20 +7,29 @@ namespace CarDatabase
 {
     public partial class DeleteVehicle : Form
     {
-        // SELECT文用コマンド
+        // 車両情報テーブルSELECT文用コマンド
         private string selectComandText = "SELECT * FROM m_vehicle";
 
         // 件数取得用コマンド
         private string countComandText = "SELECT COUNT (*) FROM m_vehicle";
 
-        //DELETE文用コマンド
+        // 車両情報テーブルDELETE文用コマンド
         private string deleteComandText = "DELETE FROM m_vehicle";
+
+        // 下限値文字列
+        string min = "";
+
+        // 上限値文字列
+        string max = "";
+
+        // 名前検索文字列
+        string nameString = "";
 
         /// <summary>
         /// 文字列がnullか空白ならnullを返す
         /// </summary>
-        /// <param name="data">対象となる文字列</param>
-        /// <returns></returns>
+        /// <param name="data">文字列</param>
+        /// <returns>空白チェックを行った文字列</returns>
         private string ConvertString(String data)
         {
             // 文字列が空白かnullならnullを返す
@@ -42,17 +45,49 @@ namespace CarDatabase
             }
         }
 
+        /// <summary>
+        /// 最初に実行される
+        /// </summary>
         public DeleteVehicle()
         {
+            // フォーム表示処理
             InitializeComponent();
+
+            // コンボボックスの中身を設定
+            SetManufacturerComboBox();
+        }
+
+        /// <summary>
+        /// メーカー名を抽出し、コンボボックスに表示する
+        /// </summary>
+        private void SetManufacturerComboBox()
+        {
+            // database.dbを使用
+            using (SQLiteConnection con = new SQLiteConnection("Data Source=database.db"))
+            {
+                // データテーブル生成
+                DataTable dataTable = new DataTable();
+
+                // m_manufacturerからメーカー名を取得しdataTableに格納
+                SQLiteDataAdapter adapter = new SQLiteDataAdapter("SELECT name FROM m_manufacturer", con);
+                adapter.Fill(dataTable);
+
+                // コンボボックスのインデックスと表示名を指定
+                ManufacturerComboBox.ValueMember = "id";
+                ManufacturerComboBox.DisplayMember = "name";
+
+                // コンボボックスのDataSourceを指定
+                ManufacturerComboBox.DataSource = dataTable;
+                
+                // 何も選択されていない状態にする
+                ManufacturerComboBox.SelectedIndex = -1;
+            }
         }
 
         /// <summary>
         /// 車両情報削除ボタンが押されたときの動作
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void deleteVehicleButton_Click(object sender, EventArgs e)
+        private void DeleteVehicleExecuteButtonClick(object sender, EventArgs e)
         {
             // database.dbを使用
             using (SQLiteConnection con = new SQLiteConnection("Data Source=database.db"))
@@ -68,32 +103,23 @@ namespace CarDatabase
                     // コマンド文字列初期化
                     string commandText = " WHERE ";
 
-                    // 下限値文字列初期化
-                    string min = "";
-
-                    // 上限値文字列初期化
-                    string max = "";
-
-                    // 名前検索文字列初期化
-                    string name = "";
-
                     #region 車両ID検索
 
                     // 上限・下限取得
-                    min = ConvertString(minIdTextbox.Text);
-                    max = ConvertString(maxIdTextbox.Text);
+                    min = ConvertString(MinIdTextbox.Text);
+                    max = ConvertString(MaxIdTextbox.Text);
 
                     // 上限・下限どちらか片方でも入力されている場合
                     if (min != null || max != null)
                     {
                         // 上限が未入力の場合
-                        if (ConvertString(maxIdTextbox.Text) == null)
+                        if (ConvertString(MaxIdTextbox.Text) == null)
                         {
                             // 車両IDが下限以上のものを指定
                             commandText = commandText + "id >= @MinId AND ";
 
                             // パラメータ追加
-                            cmd.Parameters.Add("MinId", System.Data.DbType.Int64);
+                            cmd.Parameters.Add("MinId", DbType.Int64);
 
                             // パラメータを設定
                             cmd.Parameters["MinId"].Value = int.Parse(min);
@@ -105,7 +131,7 @@ namespace CarDatabase
                             commandText = commandText + "id <= @MaxId AND ";
 
                             // パラメータ追加
-                            cmd.Parameters.Add("MaxId", System.Data.DbType.Int64);
+                            cmd.Parameters.Add("MaxId", DbType.Int64);
 
                             // パラメータを設定
                             cmd.Parameters["MaxId"].Value = int.Parse(max);
@@ -118,8 +144,8 @@ namespace CarDatabase
                             commandText = commandText + "id BETWEEN @MinId AND @MaxId AND ";
 
                             // パラメータ追加
-                            cmd.Parameters.Add("MinId", System.Data.DbType.Int64);
-                            cmd.Parameters.Add("MaxId", System.Data.DbType.Int64);
+                            cmd.Parameters.Add("MinId", DbType.Int64);
+                            cmd.Parameters.Add("MaxId", DbType.Int64);
 
                             // パラメータを設定
                             cmd.Parameters["MinId"].Value = int.Parse(min);
@@ -131,8 +157,8 @@ namespace CarDatabase
                     #region 年式検索
 
                     // 上限・下限取得
-                    min = ConvertString(minModelYearTextbox.Text);
-                    max = ConvertString(maxModelYearTextbox.Text);
+                    min = ConvertString(MinModelYearTextbox.Text);
+                    max = ConvertString(MaxModelYearTextbox.Text);
 
                     // 上限・下限どちらか片方でも入力されている場合
                     if (min != null || max != null)
@@ -144,7 +170,7 @@ namespace CarDatabase
                             commandText = commandText + "model_year >= @MinModelYear AND ";
 
                             // パラメータ追加
-                            cmd.Parameters.Add("MinModelYear", System.Data.DbType.Int64);
+                            cmd.Parameters.Add("MinModelYear", DbType.Int64);
 
                             // パラメータを設定
                             cmd.Parameters["MinModelYear"].Value = int.Parse(min);
@@ -157,7 +183,7 @@ namespace CarDatabase
                             commandText = commandText + "model_year <= @MaxModelYear AND ";
 
                             // パラメータ追加
-                            cmd.Parameters.Add("MaxModelYear", System.Data.DbType.Int64);
+                            cmd.Parameters.Add("MaxModelYear", DbType.Int64);
 
                             // パラメータを設定
                             cmd.Parameters["MaxModelYear"].Value = int.Parse(max);
@@ -170,8 +196,8 @@ namespace CarDatabase
                             commandText = commandText + "model_year BETWEEN @MinModelYear AND @MaxModelYear AND ";
 
                             // パラメータ追加
-                            cmd.Parameters.Add("MinModelYear", System.Data.DbType.Int64);
-                            cmd.Parameters.Add("MaxModelYear", System.Data.DbType.Int64);
+                            cmd.Parameters.Add("MinModelYear", DbType.Int64);
+                            cmd.Parameters.Add("MaxModelYear", DbType.Int64);
 
                             // パラメータを設定
                             cmd.Parameters["MinModelYear"].Value = int.Parse(min);
@@ -183,99 +209,39 @@ namespace CarDatabase
                     #region 名前検索
 
                     // 車両名を取得
-                    name = ConvertString(nameTextbox.Text);
+                    nameString = ConvertString(NameTextbox.Text);
 
                     // 車両名が入力されている場合
-                    if (name != null)
+                    if (nameString != null)
                     {
                         // 車両名が一致するものを指定
                         commandText = commandText + "name LIKE '%' || @Name || '%' AND ";
 
                         // パラメータ追加
-                        cmd.Parameters.Add("Name", System.Data.DbType.String);
+                        cmd.Parameters.Add("Name", DbType.String);
 
 
                         // パラメータを設定
-                        cmd.Parameters["Name"].Value = name;
-                    }
-                    #endregion
-
-                    #region メーカーID検索
-
-                    // メーカーIDにチェックされていた時
-                    if (manufacturerIdRadioButton.Checked)
-                    {
-                        // 上限・下限取得
-                        min = ConvertString(minManufacturerIdTextBox.Text);
-                        max = ConvertString(maxManufacturerIdTextBox.Text);
-
-                        // 上限・下限どちらか片方でも入力されている場合
-                        if (min != null || max != null)
-                        {
-                            // 上限が未入力の場合
-                            if (max == null)
-                            {
-                                // メーカーIDが下限以上のものを指定
-                                commandText = commandText + "manufacturer_id >= @MinManufacturerId AND ";
-
-                                // パラメータ追加
-                                cmd.Parameters.Add("MinManufacturerId", System.Data.DbType.Int64);
-
-                                // パラメータを設定
-                                cmd.Parameters["MinManufacturerId"].Value = int.Parse(min);
-                            }
-
-                            // 下限が未入力の場合
-                            else if (min == null)
-                            {
-                                // メーカーIDが上限以下のものを指定
-                                commandText = commandText + "manufacturer_id <= @MaxModelYear AND ";
-
-                                // パラメータ追加
-                                cmd.Parameters.Add("MaxManufacturerId", System.Data.DbType.Int64);
-
-                                // パラメータを設定
-                                cmd.Parameters["MaxManufacturerId"].Value = int.Parse(max);
-                            }
-
-                            // 上限・下限ともに入力されている場合
-                            else
-                            {
-                                // メーカーIDがmin以上max以下のものを指定
-                                commandText = commandText + "manufacturer_id BETWEEN @MinManufacturerId AND @MaxManufacturerId AND ";
-
-                                // パラメータ追加
-                                cmd.Parameters.Add("MinManufacturerId", System.Data.DbType.Int64);
-                                cmd.Parameters.Add("MaxManufacturerId", System.Data.DbType.Int64);
-
-                                // パラメータを設定
-                                cmd.Parameters["MinManufacturerId"].Value = int.Parse(min);
-                                cmd.Parameters["MaxManufacturerId"].Value = int.Parse(max);
-                            }
-                        }
+                        cmd.Parameters["Name"].Value = NameBoxLabel;
                     }
                     #endregion
 
                     #region メーカー名検索
 
-                    //メーカー名にチェックされていた時
-                    else
+                    // メーカー名を取得
+                    nameString = ConvertString(ManufacturerComboBox.Text);
+
+                    // メーカー名が入力されている場合
+                    if (nameString != null)
                     {
-                        // メーカー名を取得
-                        name = ConvertString(manufacturerNameTextbox.Text);
+                        // メーカー名が一致するデータのメーカーIDをm_manufacturerから取得して指定
+                        commandText = commandText + "manufacturer_id IN (SELECT id FROM m_manufacturer WHERE name LIKE '%' || @ManufacturerName || '%')";
 
-                        // メーカー名が入力されている場合
-                        if (name != null)
-                        {
-                            // メーカー名が一致するデータのメーカーIDをm_manufacturerから取得して指定
-                            commandText = commandText + "manufacturer_id IN (SELECT id FROM m_manufacturer WHERE name LIKE '%' || @ManufacturerName || '%')";
+                        // パラメータ追加
+                        cmd.Parameters.Add("ManufacturerName", DbType.String);
 
-                            // パラメータ追加
-                            cmd.Parameters.Add("ManufacturerName", System.Data.DbType.String);
-
-                            // パラメータを設定
-                            cmd.Parameters["ManufacturerName"].Value = name;
-                        }
+                        // パラメータを設定
+                        cmd.Parameters["ManufacturerName"].Value = nameString;
                     }
 
                     #endregion
@@ -283,8 +249,8 @@ namespace CarDatabase
                     #region 更新日時検索
 
                     // 上限・下限取得
-                    min = ConvertString(minDateTimeTextbox.Text);
-                    max = ConvertString(maxDateTimeTextbox.Text);
+                    min = ConvertString(MinDateTimeTextbox.Text);
+                    max = ConvertString(MaxDateTimeTextbox.Text);
 
                     // 上限・下限のDateTime型を定義
                     DateTime maxDateTime;
@@ -297,7 +263,7 @@ namespace CarDatabase
                         if (max == null)
                         {
                             // 下限をDataTimeに変換できた場合
-                            if (DateTime.TryParse(min, out minDateTime))
+                            if (System.DateTime.TryParse(min, out minDateTime))
                             {
                                 // 文字列を日付型に変換(Parse)→文字列型に再変換(ToString)
                                 min = minDateTime.ToString("yyyy/MM/dd HH:mm:ss");
@@ -306,7 +272,7 @@ namespace CarDatabase
                                 commandText = commandText + "date_time >= @MinDateTime AND ";
 
                                 // パラメータ追加
-                                cmd.Parameters.Add("MinDateTime", System.Data.DbType.String);
+                                cmd.Parameters.Add("MinDateTime", DbType.String);
 
                                 // パラメータを設定
                                 cmd.Parameters["MinDateTime"].Value = min;
@@ -324,7 +290,7 @@ namespace CarDatabase
                         else if (min == null)
                         {
                             // 上限をDataTimeに変換できた場合
-                            if (DateTime.TryParse(max, out maxDateTime))
+                            if (System.DateTime.TryParse(max, out maxDateTime))
                             {
                                 // 文字列を日付型に変換(Parse)→文字列型に再変換(ToString)
                                 max = maxDateTime.ToString("yyyy/MM/dd HH:mm:ss");
@@ -333,7 +299,7 @@ namespace CarDatabase
                                 commandText = commandText + "date_time <= @MaxDateTime AND ";
 
                                 // パラメータ追加
-                                cmd.Parameters.Add("MaxDateTime", System.Data.DbType.String);
+                                cmd.Parameters.Add("MaxDateTime", DbType.String);
 
                                 // パラメータを設定
                                 cmd.Parameters["MaxDateTime"].Value = max;
@@ -351,15 +317,15 @@ namespace CarDatabase
                         else
                         {
                             // 文字列を日付型に変換(Parse)→文字列型に再変換(ToString)
-                            min = DateTime.Parse(min).ToString("yyyy/MM/dd HH:mm:ss");
-                            max = DateTime.Parse(max).ToString("yyyy/MM/dd HH:mm:ss");
+                            min = System.DateTime.Parse(min).ToString("yyyy/MM/dd HH:mm:ss");
+                            max = System.DateTime.Parse(max).ToString("yyyy/MM/dd HH:mm:ss");
 
                             // IDがMinIdからMaxIdまでを削除
                             commandText = commandText + "date_time BETWEEN @MinDateTime AND @MaxDateTime AND ";
 
                             // パラメータ追加
-                            cmd.Parameters.Add("MinDateTime", System.Data.DbType.String);
-                            cmd.Parameters.Add("MaxDateTime", System.Data.DbType.String);
+                            cmd.Parameters.Add("MinDateTime", DbType.String);
+                            cmd.Parameters.Add("MaxDateTime", DbType.String);
 
                             // パラメータを設定
                             cmd.Parameters["MinDateTime"].Value = min;
@@ -390,20 +356,22 @@ namespace CarDatabase
                         // commandTextの末尾を削除
                         commandText = commandText.Remove(commandText.Length - removeChars);
                     }
-                    // DialogResult
-                    DialogResult dialogResult;
+
+                    // ポップアップの入力結果を格納する
+                    DialogResult popUpResult;
 
                     // 件数取得用コマンド文字列を結合
                     cmd.CommandText = countComandText + commandText;
 
+                    //コマンド内容表示(デバッグ用)
                     MessageBox.Show(cmd.CommandText);
 
                     // 検索結果の件数(int64型のためlong)が0の場合
                     if ((long)cmd.ExecuteScalar() == 0)
                     {
-                        // NoResultPopUpを表示し、入力結果をdialogResultに格納
+                        // 検索結果0件のポップアップを表示し、入力結果をdialogResultに格納
                         NoResultPopUp noResultPopUp = new NoResultPopUp();
-                        dialogResult = noResultPopUp.ShowDialog();
+                        popUpResult = noResultPopUp.ShowDialog();
 
                         // 以降の処理は行わない
                         return;
@@ -420,16 +388,16 @@ namespace CarDatabase
                     adapter.Fill(dataTable);
 
                     // 削除確認ポップアップを表示
-                    PopUp1 popUp1 = new PopUp1();
+                    DeleteVehiclePopUp deletePopUp = new DeleteVehiclePopUp();
 
                     // ポップアップのDataSourceを指定
-                    popUp1.PopUpSql(dataTable);
+                    deletePopUp.PopUpSql(dataTable);
 
                     // ポップアップを表示し、DialogResultを設定
-                    dialogResult = popUp1.ShowDialog();
+                    popUpResult = deletePopUp.ShowDialog();
 
                     // キャンセルが押された場合は何もせずreturn
-                    if (dialogResult == DialogResult.Cancel)
+                    if (popUpResult == DialogResult.Cancel)
                     {
                         return;
                     }
@@ -451,12 +419,10 @@ namespace CarDatabase
         /// <summary>
         /// 車両登録画面を表示する
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void showRegisterForm_Click(object sender, EventArgs e)
+        private void ShowRegisterFormButtonClick(object sender, EventArgs e)
         {
             // 現在の画面を非表示にする
-            this.Visible = false;
+            Visible = false;
 
             // 登録画面を表示
             RegisterVehicle form = new RegisterVehicle();

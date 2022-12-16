@@ -11,9 +11,9 @@ using System.Data.SQLite;
 
 namespace CarDatabase
 {
-    public partial class PopUp1 : Form
+    public partial class DeleteVehiclePopUp : Form
     {
-        public PopUp1()
+        public DeleteVehiclePopUp()
         {
             InitializeComponent();
         }

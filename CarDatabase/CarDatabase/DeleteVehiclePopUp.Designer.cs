@@ -1,7 +1,7 @@
 ﻿
 namespace CarDatabase
 {
-    partial class PopUp1
+    partial class DeleteVehiclePopUp
     {
         /// <summary>
         /// Required designer variable.

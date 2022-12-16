@@ -18,7 +18,7 @@ C:\Users\s20217019\Desktop\Form\CarDatabase\CarDatabase\obj\Debug\CarDatabase.cs
 C:\Users\s20217019\Desktop\Form\CarDatabase\CarDatabase\obj\Debug\CarDatabase.exe
 C:\Users\s20217019\Desktop\Form\CarDatabase\CarDatabase\obj\Debug\CarDatabase.pdb
 C:\Users\s20217019\Desktop\Form\CarDatabase\CarDatabase\obj\Debug\CarDatabase.Form2.resources
-C:\Users\s20217019\Desktop\Form\CarDatabase\CarDatabase\obj\Debug\CarDatabase.PopUp1.resources
 C:\Users\s20217019\Desktop\Form\CarDatabase\CarDatabase\obj\Debug\CarDatabase.NoResultPopUp.resources
 C:\Users\s20217019\Desktop\Form\CarDatabase\CarDatabase\obj\Debug\CarDatabase.DeleteVehicle.resources
 C:\Users\s20217019\Desktop\Form\CarDatabase\CarDatabase\obj\Debug\CarDatabase.RegisterVehicle.resources
+C:\Users\s20217019\Desktop\Form\CarDatabase\CarDatabase\obj\Debug\CarDatabase.DeleteVehiclePopUp.resources
