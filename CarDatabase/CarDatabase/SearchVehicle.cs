@@ -5,7 +5,7 @@ using System.Data.SQLite;
 
 namespace CarDatabase
 {
-    public partial class DeleteVehicle : Form
+    public partial class SearchVehicle : Form
     {
         // 表示されていない時はtrueになる
         private bool closing = false;
@@ -15,9 +15,6 @@ namespace CarDatabase
 
         // 件数取得用コマンド
         private string countComandText = "SELECT COUNT (*) FROM m_vehicle";
-
-        // 車両情報テーブルDELETE文用コマンド
-        private string deleteComandText = "DELETE FROM m_vehicle";
 
         // 下限値文字列
         string min = "";
@@ -51,7 +48,7 @@ namespace CarDatabase
         /// <summary>
         /// 最初に実行される処理
         /// </summary>
-        public DeleteVehicle()
+        public SearchVehicle()
         {
             // フォーム表示処理
             InitializeComponent();
@@ -88,9 +85,20 @@ namespace CarDatabase
         }
 
         /// <summary>
-        /// 車両情報削除ボタンが押されたときの動作
+        /// ✕ボタンが押されたとき
         /// </summary>
-        private void DeleteVehicleButtonClick(object sender, EventArgs e)
+        private void ShowTopFormButtonClick(object sender, EventArgs e)
+        {
+            // 現在の画面を非表示にする
+            Visible = false;
+            closing = true;
+
+            // トップ画面を表示
+            TopForm form = new TopForm();
+            form.Show();
+        }
+
+        private void SearchVehicleButtonClick(object sender, EventArgs e)
         {
             // database.dbを使用
             using (SQLiteConnection con = new SQLiteConnection("Data Source=database.db"))
@@ -359,9 +367,6 @@ namespace CarDatabase
                         commandText = commandText.Remove(commandText.Length - removeChars);
                     }
 
-                    // ポップアップの入力結果を格納する
-                    DialogResult popUpResult;
-
                     // 件数取得用コマンド文字列を結合
                     cmd.CommandText = countComandText + commandText;
 
@@ -370,7 +375,7 @@ namespace CarDatabase
                     {
                         // 検索結果0件のポップアップを表示し、入力結果をdialogResultに格納
                         NoResultPopUp noResultPopUp = new NoResultPopUp();
-                        popUpResult = noResultPopUp.ShowDialog();
+                        DialogResult popUpResult = noResultPopUp.ShowDialog();
 
                         // 以降の処理は行わない
                         return;
@@ -386,29 +391,7 @@ namespace CarDatabase
                     SQLiteDataAdapter adapter = new SQLiteDataAdapter(cmd);
                     adapter.Fill(dataTable);
 
-                    // 削除確認ポップアップを表示
-                    DeleteVehiclePopUp deletePopUp = new DeleteVehiclePopUp();
-
-                    // ポップアップのDataSourceを指定
-                    deletePopUp.PopUpSql(dataTable);
-
-                    // ポップアップを表示し、DialogResultを設定
-                    popUpResult = deletePopUp.ShowDialog();
-
-                    // キャンセルが押された場合は何もせずreturn
-                    if (popUpResult == DialogResult.Cancel)
-                    {
-                        return;
-                    }
-
-                    // 削除用コマンド文字列を結合
-                    cmd.CommandText = deleteComandText + commandText;
-
-                    // SQL実行
-                    cmd.ExecuteNonQuery();
-
-                    // コミット
-                    trans.Commit();
+                    SearchResultDataGridView.DataSource = dataTable;
                 }
                 // コネクションを閉じる
                 con.Close();
@@ -416,23 +399,9 @@ namespace CarDatabase
         }
 
         /// <summary>
-        /// トップ画面を表示する
-        /// </summary>
-        private void ShowTopFormButtonClick(object sender, EventArgs e)
-        {
-            // 現在の画面を非表示にする
-            Visible = false;
-            closing = true;
-
-            // トップ画面を表示
-            TopForm form = new TopForm();
-            form.Show();
-        }
-
-        /// <summary>
         /// ✕ボタンが押されたとき
         /// </summary>
-        private void DeleteVehicleFormClosing(object sender, FormClosingEventArgs e)
+        private void SearchVehicleFormClosing(object sender, FormClosingEventArgs e)
         {
             if (closing)
             {

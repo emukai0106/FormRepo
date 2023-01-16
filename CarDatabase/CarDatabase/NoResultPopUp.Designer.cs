@@ -30,38 +30,42 @@ namespace CarDatabase
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.ContinueButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(113, 72);
+            this.label1.Location = new System.Drawing.Point(12, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(236, 15);
             this.label1.TabIndex = 0;
             this.label1.Text = "検索条件に該当するデータがありません";
             // 
-            // button1
+            // ContinueButton
             // 
-            this.button1.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.button1.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.button1.Location = new System.Drawing.Point(163, 151);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(114, 38);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "続行";
-            this.button1.UseVisualStyleBackColor = true;
+            this.ContinueButton.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.ContinueButton.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.ContinueButton.Location = new System.Drawing.Point(12, 71);
+            this.ContinueButton.Name = "ContinueButton";
+            this.ContinueButton.Size = new System.Drawing.Size(236, 38);
+            this.ContinueButton.TabIndex = 1;
+            this.ContinueButton.Text = "続行";
+            this.ContinueButton.UseVisualStyleBackColor = true;
             // 
             // NoResultPopUp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(463, 247);
-            this.Controls.Add(this.button1);
+            this.ControlBox = false;
+            this.Controls.Add(this.ContinueButton);
             this.Controls.Add(this.label1);
             this.Name = "NoResultPopUp";
-            this.Text = "NoResultPopUp";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "検索結果なし";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -70,6 +74,6 @@ namespace CarDatabase
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button ContinueButton;
     }
 }

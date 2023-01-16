@@ -73,7 +73,7 @@ namespace CarDatabase
             this.viewVehicleButton.TabIndex = 9;
             this.viewVehicleButton.Text = "車両情報表示";
             this.viewVehicleButton.UseVisualStyleBackColor = true;
-            this.viewVehicleButton.Click += new System.EventHandler(this.viewVehicleButton_Click);
+            this.viewVehicleButton.Click += new System.EventHandler(this.ViewVehicleButton_Click);
             // 
             // updateVehicleButton
             // 

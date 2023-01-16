@@ -99,6 +99,12 @@
     <Compile Include="DeleteVehicle.Designer.cs">
       <DependentUpon>DeleteVehicle.cs</DependentUpon>
     </Compile>
+    <Compile Include="ManufacturerTableManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ManufacturerTableManagement.Designer.cs">
+      <DependentUpon>ManufacturerTableManagement.cs</DependentUpon>
+    </Compile>
     <Compile Include="NoResultPopUp.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -119,6 +125,24 @@
     <Compile Include="RegisterVehicle.Designer.cs">
       <DependentUpon>RegisterVehicle.cs</DependentUpon>
     </Compile>
+    <Compile Include="SearchVehicle.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SearchVehicle.Designer.cs">
+      <DependentUpon>SearchVehicle.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TopForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TopForm.Designer.cs">
+      <DependentUpon>TopForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VehicleTableManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VehicleTableManagement.Designer.cs">
+      <DependentUpon>VehicleTableManagement.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -127,6 +151,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DeleteVehicle.resx">
       <DependentUpon>DeleteVehicle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ManufacturerTableManagement.resx">
+      <DependentUpon>ManufacturerTableManagement.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NoResultPopUp.resx">
       <DependentUpon>NoResultPopUp.cs</DependentUpon>
@@ -146,6 +173,15 @@
     </Compile>
     <EmbeddedResource Include="RegisterVehicle.resx">
       <DependentUpon>RegisterVehicle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SearchVehicle.resx">
+      <DependentUpon>SearchVehicle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TopForm.resx">
+      <DependentUpon>TopForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VehicleTableManagement.resx">
+      <DependentUpon>VehicleTableManagement.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

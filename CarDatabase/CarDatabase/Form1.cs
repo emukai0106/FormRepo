@@ -125,7 +125,7 @@ namespace CarDatabase
             }
         }
 
-        private void viewVehicleButton_Click(object sender, EventArgs e)
+        private void ViewVehicleButton_Click(object sender, EventArgs e)
         {
             using (SQLiteConnection con = new SQLiteConnection("Data Source=database.db"))
             {

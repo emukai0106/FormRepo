@@ -40,10 +40,10 @@ namespace CarDatabase
             // 
             this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.cancelButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.cancelButton.Location = new System.Drawing.Point(81, 243);
+            this.cancelButton.Location = new System.Drawing.Point(15, 169);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(114, 38);
-            this.cancelButton.TabIndex = 0;
+            this.cancelButton.TabIndex = 2;
             this.cancelButton.Text = "キャンセル";
             this.cancelButton.UseVisualStyleBackColor = true;
             // 
@@ -51,44 +51,48 @@ namespace CarDatabase
             // 
             this.continueButton.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.continueButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.continueButton.Location = new System.Drawing.Point(201, 243);
+            this.continueButton.Location = new System.Drawing.Point(592, 169);
             this.continueButton.Name = "continueButton";
             this.continueButton.Size = new System.Drawing.Size(114, 38);
-            this.continueButton.TabIndex = 1;
+            this.continueButton.TabIndex = 3;
             this.continueButton.Text = "続行";
             this.continueButton.UseVisualStyleBackColor = true;
             // 
             // deleteVehicleDataGridView
             // 
+            this.deleteVehicleDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.deleteVehicleDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.deleteVehicleDataGridView.Location = new System.Drawing.Point(81, 101);
+            this.deleteVehicleDataGridView.Location = new System.Drawing.Point(15, 27);
             this.deleteVehicleDataGridView.Name = "deleteVehicleDataGridView";
             this.deleteVehicleDataGridView.RowHeadersWidth = 51;
             this.deleteVehicleDataGridView.RowTemplate.Height = 24;
-            this.deleteVehicleDataGridView.Size = new System.Drawing.Size(237, 136);
-            this.deleteVehicleDataGridView.TabIndex = 2;
+            this.deleteVehicleDataGridView.Size = new System.Drawing.Size(691, 136);
+            this.deleteVehicleDataGridView.TabIndex = 1;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(81, 83);
+            this.label1.Location = new System.Drawing.Point(12, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(159, 15);
-            this.label1.TabIndex = 3;
+            this.label1.TabIndex = 0;
             this.label1.Text = "以下のデータを削除します";
             // 
-            // PopUp1
+            // DeleteVehiclePopUp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(402, 373);
+            this.AutoSize = true;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ClientSize = new System.Drawing.Size(718, 373);
+            this.ControlBox = false;
             this.Controls.Add(this.label1);
             this.Controls.Add(this.deleteVehicleDataGridView);
             this.Controls.Add(this.continueButton);
             this.Controls.Add(this.cancelButton);
-            this.Name = "PopUp1";
+            this.Name = "DeleteVehiclePopUp";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form3";
+            this.Text = "車両情報削除";
             ((System.ComponentModel.ISupportInitialize)(this.deleteVehicleDataGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
