@@ -81,6 +81,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Manufacturer\DeleteManufacturer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Manufacturer\DeleteManufacturer.Designer.cs">
+      <DependentUpon>DeleteManufacturer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -93,16 +99,22 @@
     <Compile Include="Form2.Designer.cs">
       <DependentUpon>Form2.cs</DependentUpon>
     </Compile>
-    <Compile Include="DeleteVehicle.cs">
+    <Compile Include="Vehicle\DeleteVehicle.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DeleteVehicle.Designer.cs">
+    <Compile Include="Vehicle\DeleteVehicle.Designer.cs">
       <DependentUpon>DeleteVehicle.cs</DependentUpon>
     </Compile>
-    <Compile Include="ManufacturerTableManagement.cs">
+    <Compile Include="Manufacturer\SearchManufacturer.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ManufacturerTableManagement.Designer.cs">
+    <Compile Include="Manufacturer\SearchManufacturer.Designer.cs">
+      <DependentUpon>SearchManufacturer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Manufacturer\ManufacturerTableManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Manufacturer\ManufacturerTableManagement.Designer.cs">
       <DependentUpon>ManufacturerTableManagement.cs</DependentUpon>
     </Compile>
     <Compile Include="NoResultPopUp.cs">
@@ -111,24 +123,24 @@
     <Compile Include="NoResultPopUp.Designer.cs">
       <DependentUpon>NoResultPopUp.cs</DependentUpon>
     </Compile>
-    <Compile Include="DeleteVehiclePopUp.cs">
+    <Compile Include="DeletePopUp.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DeleteVehiclePopUp.Designer.cs">
-      <DependentUpon>DeleteVehiclePopUp.cs</DependentUpon>
+    <Compile Include="DeletePopUp.Designer.cs">
+      <DependentUpon>DeletePopUp.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RegisterVehicle.cs">
+    <Compile Include="Vehicle\RegisterVehicle.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="RegisterVehicle.Designer.cs">
+    <Compile Include="Vehicle\RegisterVehicle.Designer.cs">
       <DependentUpon>RegisterVehicle.cs</DependentUpon>
     </Compile>
-    <Compile Include="SearchVehicle.cs">
+    <Compile Include="Vehicle\SearchVehicle.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SearchVehicle.Designer.cs">
+    <Compile Include="Vehicle\SearchVehicle.Designer.cs">
       <DependentUpon>SearchVehicle.cs</DependentUpon>
     </Compile>
     <Compile Include="TopForm.cs">
@@ -137,29 +149,32 @@
     <Compile Include="TopForm.Designer.cs">
       <DependentUpon>TopForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="VehicleTableManagement.cs">
+    <Compile Include="Vehicle\VehicleTableManagement.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="VehicleTableManagement.Designer.cs">
+    <Compile Include="Vehicle\VehicleTableManagement.Designer.cs">
       <DependentUpon>VehicleTableManagement.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Manufacturer\DeleteManufacturer.resx">
+      <DependentUpon>DeleteManufacturer.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form2.resx">
       <DependentUpon>Form2.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DeleteVehicle.resx">
+    <EmbeddedResource Include="Vehicle\DeleteVehicle.resx">
       <DependentUpon>DeleteVehicle.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ManufacturerTableManagement.resx">
+    <EmbeddedResource Include="Manufacturer\ManufacturerTableManagement.resx">
       <DependentUpon>ManufacturerTableManagement.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NoResultPopUp.resx">
       <DependentUpon>NoResultPopUp.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DeleteVehiclePopUp.resx">
-      <DependentUpon>DeleteVehiclePopUp.cs</DependentUpon>
+    <EmbeddedResource Include="DeletePopUp.resx">
+      <DependentUpon>DeletePopUp.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -171,16 +186,19 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="RegisterVehicle.resx">
+    <EmbeddedResource Include="Vehicle\RegisterVehicle.resx">
       <DependentUpon>RegisterVehicle.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SearchVehicle.resx">
+    <EmbeddedResource Include="Manufacturer\SearchManufacturer.resx">
+      <DependentUpon>SearchManufacturer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vehicle\SearchVehicle.resx">
       <DependentUpon>SearchVehicle.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TopForm.resx">
       <DependentUpon>TopForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="VehicleTableManagement.resx">
+    <EmbeddedResource Include="Vehicle\VehicleTableManagement.resx">
       <DependentUpon>VehicleTableManagement.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />

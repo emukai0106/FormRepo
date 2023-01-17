@@ -56,14 +56,14 @@ namespace CarDatabase
             this.MinIdLabel = new System.Windows.Forms.Label();
             this.SearchVehicleButton = new System.Windows.Forms.Button();
             this.SearchResultDataGridView = new System.Windows.Forms.DataGridView();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.SearchResultGroupBox = new System.Windows.Forms.GroupBox();
             this.groupBox1.SuspendLayout();
             this.NameGroupBox.SuspendLayout();
             this.DateTimeGroupBox.SuspendLayout();
             this.ModelYearGroupBox.SuspendLayout();
             this.IdGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SearchResultDataGridView)).BeginInit();
-            this.groupBox2.SuspendLayout();
+            this.SearchResultGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -319,15 +319,15 @@ namespace CarDatabase
             this.SearchResultDataGridView.Size = new System.Drawing.Size(492, 123);
             this.SearchResultDataGridView.TabIndex = 0;
             // 
-            // groupBox2
+            // SearchResultGroupBox
             // 
-            this.groupBox2.Controls.Add(this.SearchResultDataGridView);
-            this.groupBox2.Location = new System.Drawing.Point(155, 252);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(508, 150);
-            this.groupBox2.TabIndex = 7;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "検索結果";
+            this.SearchResultGroupBox.Controls.Add(this.SearchResultDataGridView);
+            this.SearchResultGroupBox.Location = new System.Drawing.Point(155, 252);
+            this.SearchResultGroupBox.Name = "SearchResultGroupBox";
+            this.SearchResultGroupBox.Size = new System.Drawing.Size(508, 150);
+            this.SearchResultGroupBox.TabIndex = 7;
+            this.SearchResultGroupBox.TabStop = false;
+            this.SearchResultGroupBox.Text = "検索結果";
             // 
             // SearchVehicle
             // 
@@ -336,7 +336,7 @@ namespace CarDatabase
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(808, 499);
-            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.SearchResultGroupBox);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.ShowTopFormButton);
             this.Controls.Add(this.NameGroupBox);
@@ -359,7 +359,7 @@ namespace CarDatabase
             this.IdGroupBox.ResumeLayout(false);
             this.IdGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SearchResultDataGridView)).EndInit();
-            this.groupBox2.ResumeLayout(false);
+            this.SearchResultGroupBox.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -393,6 +393,6 @@ namespace CarDatabase
         private System.Windows.Forms.Label MinIdLabel;
         private System.Windows.Forms.Button SearchVehicleButton;
         private System.Windows.Forms.DataGridView SearchResultDataGridView;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox SearchResultGroupBox;
     }
 }

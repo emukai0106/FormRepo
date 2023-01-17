@@ -115,8 +115,9 @@ namespace CarDatabase
             this.ShowSearchManufacturerFormButton.Name = "ShowSearchManufacturerFormButton";
             this.ShowSearchManufacturerFormButton.Size = new System.Drawing.Size(130, 93);
             this.ShowSearchManufacturerFormButton.TabIndex = 1;
-            this.ShowSearchManufacturerFormButton.Text = "車両情報\r\n検索画面へ";
+            this.ShowSearchManufacturerFormButton.Text = "メーカー情報\r\n検索画面へ";
             this.ShowSearchManufacturerFormButton.UseVisualStyleBackColor = true;
+            this.ShowSearchManufacturerFormButton.Click += new System.EventHandler(this.ShowSearchManufacturerFormButton_Click);
             // 
             // ShowDeleteManufacturerFormButton
             // 
@@ -124,8 +125,9 @@ namespace CarDatabase
             this.ShowDeleteManufacturerFormButton.Name = "ShowDeleteManufacturerFormButton";
             this.ShowDeleteManufacturerFormButton.Size = new System.Drawing.Size(130, 93);
             this.ShowDeleteManufacturerFormButton.TabIndex = 3;
-            this.ShowDeleteManufacturerFormButton.Text = "車両情報\r\n削除画面へ";
+            this.ShowDeleteManufacturerFormButton.Text = "メーカー情報\r\n削除画面へ";
             this.ShowDeleteManufacturerFormButton.UseVisualStyleBackColor = true;
+            this.ShowDeleteManufacturerFormButton.Click += new System.EventHandler(this.ShowDeleteManufacturerFormButtonClick);
             // 
             // ShowManufacturerTableFormButton
             // 
@@ -143,8 +145,9 @@ namespace CarDatabase
             this.ShowRegisterManufacturerFormButton.Name = "ShowRegisterManufacturerFormButton";
             this.ShowRegisterManufacturerFormButton.Size = new System.Drawing.Size(130, 93);
             this.ShowRegisterManufacturerFormButton.TabIndex = 2;
-            this.ShowRegisterManufacturerFormButton.Text = "車両情報\r\n登録画面へ";
+            this.ShowRegisterManufacturerFormButton.Text = "メーカー情報\r\n登録画面へ";
             this.ShowRegisterManufacturerFormButton.UseVisualStyleBackColor = true;
+            this.ShowRegisterManufacturerFormButton.Click += new System.EventHandler(this.ShowRegisterManufacturerFormButtonClick);
             // 
             // TopForm
             // 
@@ -157,7 +160,7 @@ namespace CarDatabase
             this.Controls.Add(this.groupBox1);
             this.Name = "TopForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "トップ画面";
+            this.Text = "トップ";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TopForm_FormClosing);
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);

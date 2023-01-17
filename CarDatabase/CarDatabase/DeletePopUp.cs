@@ -3,9 +3,9 @@ using System.Windows.Forms;
 
 namespace CarDatabase
 {
-    public partial class DeleteVehiclePopUp : Form
+    public partial class DeletePopUp : Form
     {
-        public DeleteVehiclePopUp()
+        public DeletePopUp()
         {
             InitializeComponent();
         }

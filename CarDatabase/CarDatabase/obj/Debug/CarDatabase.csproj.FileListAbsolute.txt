@@ -21,8 +21,10 @@ C:\Users\s20217019\Desktop\Form\CarDatabase\CarDatabase\obj\Debug\CarDatabase.Fo
 C:\Users\s20217019\Desktop\Form\CarDatabase\CarDatabase\obj\Debug\CarDatabase.NoResultPopUp.resources
 C:\Users\s20217019\Desktop\Form\CarDatabase\CarDatabase\obj\Debug\CarDatabase.DeleteVehicle.resources
 C:\Users\s20217019\Desktop\Form\CarDatabase\CarDatabase\obj\Debug\CarDatabase.RegisterVehicle.resources
-C:\Users\s20217019\Desktop\Form\CarDatabase\CarDatabase\obj\Debug\CarDatabase.DeleteVehiclePopUp.resources
 C:\Users\s20217019\Desktop\Form\CarDatabase\CarDatabase\obj\Debug\CarDatabase.TopForm.resources
 C:\Users\s20217019\Desktop\Form\CarDatabase\CarDatabase\obj\Debug\CarDatabase.VehicleTableManagement.resources
 C:\Users\s20217019\Desktop\Form\CarDatabase\CarDatabase\obj\Debug\CarDatabase.ManufacturerTableManagement.resources
 C:\Users\s20217019\Desktop\Form\CarDatabase\CarDatabase\obj\Debug\CarDatabase.SearchVehicle.resources
+C:\Users\s20217019\Desktop\Form\CarDatabase\CarDatabase\obj\Debug\CarDatabase.DeleteManufacturer.resources
+C:\Users\s20217019\Desktop\Form\CarDatabase\CarDatabase\obj\Debug\CarDatabase.DeletePopUp.resources
+C:\Users\s20217019\Desktop\Form\CarDatabase\CarDatabase\obj\Debug\CarDatabase.SearchManufacturer.resources

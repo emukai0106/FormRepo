@@ -138,7 +138,7 @@ namespace CarDatabase
             this.Controls.Add(this.RegisterVehicleButton);
             this.Name = "RegisterVehicle";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "RegisterVehicle";
+            this.Text = "車両情報登録";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.RegisterVehicle_FormClosing);
             this.groupBox.ResumeLayout(false);
             this.groupBox.PerformLayout();

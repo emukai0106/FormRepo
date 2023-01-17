@@ -141,6 +141,7 @@ namespace CarDatabase
         /// </summary>
         private void RegisterVehicle_FormClosing(object sender, FormClosingEventArgs e)
         {
+            // すでに非表示なら何もしない
             if (closing)
             {
                 return;

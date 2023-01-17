@@ -83,8 +83,50 @@ namespace CarDatabase
             Visible = false;
             closing = true;
 
-            // 車両テーブル管理画面を表示
+            // メーカーテーブル管理画面を表示
             VehicleTableManagement form = new VehicleTableManagement();
+            form.Show();
+        }
+
+        /// <summary>
+        /// メーカー情報検索画面を表示する
+        /// </summary>
+        private void ShowSearchManufacturerFormButton_Click(object sender, EventArgs e)
+        {
+            // 現在の画面を非表示にする
+            Visible = false;
+            closing = true;
+
+            // メーカー情報検索画面を表示
+            SearchManufacturer form = new SearchManufacturer();
+            form.Show();
+        }
+
+        /// <summary>
+        /// メーカー情報登録画面を表示する
+        /// </summary>
+        private void ShowRegisterManufacturerFormButtonClick(object sender, EventArgs e)
+        {
+            // 現在の画面を非表示にする
+            Visible = false;
+            closing = true;
+
+            // メーカー情報検索画面を表示
+            VehicleTableManagement form = new VehicleTableManagement();
+            form.Show();
+        }
+
+        /// <summary>
+        /// メーカー情報削除画面を表示する
+        /// </summary>
+        private void ShowDeleteManufacturerFormButtonClick(object sender, EventArgs e)
+        {
+            // 現在の画面を非表示にする
+            Visible = false;
+            closing = true;
+
+            // メーカー情報削除画面を表示
+            DeleteManufacturer form = new DeleteManufacturer();
             form.Show();
         }
 
@@ -93,6 +135,7 @@ namespace CarDatabase
         /// </summary>
         private void TopForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            // すでに非表示なら何もしない
             if (closing)
             {
                 return;

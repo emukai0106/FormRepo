@@ -65,7 +65,7 @@ namespace CarDatabase
             this.Controls.Add(this.label1);
             this.Name = "NoResultPopUp";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "検索結果なし";
+            this.Text = "該当なし";
             this.ResumeLayout(false);
             this.PerformLayout();
 

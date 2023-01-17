@@ -403,6 +403,7 @@ namespace CarDatabase
         /// </summary>
         private void SearchVehicleFormClosing(object sender, FormClosingEventArgs e)
         {
+            // すでに非表示なら何もしない
             if (closing)
             {
                 return;

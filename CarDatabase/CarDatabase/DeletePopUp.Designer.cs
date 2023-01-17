@@ -1,7 +1,7 @@
 ﻿
 namespace CarDatabase
 {
-    partial class DeleteVehiclePopUp
+    partial class DeletePopUp
     {
         /// <summary>
         /// Required designer variable.
@@ -78,7 +78,7 @@ namespace CarDatabase
             this.label1.TabIndex = 0;
             this.label1.Text = "以下のデータを削除します";
             // 
-            // DeleteVehiclePopUp
+            // DeletePopUp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -90,9 +90,9 @@ namespace CarDatabase
             this.Controls.Add(this.deleteVehicleDataGridView);
             this.Controls.Add(this.continueButton);
             this.Controls.Add(this.cancelButton);
-            this.Name = "DeleteVehiclePopUp";
+            this.Name = "DeletePopUp";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "車両情報削除";
+            this.Text = "データ削除";
             ((System.ComponentModel.ISupportInitialize)(this.deleteVehicleDataGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

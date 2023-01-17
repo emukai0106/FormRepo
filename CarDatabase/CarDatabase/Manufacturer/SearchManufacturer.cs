@@ -3,21 +3,19 @@ using System.Data;
 using System.Windows.Forms;
 using System.Data.SQLite;
 
+
 namespace CarDatabase
 {
-    public partial class DeleteVehicle : Form
+    public partial class SearchManufacturer : Form
     {
         // 表示されていない時はtrueになる
         private bool closing = false;
 
         // 車両情報テーブルSELECT文用コマンド
-        private string selectComandText = "SELECT * FROM m_vehicle";
+        private string selectComandText = "SELECT * FROM m_manufacturer";
 
         // 件数取得用コマンド
-        private string countComandText = "SELECT COUNT (*) FROM m_vehicle";
-
-        // 車両情報テーブルDELETE文用コマンド
-        private string deleteComandText = "DELETE FROM m_vehicle";
+        private string countComandText = "SELECT COUNT (*) FROM m_manufacturer";
 
         // 下限値文字列
         string min = "";
@@ -51,46 +49,16 @@ namespace CarDatabase
         /// <summary>
         /// 最初に実行される処理
         /// </summary>
-        public DeleteVehicle()
+        public SearchManufacturer()
         {
             // フォーム表示処理
             InitializeComponent();
-
-            // コンボボックスの中身を設定
-            SetManufacturerComboBox();
         }
 
         /// <summary>
-        /// メーカー名を抽出し、コンボボックスに表示する
+        /// メーカー情報検索ボタンが押されたときの動作
         /// </summary>
-        private void SetManufacturerComboBox()
-        {
-            // database.dbを使用
-            using (SQLiteConnection con = new SQLiteConnection("Data Source=database.db"))
-            {
-                // データテーブル生成
-                DataTable dataTable = new DataTable();
-
-                // m_manufacturerからメーカー名を取得しdataTableに格納
-                SQLiteDataAdapter adapter = new SQLiteDataAdapter("SELECT name FROM m_manufacturer", con);
-                adapter.Fill(dataTable);
-
-                // コンボボックスのインデックスと表示名を指定
-                ManufacturerComboBox.ValueMember = "id";
-                ManufacturerComboBox.DisplayMember = "name";
-
-                // コンボボックスのDataSourceを指定
-                ManufacturerComboBox.DataSource = dataTable;
-
-                // 何も選択されていない状態にする
-                ManufacturerComboBox.SelectedIndex = -1;
-            }
-        }
-
-        /// <summary>
-        /// 車両情報削除ボタンが押されたときの動作
-        /// </summary>
-        private void DeleteVehicleButtonClick(object sender, EventArgs e)
+        private void SearchManufacturerButtonClick(object sender, EventArgs e)
         {
             // database.dbを使用
             using (SQLiteConnection con = new SQLiteConnection("Data Source=database.db"))
@@ -157,58 +125,6 @@ namespace CarDatabase
                     }
                     #endregion
 
-                    #region 年式検索
-
-                    // 上限・下限取得
-                    min = ConvertString(MinModelYearTextbox.Text);
-                    max = ConvertString(MaxModelYearTextbox.Text);
-
-                    // 上限・下限どちらか片方でも入力されている場合
-                    if (min != null || max != null)
-                    {
-                        // 上限が未入力の場合
-                        if (max == null)
-                        {
-                            // 年式が下限以上のものを指定
-                            commandText = commandText + "model_year >= @MinModelYear AND ";
-
-                            // パラメータ追加
-                            cmd.Parameters.Add("MinModelYear", DbType.Int64);
-
-                            // パラメータを設定
-                            cmd.Parameters["MinModelYear"].Value = int.Parse(min);
-                        }
-
-                        // 下限が未入力の場合
-                        else if (min == null)
-                        {
-                            // 年式が上限以下のものを指定
-                            commandText = commandText + "model_year <= @MaxModelYear AND ";
-
-                            // パラメータ追加
-                            cmd.Parameters.Add("MaxModelYear", DbType.Int64);
-
-                            // パラメータを設定
-                            cmd.Parameters["MaxModelYear"].Value = int.Parse(max);
-                        }
-
-                        // 上限、下限ともに入力されている場合
-                        else
-                        {
-                            // 年式が下限から上限までのものを指定
-                            commandText = commandText + "model_year BETWEEN @MinModelYear AND @MaxModelYear AND ";
-
-                            // パラメータ追加
-                            cmd.Parameters.Add("MinModelYear", DbType.Int64);
-                            cmd.Parameters.Add("MaxModelYear", DbType.Int64);
-
-                            // パラメータを設定
-                            cmd.Parameters["MinModelYear"].Value = int.Parse(min);
-                            cmd.Parameters["MaxModelYear"].Value = int.Parse(max);
-                        }
-                    }
-                    #endregion
-
                     #region 名前検索
 
                     // 車両名を取得
@@ -226,25 +142,6 @@ namespace CarDatabase
 
                         // パラメータを設定
                         cmd.Parameters["Name"].Value = nameString;
-                    }
-                    #endregion
-
-                    #region メーカー名検索
-
-                    // メーカー名を取得
-                    nameString = ConvertString(ManufacturerComboBox.Text);
-
-                    // メーカー名が入力されている場合
-                    if (nameString != null)
-                    {
-                        // メーカー名が一致するデータのメーカーIDをm_manufacturerから取得して指定
-                        commandText = commandText + "manufacturer_id IN (SELECT id FROM m_manufacturer WHERE name LIKE '%' || @ManufacturerName || '%')";
-
-                        // パラメータ追加
-                        cmd.Parameters.Add("ManufacturerName", DbType.String);
-
-                        // パラメータを設定
-                        cmd.Parameters["ManufacturerName"].Value = nameString;
                     }
                     #endregion
 
@@ -359,9 +256,6 @@ namespace CarDatabase
                         commandText = commandText.Remove(commandText.Length - removeChars);
                     }
 
-                    // ポップアップの入力結果を格納する
-                    DialogResult popUpResult;
-
                     // 件数取得用コマンド文字列を結合
                     cmd.CommandText = countComandText + commandText;
 
@@ -370,7 +264,7 @@ namespace CarDatabase
                     {
                         // 検索結果0件のポップアップを表示し、入力結果をdialogResultに格納
                         NoResultPopUp noResultPopUp = new NoResultPopUp();
-                        popUpResult = noResultPopUp.ShowDialog();
+                        DialogResult popUpResult = noResultPopUp.ShowDialog();
 
                         // 以降の処理は行わない
                         return;
@@ -386,29 +280,7 @@ namespace CarDatabase
                     SQLiteDataAdapter adapter = new SQLiteDataAdapter(cmd);
                     adapter.Fill(dataTable);
 
-                    // 削除確認ポップアップを表示
-                    DeleteVehiclePopUp deletePopUp = new DeleteVehiclePopUp();
-
-                    // ポップアップのDataSourceを指定
-                    deletePopUp.PopUpSql(dataTable);
-
-                    // ポップアップを表示し、DialogResultを設定
-                    popUpResult = deletePopUp.ShowDialog();
-
-                    // キャンセルが押された場合は何もせずreturn
-                    if (popUpResult == DialogResult.Cancel)
-                    {
-                        return;
-                    }
-
-                    // 削除用コマンド文字列を結合
-                    cmd.CommandText = deleteComandText + commandText;
-
-                    // SQL実行
-                    cmd.ExecuteNonQuery();
-
-                    // コミット
-                    trans.Commit();
+                    SearchResultDataGridView.DataSource = dataTable;
                 }
                 // コネクションを閉じる
                 con.Close();
@@ -432,8 +304,9 @@ namespace CarDatabase
         /// <summary>
         /// ✕ボタンが押されたとき
         /// </summary>
-        private void DeleteVehicleFormClosing(object sender, FormClosingEventArgs e)
+        private void SearchManufacturerFormClosing(object sender, FormClosingEventArgs e)
         {
+            // すでに非表示なら何もしない
             if (closing)
             {
                 return;
