@@ -108,19 +108,24 @@ namespace CarDatabase
                     SQLiteCommand cmd = con.CreateCommand();
 
                     // インサート
-                    cmd.CommandText = "INSERT INTO m_manufacturer (name, country) VALUES (@Name, @Country)";
+                    cmd.CommandText = "INSERT INTO m_manufacturer (name) VALUES (@Name)";
 
                     // パラメータセット
                     cmd.Parameters.Add("Name", System.Data.DbType.String);
-                    cmd.Parameters.Add("Country", System.Data.DbType.String);
 
 
                     // 現状nullを処理できないため対処が必要
 
                     // データ追加
                     cmd.Parameters["Name"].Value = GetDbString(registerManufacturerNameTextbox.Text);
-                    cmd.Parameters["Country"].Value = GetDbString(registerManufacturerCountryTextbox.Text);
-                    cmd.ExecuteNonQuery();
+                    try{
+                        cmd.ExecuteNonQuery();
+                    }
+                    catch(SQLiteException)
+                    {
+                        MessageBox.Show("SQLの実行に失敗しました。");
+                    }
+                    
 
                     // コミット
                     trans.Commit();

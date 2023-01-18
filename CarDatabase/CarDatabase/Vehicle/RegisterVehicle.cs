@@ -32,17 +32,23 @@ namespace CarDatabase
             {
                 // データテーブル生成
                 DataTable dataTable = new DataTable();
+                try
+                {
+                    // m_manufacturerからメーカー名を取得しdataTableに格納
+                    SQLiteDataAdapter adapter = new SQLiteDataAdapter("SELECT name FROM m_manufacturer", con);
+                    adapter.Fill(dataTable);
 
-                // m_manufacturerからメーカー名を取得しdataTableに格納
-                SQLiteDataAdapter adapter = new SQLiteDataAdapter("SELECT name FROM m_manufacturer", con);
-                adapter.Fill(dataTable);
+                    // コンボボックスのインデックスと表示名を指定
+                    ManufacturerComboBox.ValueMember = "id";
+                    ManufacturerComboBox.DisplayMember = "name";
 
-                // コンボボックスのインデックスと表示名を指定
-                ManufacturerComboBox.ValueMember = "id";
-                ManufacturerComboBox.DisplayMember = "name";
+                    // コンボボックスのDataSourceを指定
+                    ManufacturerComboBox.DataSource = dataTable;
+                }
 
-                // コンボボックスのDataSourceを指定
-                ManufacturerComboBox.DataSource = dataTable;
+                // エラーが発生した場合は何もしない
+                catch (SQLiteException) { }
+
 
                 // 何も選択されていない状態にする
                 ManufacturerComboBox.SelectedIndex = -1;
@@ -87,6 +93,12 @@ namespace CarDatabase
                     // 車両名を取得
                     string nameString = ConvertString(nameTextbox.Text);
 
+                    //メーカー名を取得
+                    string manufacturer = ConvertString(ManufacturerComboBox.Text);
+
+                    //年式を取得
+                    string modelYear = ConvertString(ModelYearTextbox.Text);
+
                     // 車両名が未入力だった場合
                     if (nameString == null)
                     {
@@ -94,10 +106,6 @@ namespace CarDatabase
                         MessageBox.Show("車両名が入力されていません。", "未入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
-
-                    // データ追加コマンド文を設定
-                    cmd.CommandText = "INSERT INTO m_vehicle (name, manufacturer_id, model_year, date_time) VALUES " +
-                        "(@Name, (SELECT id FROM m_manufacturer WHERE name LIKE '%' || @ManufacturerName || '%'), @ModelYear, @DateTime)";
 
                     // パラメータ追加
                     cmd.Parameters.Add("Name", DbType.String);
@@ -107,12 +115,53 @@ namespace CarDatabase
 
                     // パラメータを設定
                     cmd.Parameters["Name"].Value = nameString;
-                    cmd.Parameters["ManufacturerName"].Value = ConvertString(ManufacturerComboBox.Text);
-                    cmd.Parameters["ModelYear"].Value = int.Parse(ConvertString(ModelYearTextbox.Text));
+                    cmd.Parameters["ManufacturerName"].Value = manufacturer;
+                    cmd.Parameters["ModelYear"].Value = modelYear;
                     cmd.Parameters["DateTime"].Value = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
 
-                    // SQL実行
-                    cmd.ExecuteNonQuery();
+                    // 既存データ検索コマンド文を設定
+                    cmd.CommandText = "SELECT * FROM m_vehicle WHERE name LIKE '%' || @Name || '%'";
+
+                    // メーカー名が入力されていた場合
+                    if (manufacturer != null)
+                    {
+                        // 検索用コマンドにメーカーIDを追加
+                        cmd.CommandText += " AND manufacturer_id IN (SELECT id FROM m_manufacturer WHERE name LIKE '%' || @ManufacturerName || '%')";
+                    }
+
+                    // 年式が入力されていた場合
+                    if (modelYear != null)
+                    {
+                        // 検索用コマンドに年式を追加
+                        cmd.CommandText += " AND model_year = @ModelYear";
+                    }
+
+                    // 検索結果の件数(int64型のためlong)が1以上の場合
+                    if ((long)cmd.ExecuteScalar() >= 1)
+                    {
+                        // エラーメッセージを表示
+                        MessageBox.Show("その車両はすでに登録されています。\n車両名、メーカー、年式のいずれかを変更してください。", "データ重複",
+                            MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+                        // 以降の処理は行わない
+                        return;
+                    }
+
+                    // データ追加コマンド文を設定
+                    cmd.CommandText = "INSERT INTO m_vehicle (name, manufacturer_id, model_year, date_time) VALUES " +
+                        "(@Name, (SELECT id FROM m_manufacturer WHERE name LIKE '%' || @ManufacturerName || '%'), @ModelYear, @DateTime)";
+
+                    try
+                    {
+                        // SQL実行
+                        cmd.ExecuteNonQuery();
+                    }
+                    catch (SQLiteException)
+                    {
+
+                    }
+
+                    
 
                     // コミット
                     trans.Commit();

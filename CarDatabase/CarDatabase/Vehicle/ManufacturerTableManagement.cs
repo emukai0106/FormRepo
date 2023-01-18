@@ -2,9 +2,9 @@
 using System.Windows.Forms;
 using System.Data.SQLite;
 
-namespace CarDatabase
+namespace CarDatabase.Vehicle
 {
-    public partial class VehicleTableManagement : Form
+    public partial class ManufacturerTableManagement : Form
     {
         // 表示されていない時はtrueになる
         private bool closing = false;
@@ -12,7 +12,7 @@ namespace CarDatabase
         /// <summary>
         /// 最初に実行される処理
         /// </summary>
-        public VehicleTableManagement()
+        public ManufacturerTableManagement()
         {
             // フォーム表示処理
             InitializeComponent();
@@ -31,31 +31,9 @@ namespace CarDatabase
 
                 using (SQLiteCommand cmd = con.CreateCommand())
                 {
-                    // テーブルm_vehicleを作成する
-                    cmd.CommandText = ("CREATE TABLE m_vehicle(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, " +
-                        "manufacturer_id INTEGER, model_year INTEGER, date_time TEXT NOT NULL)");
-
-                    try
-                    {
-                        // SQL実行
-                        cmd.ExecuteNonQuery();
-                    }
-
-                    // SQLの実行に失敗した場合
-                    catch (SQLiteException)
-                    {
-                        // コネクションを閉じる
-                        con.Close();
-
-                        // エラーメッセージを表示
-                        MessageBox.Show("テーブルの作成に失敗しました。\nテーブルがすでに存在しています。", "テーブル作成エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                        return;
-                    }
-
-                    // メッセージを表示
-                    MessageBox.Show("テーブルの作成に成功しました。", "テーブル作成", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+                    // テーブルm_manufacturerが存在しなければ作成する(CREATE TABLE IF NOT EXISTS)
+                    cmd.CommandText = ("CREATE TABLE IF NOT EXISTS m_manufacturer(id INTEGER PRIMARY KEY  AUTOINCREMENT, name TEXT NOT NULL UNIQUE)");
+                    cmd.ExecuteNonQuery();
                 }
                 // コネクションを閉じる
                 con.Close();
@@ -78,41 +56,18 @@ namespace CarDatabase
                     SQLiteCommand cmd = con.CreateCommand();
 
                     // 削除確認ダイアログ表示
-                    DialogResult dialogResult = MessageBox.Show("車両テーブルを削除します。\n本当に削除しますか？", "テーブル削除",
+                    DialogResult dialogResult = MessageBox.Show("メーカーテーブルを削除します。\n本当に削除しますか？", "テーブル削除",
                         MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
 
                     // いいえが押された場合何もしない
                     if (dialogResult == DialogResult.No)
                     {
-                        // コネクションを閉じる
-                        con.Close();
-
                         return;
                     }
 
-                    // テーブルm_vehicleが存在すれば削除
-                    cmd.CommandText = "DROP TABLE IF EXISTS m_vehicle";
-
-                    try
-                    {
-                        // SQL実行
-                        cmd.ExecuteNonQuery();
-                    }
-
-                    // SQLの実行に失敗した場合
-                    catch (SQLiteException)
-                    {
-                        // コネクションを閉じる
-                        con.Close();
-
-                        // メッセージを表示
-                        MessageBox.Show("テーブルの削除に失敗しました。", "テーブル削除エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                        return;
-                    }
-
-                    // メッセージを表示
-                    MessageBox.Show("テーブルの削除に成功しました。", "テーブル削除", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    // テーブルm_manufacturerが存在すれば削除
+                    cmd.CommandText = "DROP TABLE IF EXISTS m_manufacturer";
+                    cmd.ExecuteNonQuery();
 
                     // コミット
                     trans.Commit();
@@ -138,7 +93,7 @@ namespace CarDatabase
         /// <summary>
         /// ✕ボタンが押されたとき
         /// </summary>
-        private void VehicleTableManagementFormClosing(object sender, FormClosingEventArgs e)
+        private void ManufacturerTableManagementFormClosing(object sender, FormClosingEventArgs e)
         {
             if (closing)
             {

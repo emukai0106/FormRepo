@@ -84,7 +84,7 @@ namespace CarDatabase
             closing = true;
 
             // メーカーテーブル管理画面を表示
-            VehicleTableManagement form = new VehicleTableManagement();
+            ManufacturerTableManagement form = new ManufacturerTableManagement();
             form.Show();
         }
 

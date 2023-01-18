@@ -87,7 +87,7 @@ namespace CarDatabase
                         if (max == null)
                         {
                             // 車両IDが下限以上のものを指定
-                            commandText = commandText + "id >= @MinId AND ";
+                            commandText += "id >= @MinId AND ";
 
                             // パラメータ追加
                             cmd.Parameters.Add("MinId", DbType.Int64);
@@ -99,7 +99,7 @@ namespace CarDatabase
                         else if (min == null)
                         {
                             // 車両IDが上限以下ものを指定
-                            commandText = commandText + "id <= @MaxId AND ";
+                            commandText += "id <= @MaxId AND ";
 
                             // パラメータ追加
                             cmd.Parameters.Add("MaxId", DbType.Int64);
@@ -112,7 +112,7 @@ namespace CarDatabase
                         else
                         {
                             // 車両IDが下限から上限までのものを指定
-                            commandText = commandText + "id BETWEEN @MinId AND @MaxId AND ";
+                            commandText += "id BETWEEN @MinId AND @MaxId AND ";
 
                             // パラメータ追加
                             cmd.Parameters.Add("MinId", DbType.Int64);
@@ -134,7 +134,7 @@ namespace CarDatabase
                     if (nameString != null)
                     {
                         // 車両名が一致するものを指定
-                        commandText = commandText + "name LIKE '%' || @Name || '%' AND ";
+                        commandText += "name LIKE '%' || @Name || '%' AND ";
 
                         // パラメータ追加
                         cmd.Parameters.Add("Name", DbType.String);
@@ -168,7 +168,7 @@ namespace CarDatabase
                                 min = minDateTime.ToString("yyyy/MM/dd HH:mm:ss");
 
                                 // 更新日時が下限以上のものを指定
-                                commandText = commandText + "date_time >= @MinDateTime AND ";
+                                commandText += "date_time >= @MinDateTime AND ";
 
                                 // パラメータ追加
                                 cmd.Parameters.Add("MinDateTime", DbType.String);
@@ -179,6 +179,9 @@ namespace CarDatabase
                             // minをDataTimeに変換できなかった場合
                             else
                             {
+                                // コネクションを閉じる
+                                con.Close();
+
                                 // エラー通知ダイアログ表示
                                 MessageBox.Show("日付の入力形式が間違っています。\n入力例:2022/01/01", "入力形式エラー",
                                     MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -195,7 +198,7 @@ namespace CarDatabase
                                 max = maxDateTime.ToString("yyyy/MM/dd HH:mm:ss");
 
                                 // 更新日時が上限以下のものを指定
-                                commandText = commandText + "date_time <= @MaxDateTime AND ";
+                                commandText += "date_time <= @MaxDateTime AND ";
 
                                 // パラメータ追加
                                 cmd.Parameters.Add("MaxDateTime", DbType.String);
@@ -206,6 +209,9 @@ namespace CarDatabase
                             // maxをDataTimeに変換できなかった場合
                             else
                             {
+                                // コネクションを閉じる
+                                con.Close();
+
                                 // エラー通知ダイアログ表示
                                 MessageBox.Show("日付の入力形式が間違っています。\n入力例:2022/01/01", "入力形式エラー",
                                     MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -220,7 +226,7 @@ namespace CarDatabase
                             max = System.DateTime.Parse(max).ToString("yyyy/MM/dd HH:mm:ss");
 
                             // IDがMinIdからMaxIdまでを削除
-                            commandText = commandText + "date_time BETWEEN @MinDateTime AND @MaxDateTime AND ";
+                            commandText += "date_time BETWEEN @MinDateTime AND @MaxDateTime AND ";
 
                             // パラメータ追加
                             cmd.Parameters.Add("MinDateTime", DbType.String);
@@ -262,9 +268,11 @@ namespace CarDatabase
                     // 検索結果の件数(int64型のためlong)が0の場合
                     if ((long)cmd.ExecuteScalar() == 0)
                     {
-                        // 検索結果0件のポップアップを表示し、入力結果をdialogResultに格納
-                        NoResultPopUp noResultPopUp = new NoResultPopUp();
-                        DialogResult popUpResult = noResultPopUp.ShowDialog();
+                        // コネクションを閉じる
+                        con.Close();
+
+                        // メッセージを表示
+                        MessageBox.Show("検索条件に該当するデータがありません。", "該当なし", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                         // 以降の処理は行わない
                         return;
