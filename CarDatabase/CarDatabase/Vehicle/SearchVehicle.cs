@@ -91,7 +91,7 @@ namespace CarDatabase
                     ManufacturerComboBox.SelectedIndex = -1;
 
                     // メッセージを表示
-                    MessageBox.Show("メーカー名の読み込みに失敗しました。\nメーカーテーブルが存在しない可能性があります。", "読み込み失敗", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show("メーカー名の読み込みに失敗しました。\nメーカー情報テーブルが存在しない可能性があります。", "読み込み失敗", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
             }
         }
@@ -383,7 +383,7 @@ namespace CarDatabase
                     cmd.CommandText = countComandText + commandText;
 
                     // 検索結果の件数(int64型のためlong)が0の場合
-                    if ((long)cmd.ExecuteScalar() == 0)
+                    if (cmd.ExecuteScalar() != null && (long)cmd.ExecuteScalar() == 0)
                     {
                         // メッセージを表示
                         MessageBox.Show("検索条件に該当するデータがありません。", "該当なし", MessageBoxButtons.OK, MessageBoxIcon.Information);

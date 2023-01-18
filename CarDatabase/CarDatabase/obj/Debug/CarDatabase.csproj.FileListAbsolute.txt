@@ -27,5 +27,4 @@ C:\Users\s20217019\Desktop\Form\CarDatabase\CarDatabase\obj\Debug\CarDatabase.Se
 C:\Users\s20217019\Desktop\Form\CarDatabase\CarDatabase\obj\Debug\CarDatabase.DeleteManufacturer.resources
 C:\Users\s20217019\Desktop\Form\CarDatabase\CarDatabase\obj\Debug\CarDatabase.DeletePopUp.resources
 C:\Users\s20217019\Desktop\Form\CarDatabase\CarDatabase\obj\Debug\CarDatabase.SearchManufacturer.resources
-C:\Users\s20217019\Desktop\Form\CarDatabase\CarDatabase\obj\Debug\CarDatabase.Vehicle.ManufacturerTableManagement.resources
-C:\Users\s20217019\Desktop\Form\CarDatabase\CarDatabase\obj\Debug\CarDatabase.Vehicle.RegisterManufacturer.resources
+C:\Users\s20217019\Desktop\Form\CarDatabase\CarDatabase\obj\Debug\CarDatabase.RegisterManufacturer.resources

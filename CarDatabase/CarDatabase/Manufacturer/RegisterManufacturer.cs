@@ -3,7 +3,7 @@ using System.Data;
 using System.Windows.Forms;
 using System.Data.SQLite;
 
-namespace CarDatabase.Vehicle
+namespace CarDatabase
 {
     public partial class RegisterManufacturer : Form
     {
@@ -44,6 +44,7 @@ namespace CarDatabase.Vehicle
         /// </summary>
         private void RegisterManufacturerButtonClick(object sender, EventArgs e)
         {
+            // database.dbを使用
             using (SQLiteConnection con = new SQLiteConnection("Data Source=database.db"))
             {
                 // コネクションを開く

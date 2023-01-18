@@ -1,5 +1,5 @@
 ﻿
-namespace CarDatabase.Vehicle
+namespace CarDatabase
 {
     partial class RegisterManufacturer
     {

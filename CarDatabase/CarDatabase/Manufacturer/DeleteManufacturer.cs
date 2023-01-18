@@ -55,6 +55,7 @@ namespace CarDatabase
         {
             // フォーム表示処理
             InitializeComponent();
+
         }
 
         /// <summary>
@@ -265,8 +266,11 @@ namespace CarDatabase
                     cmd.CommandText = countComandText + commandText;
 
                     // 検索結果の件数(int64型のためlong)が0の場合
-                    if ((long)cmd.ExecuteScalar() == 0)
+                    if (cmd.ExecuteScalar() != null && (long)cmd.ExecuteScalar() == 0)
                     {
+                        // コネクションを閉じる
+                        con.Close();
+
                         // メッセージを表示
                         MessageBox.Show("検索条件に該当するデータがありません。", "該当なし", MessageBoxButtons.OK, MessageBoxIcon.Information);
 

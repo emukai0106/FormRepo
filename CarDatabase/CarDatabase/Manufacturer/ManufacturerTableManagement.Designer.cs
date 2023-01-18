@@ -74,7 +74,7 @@ namespace CarDatabase
             this.Controls.Add(this.CreateVehicleTableButton);
             this.Name = "ManufacturerTableManagement";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "メーカーテーブル作成/削除";
+            this.Text = "メーカー情報テーブル作成/削除";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ManufacturerTableManagementFormClosing);
             this.ResumeLayout(false);
 

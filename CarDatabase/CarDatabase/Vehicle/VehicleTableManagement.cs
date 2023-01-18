@@ -78,7 +78,7 @@ namespace CarDatabase
                     SQLiteCommand cmd = con.CreateCommand();
 
                     // 削除確認ダイアログ表示
-                    DialogResult dialogResult = MessageBox.Show("車両テーブルを削除します。\n本当に削除しますか？", "テーブル削除",
+                    DialogResult dialogResult = MessageBox.Show("車両情報テーブルを削除します。\n本当に削除しますか？", "テーブル削除",
                         MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
 
                     // いいえが押された場合何もしない
