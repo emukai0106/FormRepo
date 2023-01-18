@@ -82,14 +82,20 @@ namespace CarDatabase
 
                     // コンボボックスのDataSourceを指定
                     ManufacturerComboBox.DataSource = dataTable;
+
+                    // 何も選択されていない状態にする
+                    ManufacturerComboBox.SelectedIndex = -1;
                 }
 
-                // エラーが発生した場合は何もしない
-                catch (SQLiteException) { }
+                // メーカー名を取得できなかった場合
+                catch (SQLiteException)
+                {
+                    // 何も選択されていない状態にする
+                    ManufacturerComboBox.SelectedIndex = -1;
 
-
-                // 何も選択されていない状態にする
-                ManufacturerComboBox.SelectedIndex = -1;
+                    // メッセージを表示
+                    MessageBox.Show("メーカー名の読み込みに失敗しました。\nメーカーテーブルが存在しない可能性があります。", "読み込み失敗", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
             }
         }
 
@@ -423,14 +429,31 @@ namespace CarDatabase
                     // 削除用コマンド文字列を結合
                     cmd.CommandText = deleteComandText + commandText;
 
-                    // SQL実行
-                    cmd.ExecuteNonQuery();
+                    try
+                    {
+                        // SQL実行
+                        cmd.ExecuteNonQuery();
+                    }
 
+                    // SQLの実行に失敗した場合
+                    catch (SQLiteException)
+                    {
+                        // コネクションを閉じる
+                        con.Close();
+
+                        // エラーメッセージを表示
+                        MessageBox.Show("車両情報の削除に失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                        return;
+                    }
                     // コミット
                     trans.Commit();
                 }
                 // コネクションを閉じる
                 con.Close();
+
+                // エラーメッセージを表示
+                MessageBox.Show("車両情報の削除に成功しました。", "完了", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 

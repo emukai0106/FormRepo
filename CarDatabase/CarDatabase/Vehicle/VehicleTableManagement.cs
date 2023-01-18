@@ -111,14 +111,14 @@ namespace CarDatabase
                         return;
                     }
 
-                    // メッセージを表示
-                    MessageBox.Show("テーブルの削除に成功しました。", "テーブル削除", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
                     // コミット
                     trans.Commit();
                 }
                 // コネクションを閉じる
                 con.Close();
+
+                // メッセージを表示
+                MessageBox.Show("テーブルの削除に成功しました。", "テーブル削除", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -129,6 +129,7 @@ namespace CarDatabase
         {
             // 現在の画面を非表示にする
             Visible = false;
+            closing = true;
 
             // トップ画面を表示
             TopForm form = new TopForm();

@@ -80,7 +80,7 @@ namespace CarDatabase
             // 
             this.ShowTopFormButton.Location = new System.Drawing.Point(12, 12);
             this.ShowTopFormButton.Name = "ShowTopFormButton";
-            this.ShowTopFormButton.Size = new System.Drawing.Size(130, 93);
+            this.ShowTopFormButton.Size = new System.Drawing.Size(130, 74);
             this.ShowTopFormButton.TabIndex = 0;
             this.ShowTopFormButton.Text = "トップ画面へ";
             this.ShowTopFormButton.UseVisualStyleBackColor = true;

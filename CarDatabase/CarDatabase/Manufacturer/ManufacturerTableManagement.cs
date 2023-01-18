@@ -19,17 +19,48 @@ namespace CarDatabase
             InitializeComponent();
         }
 
-        /// <summary>
-        /// トップ画面を表示する
-        /// </summary>
-        private void ShowTopFormButtonClick(object sender, EventArgs e)
-        {
-            // 現在の画面を非表示にする
-            Visible = false;
 
-            // トップ画面を表示
-            TopForm form = new TopForm();
-            form.Show();
+        /// <summary>
+        /// テーブル作成ボタンがクリックされたときの動作
+        /// </summary>
+        private void CreateVehicleTableButtonClick(object sender, EventArgs e)
+        {
+            // database.dbを使用
+            using (SQLiteConnection con = new SQLiteConnection("Data Source=database.db"))
+            {
+                // コネクションを開く
+                con.Open();
+
+                using (SQLiteCommand cmd = con.CreateCommand())
+                {
+                    // テーブルm_manufacturerを作成する
+                    cmd.CommandText = ("CREATE TABLE m_manufacturer(id INTEGER PRIMARY KEY  AUTOINCREMENT, name TEXT NOT NULL UNIQUE)");
+
+                    try
+                    {
+                        // SQL実行
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    // SQLの実行に失敗した場合
+                    catch (SQLiteException)
+                    {
+                        // コネクションを閉じる
+                        con.Close();
+
+                        // エラーメッセージを表示
+                        MessageBox.Show("テーブルの作成に失敗しました。\nテーブルがすでに存在しています。", "テーブル作成エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                        return;
+                    }
+
+                    // メッセージを表示
+                    MessageBox.Show("テーブルの作成に成功しました。", "テーブル作成", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                }
+                // コネクションを閉じる
+                con.Close();
+            }
         }
 
         /// <summary>
@@ -57,16 +88,49 @@ namespace CarDatabase
                         return;
                     }
 
-                    // テーブルm_vehicleが存在すれば削除
+                    // テーブルm_manufacturerが存在すれば削除
                     cmd.CommandText = "DROP TABLE IF EXISTS m_manufacturer";
-                    cmd.ExecuteNonQuery();
+
+                    try
+                    {
+                        // SQL実行
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    // SQLの実行に失敗した場合
+                    catch (SQLiteException)
+                    {
+                        // コネクションを閉じる
+                        con.Close();
+
+                        // メッセージを表示
+                        MessageBox.Show("テーブルの削除に失敗しました。", "テーブル削除エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                        return;
+                    }
 
                     // コミット
                     trans.Commit();
                 }
                 // コネクションを閉じる
                 con.Close();
+
+                // メッセージを表示
+                MessageBox.Show("テーブルの削除に成功しました。", "テーブル削除", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+        }
+        /// <summary>
+        /// トップ画面を表示する
+        /// </summary>
+        private void ShowTopFormButtonClick(object sender, EventArgs e)
+        {
+            // 現在の画面を非表示にする
+            Visible = false;
+            closing = true;
+
+            // トップ画面を表示
+            TopForm form = new TopForm();
+            form.Show();
         }
 
         /// <summary>

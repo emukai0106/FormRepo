@@ -79,14 +79,20 @@ namespace CarDatabase
 
                     // コンボボックスのDataSourceを指定
                     ManufacturerComboBox.DataSource = dataTable;
+
+                    // 何も選択されていない状態にする
+                    ManufacturerComboBox.SelectedIndex = -1;
                 }
 
-                // エラーが発生した場合は何もしない
-                catch (SQLiteException) { }
+                // メーカー名を取得できなかった場合
+                catch (SQLiteException)
+                {
+                    // 何も選択されていない状態にする
+                    ManufacturerComboBox.SelectedIndex = -1;
 
-
-                // 何も選択されていない状態にする
-                ManufacturerComboBox.SelectedIndex = -1;
+                    // メッセージを表示
+                    MessageBox.Show("メーカー名の読み込みに失敗しました。\nメーカーテーブルが存在しない可能性があります。", "読み込み失敗", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
             }
         }
 

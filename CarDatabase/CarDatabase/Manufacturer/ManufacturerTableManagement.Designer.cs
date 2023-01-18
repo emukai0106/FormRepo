@@ -50,6 +50,7 @@ namespace CarDatabase
             this.CreateVehicleTableButton.Size = new System.Drawing.Size(266, 93);
             this.CreateVehicleTableButton.TabIndex = 0;
             this.CreateVehicleTableButton.Text = "テーブル作成";
+            this.CreateVehicleTableButton.Click += new System.EventHandler(this.CreateVehicleTableButtonClick);
             // 
             // ShowTopFormButton
             // 

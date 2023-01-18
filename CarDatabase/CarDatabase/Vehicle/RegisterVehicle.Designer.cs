@@ -34,7 +34,7 @@ namespace CarDatabase
             this.label1 = new System.Windows.Forms.Label();
             this.ModelYearTextbox = new System.Windows.Forms.TextBox();
             this.ManufacturerComboBox = new System.Windows.Forms.ComboBox();
-            this.nameTextbox = new System.Windows.Forms.TextBox();
+            this.NameTextbox = new System.Windows.Forms.TextBox();
             this.nameLabel = new System.Windows.Forms.Label();
             this.RegisterVehicleButton = new System.Windows.Forms.Button();
             this.ShowTopFormButton = new System.Windows.Forms.Button();
@@ -47,7 +47,7 @@ namespace CarDatabase
             this.groupBox.Controls.Add(this.label1);
             this.groupBox.Controls.Add(this.ModelYearTextbox);
             this.groupBox.Controls.Add(this.ManufacturerComboBox);
-            this.groupBox.Controls.Add(this.nameTextbox);
+            this.groupBox.Controls.Add(this.NameTextbox);
             this.groupBox.Controls.Add(this.nameLabel);
             this.groupBox.Location = new System.Drawing.Point(155, 12);
             this.groupBox.Name = "groupBox";
@@ -90,12 +90,13 @@ namespace CarDatabase
             this.ManufacturerComboBox.Size = new System.Drawing.Size(206, 23);
             this.ManufacturerComboBox.TabIndex = 3;
             // 
-            // nameTextbox
+            // NameTextbox
             // 
-            this.nameTextbox.Location = new System.Drawing.Point(10, 46);
-            this.nameTextbox.Name = "nameTextbox";
-            this.nameTextbox.Size = new System.Drawing.Size(234, 22);
-            this.nameTextbox.TabIndex = 1;
+            this.NameTextbox.Location = new System.Drawing.Point(10, 46);
+            this.NameTextbox.Name = "NameTextbox";
+            this.NameTextbox.Size = new System.Drawing.Size(234, 22);
+            this.NameTextbox.TabIndex = 1;
+            this.NameTextbox.TextChanged += new System.EventHandler(this.nameTextbox_TextChanged);
             // 
             // nameLabel
             // 
@@ -150,7 +151,7 @@ namespace CarDatabase
         private System.Windows.Forms.GroupBox groupBox;
         private System.Windows.Forms.Label nameLabel;
         private System.Windows.Forms.Button RegisterVehicleButton;
-        private System.Windows.Forms.TextBox nameTextbox;
+        private System.Windows.Forms.TextBox NameTextbox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label modelYearLabel;
         private System.Windows.Forms.TextBox ModelYearTextbox;

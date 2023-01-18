@@ -44,14 +44,20 @@ namespace CarDatabase
 
                     // コンボボックスのDataSourceを指定
                     ManufacturerComboBox.DataSource = dataTable;
+
+                    // 何も選択されていない状態にする
+                    ManufacturerComboBox.SelectedIndex = -1;
                 }
 
-                // エラーが発生した場合は何もしない
-                catch (SQLiteException) { }
+                // メーカー名を取得できなかった場合
+                catch (SQLiteException)
+                {
+                    // 何も選択されていない状態にする
+                    ManufacturerComboBox.SelectedIndex = -1;
 
-
-                // 何も選択されていない状態にする
-                ManufacturerComboBox.SelectedIndex = -1;
+                    // メッセージを表示
+                    MessageBox.Show("メーカー名の読み込みに失敗しました。\nメーカーテーブルが存在しない可能性があります。", "読み込み失敗", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
             }
         }
 
@@ -91,7 +97,7 @@ namespace CarDatabase
                     SQLiteCommand cmd = con.CreateCommand();
 
                     // 車両名を取得
-                    string nameString = ConvertString(nameTextbox.Text);
+                    string nameString = ConvertString(NameTextbox.Text);
 
                     //メーカー名を取得
                     string manufacturer = ConvertString(ManufacturerComboBox.Text);
@@ -137,8 +143,11 @@ namespace CarDatabase
                     }
 
                     // 検索結果の件数(int64型のためlong)が1以上の場合
-                    if ((long)cmd.ExecuteScalar() >= 1)
+                    if (cmd.ExecuteScalar() != null && (long)cmd.ExecuteScalar() >= 1)
                     {
+                        // コネクションを閉じる
+                        con.Close();
+
                         // エラーメッセージを表示
                         MessageBox.Show("その車両はすでに登録されています。\n車両名、メーカー、年式のいずれかを変更してください。", "データ重複",
                             MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -156,18 +165,26 @@ namespace CarDatabase
                         // SQL実行
                         cmd.ExecuteNonQuery();
                     }
+
+                    // SQLの実行に失敗した場合
                     catch (SQLiteException)
                     {
+                        // コネクションを閉じる
+                        con.Close();
 
+                        // エラーメッセージを表示
+                        MessageBox.Show("車両情報の登録に失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                        return;
                     }
-
-                    
-
                     // コミット
                     trans.Commit();
                 }
                 // コネクションを閉じる
                 con.Close();
+
+                // エラーメッセージを表示
+                MessageBox.Show("車両情報の登録に成功しました。", "完了", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -212,6 +229,11 @@ namespace CarDatabase
             {
                 e.Cancel = true;
             }
+        }
+
+        private void nameTextbox_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
