@@ -11,7 +11,8 @@ namespace CarDatabase
         private bool closing = false;
 
         // 車両情報テーブルSELECT文用コマンド
-        private string selectComandText = "SELECT * FROM m_vehicle";
+        private string selectComandText = "SELECT V.id AS '車両ID', V.name AS '車両名', M.name AS 'メーカー名', V.model_year AS '年式', " +
+            "V.date_time AS '更新日時' FROM m_vehicle AS V LEFT OUTER JOIN m_manufacturer AS M ON V.manufacturer_id = M.id";
 
         // 件数取得用コマンド
         private string countComandText = "SELECT COUNT (*) FROM m_vehicle";
@@ -382,11 +383,33 @@ namespace CarDatabase
                     // 件数取得用コマンド文字列を結合
                     cmd.CommandText = countComandText + commandText;
 
-                    // 検索結果の件数(int64型のためlong)が0の場合
-                    if (cmd.ExecuteScalar() != null && (long)cmd.ExecuteScalar() == 0)
+                    try
                     {
+                        // 検索結果の件数(int64型のためlong)が0の場合
+                        if (cmd.ExecuteScalar() != null && (long)cmd.ExecuteScalar() == 0)
+                        {
+                            // ロールバック
+                            trans.Rollback();
+
+                            // コネクションを閉じる
+                            con.Close();
+
+                            // メッセージを表示
+                            MessageBox.Show("検索条件に該当するデータがありません。", "該当なし", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                            // 以降の処理は行わない
+                            return;
+                        }
+                    }
+
+                    // SQLの実行に失敗した場合
+                    catch (SQLiteException)
+                    {
+                        // コネクションを閉じる
+                        con.Close();
+
                         // メッセージを表示
-                        MessageBox.Show("検索条件に該当するデータがありません。", "該当なし", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("検索時にエラーが発生しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                         // 以降の処理は行わない
                         return;
@@ -398,10 +421,11 @@ namespace CarDatabase
                     // 検索用コマンド文字列を結合
                     cmd.CommandText = selectComandText + commandText;
 
-                    // 削除確認ポップアップ用アダプターを作成
+                    // 検索結果表示用アダプターを作成
                     SQLiteDataAdapter adapter = new SQLiteDataAdapter(cmd);
                     adapter.Fill(dataTable);
 
+                    // 検索結果をグリッドビューに表示
                     SearchResultDataGridView.DataSource = dataTable;
                 }
                 // コネクションを閉じる

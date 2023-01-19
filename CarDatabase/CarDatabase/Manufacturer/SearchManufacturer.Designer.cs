@@ -67,7 +67,7 @@ namespace CarDatabase
             // 
             // SearchResultDataGridView
             // 
-            this.SearchResultDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.SearchResultDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.SearchResultDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.SearchResultDataGridView.Location = new System.Drawing.Point(10, 21);
             this.SearchResultDataGridView.Name = "SearchResultDataGridView";

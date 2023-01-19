@@ -11,7 +11,8 @@ namespace CarDatabase
         private bool closing = false;
 
         // 車両情報テーブルSELECT文用コマンド
-        private string selectComandText = "SELECT * FROM m_vehicle";
+        private string selectComandText = "SELECT V.id AS '車両ID', V.name AS '車両名', M.name AS 'メーカー名', V.model_year AS '年式', " +
+            "V.date_time AS '更新日時' FROM m_vehicle AS V LEFT OUTER JOIN m_manufacturer AS M ON V.manufacturer_id = M.id";
 
         // 件数取得用コマンド
         private string countComandText = "SELECT COUNT (*) FROM m_vehicle";
@@ -294,6 +295,9 @@ namespace CarDatabase
                             // minをDataTimeに変換できなかった場合
                             else
                             {
+                                // ロールバック
+                                trans.Rollback();
+
                                 // コネクションを閉じる
                                 con.Close();
 
@@ -420,6 +424,9 @@ namespace CarDatabase
                     // キャンセルが押された場合は何もせずreturn
                     if (popUpResult == DialogResult.Cancel)
                     {
+                        // ロールバック
+                        trans.Rollback();
+
                         // コネクションを閉じる
                         con.Close();
 
@@ -433,27 +440,30 @@ namespace CarDatabase
                     {
                         // SQL実行
                         cmd.ExecuteNonQuery();
+
+                        // コミット
+                        trans.Commit();
+
+                        // コネクションを閉じる
+                        con.Close();
+
+                        // メッセージを表示
+                        MessageBox.Show("車両情報の削除に成功しました。", "完了", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
 
                     // SQLの実行に失敗した場合
                     catch (SQLiteException)
                     {
+                        // ロールバック
+                        trans.Rollback();
+
                         // コネクションを閉じる
                         con.Close();
 
                         // エラーメッセージを表示
                         MessageBox.Show("車両情報の削除に失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                        return;
                     }
-                    // コミット
-                    trans.Commit();
                 }
-                // コネクションを閉じる
-                con.Close();
-
-                // エラーメッセージを表示
-                MessageBox.Show("車両情報の削除に成功しました。", "完了", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 

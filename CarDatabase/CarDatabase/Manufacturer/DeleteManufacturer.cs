@@ -11,7 +11,7 @@ namespace CarDatabase
         private bool closing = false;
 
         // メーカー情報テーブルSELECT文用コマンド
-        private string selectComandText = "SELECT * FROM m_manufacturer";
+        private string selectComandText = "SELECT id AS 'メーカーID', name AS 'メーカー名', date_time AS '更新日時' FROM m_manufacturer";
 
         // 件数取得用コマンド
         private string countComandText = "SELECT COUNT (*) FROM m_manufacturer";
@@ -268,6 +268,9 @@ namespace CarDatabase
                     // 検索結果の件数(int64型のためlong)が0の場合
                     if (cmd.ExecuteScalar() != null && (long)cmd.ExecuteScalar() == 0)
                     {
+                        // ロールバック
+                        trans.Rollback();
+
                         // コネクションを閉じる
                         con.Close();
 
@@ -306,14 +309,34 @@ namespace CarDatabase
                     // 削除用コマンド文字列を結合
                     cmd.CommandText = deleteComandText + commandText;
 
-                    // SQL実行
-                    cmd.ExecuteNonQuery();
+                    try
+                    {
+                        // SQL実行
+                        cmd.ExecuteNonQuery();
 
-                    // コミット
-                    trans.Commit();
+                        // コミット
+                        trans.Commit();
+
+                        // コネクションを閉じる
+                        con.Close();
+
+                        // メッセージを表示
+                        MessageBox.Show("メーカー情報の削除に成功しました。", "完了", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+
+                    // SQLの実行に失敗した場合
+                    catch (SQLiteException)
+                    {
+                        // ロールバック
+                        trans.Rollback();
+
+                        // コネクションを閉じる
+                        con.Close();
+
+                        // エラーメッセージを表示
+                        MessageBox.Show("メーカー情報の削除に失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
-                // コネクションを閉じる
-                con.Close();
             }
         }
 

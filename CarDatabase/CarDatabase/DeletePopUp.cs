@@ -12,7 +12,7 @@ namespace CarDatabase
 
         public void PopUpSql(DataTable dataTable)
         {
-            // データを設定
+            // グリッドビューにデータを表示
             deleteVehicleDataGridView.DataSource = dataTable;
         }
     }

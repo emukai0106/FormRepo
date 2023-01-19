@@ -81,6 +81,9 @@ namespace CarDatabase
                     // 検索結果の件数(int64型のためlong)が1以上の場合
                     if (cmd.ExecuteScalar() != null && (long)cmd.ExecuteScalar() >= 1)
                     {
+                        // ロールバック
+                        trans.Rollback();
+
                         // コネクションを閉じる
                         con.Close();
 
@@ -93,17 +96,29 @@ namespace CarDatabase
                     }
 
                     // データ追加コマンド文を設定
-                    cmd.CommandText = "INSERT INTO m_manufacturer (name) VALUES (@Name, @DateTime)";
+                    cmd.CommandText = "INSERT INTO m_manufacturer (name, date_time) VALUES (@Name, @DateTime)";
 
                     try
                     {
                         // SQL実行
                         cmd.ExecuteNonQuery();
+
+                        // コミット
+                        trans.Commit();
+
+                        // コネクションを閉じる
+                        con.Close();
+
+                        // メッセージを表示
+                        MessageBox.Show("メーカー情報の登録に成功しました。", "完了", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
 
                     // SQLの実行に失敗した場合
                     catch (SQLiteException)
                     {
+                        // ロールバック
+                        trans.Rollback();
+
                         // コネクションを閉じる
                         con.Close();
 
@@ -112,14 +127,7 @@ namespace CarDatabase
 
                         return;
                     }
-                    // コミット
-                    trans.Commit();
                 }
-                // コネクションを閉じる
-                con.Close();
-
-                // エラーメッセージを表示
-                MessageBox.Show("メーカー情報の登録に成功しました。", "完了", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 

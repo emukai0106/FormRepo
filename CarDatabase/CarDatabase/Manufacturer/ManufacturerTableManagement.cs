@@ -34,7 +34,8 @@ namespace CarDatabase
                 using (SQLiteCommand cmd = con.CreateCommand())
                 {
                     // テーブルm_manufacturerを作成する
-                    cmd.CommandText = ("CREATE TABLE m_manufacturer(id INTEGER PRIMARY KEY  AUTOINCREMENT, name TEXT NOT NULL UNIQUE)");
+                    cmd.CommandText = ("CREATE TABLE m_manufacturer(id INTEGER PRIMARY KEY  AUTOINCREMENT, name TEXT NOT NULL UNIQUE, " +
+                        "date_time TEXT NOT NULL)");
 
                     try
                     {
