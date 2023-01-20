@@ -39,6 +39,7 @@ namespace CarDatabase
             this.ShowDeleteManufacturerFormButton = new System.Windows.Forms.Button();
             this.ShowManufacturerTableFormButton = new System.Windows.Forms.Button();
             this.ShowRegisterManufacturerFormButton = new System.Windows.Forms.Button();
+            this.QuitButton = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -149,13 +150,24 @@ namespace CarDatabase
             this.ShowRegisterManufacturerFormButton.UseVisualStyleBackColor = true;
             this.ShowRegisterManufacturerFormButton.Click += new System.EventHandler(this.ShowRegisterManufacturerFormButtonClick);
             // 
+            // QuitButton
+            // 
+            this.QuitButton.Location = new System.Drawing.Point(470, 447);
+            this.QuitButton.Name = "QuitButton";
+            this.QuitButton.Size = new System.Drawing.Size(130, 74);
+            this.QuitButton.TabIndex = 3;
+            this.QuitButton.Text = "終了";
+            this.QuitButton.UseVisualStyleBackColor = true;
+            this.QuitButton.Click += new System.EventHandler(this.QuitButtonClick);
+            // 
             // TopForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(720, 453);
+            this.ClientSize = new System.Drawing.Size(720, 544);
+            this.Controls.Add(this.QuitButton);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "TopForm";
@@ -180,5 +192,6 @@ namespace CarDatabase
         private System.Windows.Forms.Button ShowSearchManufacturerFormButton;
         private System.Windows.Forms.Button ShowDeleteManufacturerFormButton;
         private System.Windows.Forms.Button ShowRegisterManufacturerFormButton;
+        private System.Windows.Forms.Button QuitButton;
     }
 }

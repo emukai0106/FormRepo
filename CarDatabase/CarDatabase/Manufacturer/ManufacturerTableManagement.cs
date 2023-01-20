@@ -21,7 +21,7 @@ namespace CarDatabase
 
 
         /// <summary>
-        /// テーブル作成ボタンがクリックされたときの動作
+        /// テーブル作成ボタンがクリックされたとき
         /// </summary>
         private void CreateVehicleTableButtonClick(object sender, EventArgs e)
         {
@@ -65,7 +65,7 @@ namespace CarDatabase
         }
 
         /// <summary>
-        /// テーブル削除ボタンがクリックされたときの動作
+        /// テーブル削除ボタンがクリックされたとき
         /// </summary>
         private void DeleteVehicleTableButtonClick(object sender, EventArgs e)
         {

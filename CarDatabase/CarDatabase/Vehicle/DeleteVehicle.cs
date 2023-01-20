@@ -15,10 +15,10 @@ namespace CarDatabase
             "V.date_time AS '更新日時' FROM m_vehicle AS V LEFT OUTER JOIN m_manufacturer AS M ON V.manufacturer_id = M.id";
 
         // 件数取得用コマンド
-        private string countComandText = "SELECT COUNT (*) FROM m_vehicle";
+        private string countComandText = "SELECT COUNT (*) FROM m_vehicle AS V";
 
         // 車両情報テーブルDELETE文用コマンド
-        private string deleteComandText = "DELETE FROM m_vehicle";
+        private string deleteComandText = "DELETE FROM m_vehicle AS V";
 
         // 下限値文字列
         string min = "";
@@ -101,7 +101,7 @@ namespace CarDatabase
         }
 
         /// <summary>
-        /// 車両情報削除ボタンが押されたときの動作
+        /// 車両情報削除ボタンが押されたとき
         /// </summary>
         private void DeleteVehicleButtonClick(object sender, EventArgs e)
         {
@@ -125,48 +125,44 @@ namespace CarDatabase
                     min = ConvertString(MinIdTextbox.Text);
                     max = ConvertString(MaxIdTextbox.Text);
 
-                    // 上限・下限どちらか片方でも入力されている場合
-                    if (min != null || max != null)
+                    // 上限が未入力の場合
+                    if (min != null && max == null)
                     {
-                        // 上限が未入力の場合
-                        if (max == null)
-                        {
-                            // 車両IDが下限以上のものを指定
-                            commandText += "id >= @MinId AND ";
+                        // 車両IDが下限以上のものを指定
+                        commandText += "V.id >= @MinId AND ";
 
-                            // パラメータ追加
-                            cmd.Parameters.Add("MinId", DbType.Int64);
+                        // パラメータ追加
+                        cmd.Parameters.Add("MinId", DbType.Int64);
 
-                            // パラメータを設定
-                            cmd.Parameters["MinId"].Value = int.Parse(min);
-                        }
-                        // 下限が未入力の場合
-                        else if (min == null)
-                        {
-                            // 車両IDが上限以下ものを指定
-                            commandText += "id <= @MaxId AND ";
+                        // パラメータを設定
+                        cmd.Parameters["MinId"].Value = int.Parse(min);
+                    }
+                    // 下限が未入力の場合
+                    else if (min == null && max != null)
+                    {
+                        // 車両IDが上限以下ものを指定
+                        commandText += "V.id <= @MaxId AND ";
 
-                            // パラメータ追加
-                            cmd.Parameters.Add("MaxId", DbType.Int64);
+                        // パラメータ追加
+                        cmd.Parameters.Add("MaxId", DbType.Int64);
 
-                            // パラメータを設定
-                            cmd.Parameters["MaxId"].Value = int.Parse(max);
-                        }
+                        // パラメータを設定
+                        cmd.Parameters["MaxId"].Value = int.Parse(max);
+                    }
 
-                        // 上限・下限ともに入力されている場合
-                        else
-                        {
-                            // 車両IDが下限から上限までのものを指定
-                            commandText += "id BETWEEN @MinId AND @MaxId AND ";
+                    // 上限、下限ともに入力されている場合
+                    else if (min != null && max != null)
+                    {
+                        // 車両IDが下限から上限までのものを指定
+                        commandText += "V.id BETWEEN @MinId AND @MaxId AND ";
 
-                            // パラメータ追加
-                            cmd.Parameters.Add("MinId", DbType.Int64);
-                            cmd.Parameters.Add("MaxId", DbType.Int64);
+                        // パラメータ追加
+                        cmd.Parameters.Add("MinId", DbType.Int64);
+                        cmd.Parameters.Add("MaxId", DbType.Int64);
 
-                            // パラメータを設定
-                            cmd.Parameters["MinId"].Value = int.Parse(min);
-                            cmd.Parameters["MaxId"].Value = int.Parse(max);
-                        }
+                        // パラメータを設定
+                        cmd.Parameters["MinId"].Value = int.Parse(min);
+                        cmd.Parameters["MaxId"].Value = int.Parse(max);
                     }
                     #endregion
 
@@ -176,49 +172,45 @@ namespace CarDatabase
                     min = ConvertString(MinModelYearTextbox.Text);
                     max = ConvertString(MaxModelYearTextbox.Text);
 
-                    // 上限・下限どちらか片方でも入力されている場合
-                    if (min != null || max != null)
+                    // 上限が未入力の場合
+                    if (min != null && max == null)
                     {
-                        // 上限が未入力の場合
-                        if (max == null)
-                        {
-                            // 年式が下限以上のものを指定
-                            commandText += "model_year >= @MinModelYear AND ";
+                        // 年式が下限以上のものを指定
+                        commandText += "V.model_year >= @MinModelYear AND ";
 
-                            // パラメータ追加
-                            cmd.Parameters.Add("MinModelYear", DbType.Int64);
+                        // パラメータ追加
+                        cmd.Parameters.Add("MinModelYear", DbType.Int64);
 
-                            // パラメータを設定
-                            cmd.Parameters["MinModelYear"].Value = int.Parse(min);
-                        }
+                        // パラメータを設定
+                        cmd.Parameters["MinModelYear"].Value = int.Parse(min);
+                    }
 
-                        // 下限が未入力の場合
-                        else if (min == null)
-                        {
-                            // 年式が上限以下のものを指定
-                            commandText += "model_year <= @MaxModelYear AND ";
+                    // 下限が未入力の場合
+                    else if (min == null && max != null)
+                    {
+                        // 年式が上限以下のものを指定
+                        commandText += "V.model_year <= @MaxModelYear AND ";
 
-                            // パラメータ追加
-                            cmd.Parameters.Add("MaxModelYear", DbType.Int64);
+                        // パラメータ追加
+                        cmd.Parameters.Add("MaxModelYear", DbType.Int64);
 
-                            // パラメータを設定
-                            cmd.Parameters["MaxModelYear"].Value = int.Parse(max);
-                        }
+                        // パラメータを設定
+                        cmd.Parameters["MaxModelYear"].Value = int.Parse(max);
+                    }
 
-                        // 上限、下限ともに入力されている場合
-                        else
-                        {
-                            // 年式が下限から上限までのものを指定
-                            commandText += "model_year BETWEEN @MinModelYear AND @MaxModelYear AND ";
+                    // 上限、下限ともに入力されている場合
+                    else if (min != null && max != null)
+                    {
+                        // 年式が下限から上限までのものを指定
+                        commandText += "V.model_year BETWEEN @MinModelYear AND @MaxModelYear AND ";
 
-                            // パラメータ追加
-                            cmd.Parameters.Add("MinModelYear", DbType.Int64);
-                            cmd.Parameters.Add("MaxModelYear", DbType.Int64);
+                        // パラメータ追加
+                        cmd.Parameters.Add("MinModelYear", DbType.Int64);
+                        cmd.Parameters.Add("MaxModelYear", DbType.Int64);
 
-                            // パラメータを設定
-                            cmd.Parameters["MinModelYear"].Value = int.Parse(min);
-                            cmd.Parameters["MaxModelYear"].Value = int.Parse(max);
-                        }
+                        // パラメータを設定
+                        cmd.Parameters["MinModelYear"].Value = int.Parse(min);
+                        cmd.Parameters["MaxModelYear"].Value = int.Parse(max);
                     }
                     #endregion
 
@@ -231,7 +223,7 @@ namespace CarDatabase
                     if (nameString != null)
                     {
                         // 車両名が一致するものを指定
-                        commandText += "name LIKE '%' || @Name || '%' AND ";
+                        commandText += "V.name LIKE '%' || @Name || '%' AND ";
 
                         // パラメータ追加
                         cmd.Parameters.Add("Name", DbType.String);
@@ -251,7 +243,7 @@ namespace CarDatabase
                     if (nameString != null)
                     {
                         // メーカー名が一致するデータのメーカーIDをm_manufacturerから取得して指定
-                        commandText += "manufacturer_id IN (SELECT id FROM m_manufacturer WHERE name LIKE '%' || @ManufacturerName || '%')";
+                        commandText += "V.manufacturer_id IN (SELECT id FROM m_manufacturer WHERE name LIKE '%' || @ManufacturerName || '%')";
 
                         // パラメータ追加
                         cmd.Parameters.Add("ManufacturerName", DbType.String);
@@ -271,83 +263,85 @@ namespace CarDatabase
                     DateTime maxDateTime;
                     DateTime minDateTime;
 
-                    // 上限・下限どちらか片方でも入力されている場合
-                    if (min != null || max != null)
+                    // 下限のみ入力されている場合
+                    if (min != null && max == null)
                     {
-                        // 下限のみ入力されている場合
-                        if (max == null)
-                        {
-                            // 下限をDataTimeに変換できた場合
-                            if (System.DateTime.TryParse(min, out minDateTime))
-                            {
-                                // 文字列を日付型に変換(Parse)→文字列型に再変換(ToString)
-                                min = minDateTime.ToString("yyyy/MM/dd HH:mm:ss");
-
-                                // 更新日時が下限以上のものを指定
-                                commandText += "date_time >= @MinDateTime AND ";
-
-                                // パラメータ追加
-                                cmd.Parameters.Add("MinDateTime", DbType.String);
-
-                                // パラメータを設定
-                                cmd.Parameters["MinDateTime"].Value = min;
-                            }
-                            // minをDataTimeに変換できなかった場合
-                            else
-                            {
-                                // ロールバック
-                                trans.Rollback();
-
-                                // コネクションを閉じる
-                                con.Close();
-
-                                // エラー通知ダイアログ表示
-                                MessageBox.Show("日付の入力形式が間違っています。\n入力例:2022/01/01", "入力形式エラー",
-                                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                                return;
-                            }
-                        }
-                        // 上限のみ入力されている場合
-                        else if (min == null)
-                        {
-                            // 上限をDataTimeに変換できた場合
-                            if (System.DateTime.TryParse(max, out maxDateTime))
-                            {
-                                // 文字列を日付型に変換(Parse)→文字列型に再変換(ToString)
-                                max = maxDateTime.ToString("yyyy/MM/dd HH:mm:ss");
-
-                                // 更新日時が上限以下のものを指定
-                                commandText += "date_time <= @MaxDateTime AND ";
-
-                                // パラメータ追加
-                                cmd.Parameters.Add("MaxDateTime", DbType.String);
-
-                                // パラメータを設定
-                                cmd.Parameters["MaxDateTime"].Value = max;
-                            }
-                            // maxをDataTimeに変換できなかった場合
-                            else
-                            {
-                                // コネクションを閉じる
-                                con.Close();
-
-                                // エラー通知ダイアログ表示
-                                MessageBox.Show("日付の入力形式が間違っています。\n入力例:2022/01/01", "入力形式エラー",
-                                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                                return;
-                            }
-                        }
-                        // 上限、下限ともに入力されている場合
-                        else
+                        // 下限をDataTimeに変換できた場合
+                        if (DateTime.TryParse(min, out minDateTime))
                         {
                             // 文字列を日付型に変換(Parse)→文字列型に再変換(ToString)
-                            min = System.DateTime.Parse(min).ToString("yyyy/MM/dd HH:mm:ss");
-                            max = System.DateTime.Parse(max).ToString("yyyy/MM/dd HH:mm:ss");
+                            min = minDateTime.ToString("yyyy/MM/dd HH:mm:ss");
+
+                            // 更新日時が下限以上のものを指定
+                            commandText += "V.date_time >= @MinDateTime AND ";
+
+                            // パラメータ追加
+                            cmd.Parameters.Add("MinDateTime", DbType.String);
+
+                            // パラメータを設定
+                            cmd.Parameters["MinDateTime"].Value = min;
+                        }
+                        // 下限をDataTimeに変換できなかった場合
+                        else
+                        {
+                            // ロールバック
+                            trans.Rollback();
+
+                            // コネクションを閉じる
+                            con.Close();
+
+                            // エラーメッセージを表示
+                            MessageBox.Show("日付の入力形式が間違っています。\n入力例:2022/01/01", "入力形式エラー",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                    }
+                    // 上限のみ入力されている場合
+                    else if (min == null && max != null)
+                    {
+                        // 上限をDataTimeに変換できた場合
+                        if (DateTime.TryParse(max, out maxDateTime))
+                        {
+                            // 文字列を日付型に変換(Parse)→文字列型に再変換(ToString)
+                            max = maxDateTime.ToString("yyyy/MM/dd HH:mm:ss");
+
+                            // 更新日時が上限以下のものを指定
+                            commandText += "V.date_time <= @MaxDateTime AND ";
+
+                            // パラメータ追加
+                            cmd.Parameters.Add("MaxDateTime", DbType.String);
+
+                            // パラメータを設定
+                            cmd.Parameters["MaxDateTime"].Value = max;
+                        }
+                        // 上限をDataTimeに変換できなかった場合
+                        else
+                        {
+                            // ロールバック
+                            trans.Rollback();
+
+                            // コネクションを閉じる
+                            con.Close();
+
+                            // エラーメッセージを表示
+                            MessageBox.Show("日付の入力形式が間違っています。\n入力例:2022/01/01", "入力形式エラー",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                    }
+                    // 上限、下限ともに入力されている場合
+                    else if (min != null && max != null)
+                    {
+                        // 上限、下限ともにDataTimeに変換できた場合
+                        if (DateTime.TryParse(max, out maxDateTime) && DateTime.TryParse(min, out minDateTime))
+                        {
+
+                            // 文字列を日付型に変換(Parse)→文字列型に再変換(ToString)
+                            min = minDateTime.ToString("yyyy/MM/dd HH:mm:ss");
+                            max = maxDateTime.ToString("yyyy/MM/dd HH:mm:ss");
 
                             // IDがMinIdからMaxIdまでを削除
-                            commandText += "date_time BETWEEN @MinDateTime AND @MaxDateTime AND ";
+                            commandText += "V.date_time BETWEEN @MinDateTime AND @MaxDateTime AND ";
 
                             // パラメータ追加
                             cmd.Parameters.Add("MinDateTime", DbType.String);
@@ -357,8 +351,22 @@ namespace CarDatabase
                             cmd.Parameters["MinDateTime"].Value = min;
                             cmd.Parameters["MaxDateTime"].Value = max;
                         }
-                        // MaxDateTime、MinDateTimeはstring型で読み込まれるが、SQL内では日付として処理される
+                        // 上限、下限のどちらかをDataTimeに変換できなかった場合
+                        else
+                        {
+                            // ロールバック
+                            trans.Rollback();
+
+                            // コネクションを閉じる
+                            con.Close();
+
+                            // エラーメッセージを表示
+                            MessageBox.Show("日付の入力形式が間違っています。\n入力例:2022/01/01", "入力形式エラー",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
                     }
+                    // MaxDateTime、MinDateTimeはstring型で読み込まれるが、SQL内では日付として処理される
                     #endregion
 
                     // コマンドから削除する文字数
@@ -389,14 +397,36 @@ namespace CarDatabase
                     // 件数取得用コマンド文字列を結合
                     cmd.CommandText = countComandText + commandText;
 
-                    // 検索結果の件数(int64型のためlong)が0の場合
-                    if (cmd.ExecuteScalar() != null && (long)cmd.ExecuteScalar() == 0)
+                    try
                     {
+                        // 検索結果の件数(int64型のためlong)が0の場合
+                        if (cmd.ExecuteScalar() != null && (long)cmd.ExecuteScalar() == 0)
+                        {
+                            // ロールバック
+                            trans.Rollback();
+
+                            // コネクションを閉じる
+                            con.Close();
+
+                            // メッセージを表示
+                            MessageBox.Show("検索条件に該当するデータがありません。", "該当なし", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                            // 以降の処理は行わない
+                            return;
+                        }
+                    }
+
+                    // SQLの実行に失敗した場合
+                    catch (SQLiteException)
+                    {
+                        // ロールバック
+                        trans.Rollback();
+
                         // コネクションを閉じる
                         con.Close();
 
                         // メッセージを表示
-                        MessageBox.Show("検索条件に該当するデータがありません。", "該当なし", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("検索時にエラーが発生しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                         // 以降の処理は行わない
                         return;
@@ -507,6 +537,21 @@ namespace CarDatabase
             else
             {
                 e.Cancel = true;
+            }
+        }
+
+        private void NumOnlyKeyHundle(object sender, KeyPressEventArgs e)
+        {
+            //バックスペース、Deleteが押された時は有効
+            if (e.KeyChar == '\b')
+            {
+                return;
+            }
+
+            //数値0～9以外が押された時は無効化する
+            if ((e.KeyChar < '0' || '9' < e.KeyChar))
+            {
+                e.Handled = true;
             }
         }
     }

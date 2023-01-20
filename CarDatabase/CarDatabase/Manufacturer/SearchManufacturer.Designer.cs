@@ -161,6 +161,7 @@ namespace CarDatabase
             this.MaxIdTextbox.Name = "MaxIdTextbox";
             this.MaxIdTextbox.Size = new System.Drawing.Size(100, 22);
             this.MaxIdTextbox.TabIndex = 4;
+            this.MaxIdTextbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NumOnlyKeyHundle);
             // 
             // MinIdTextbox
             // 
@@ -168,6 +169,7 @@ namespace CarDatabase
             this.MinIdTextbox.Name = "MinIdTextbox";
             this.MinIdTextbox.Size = new System.Drawing.Size(100, 22);
             this.MinIdTextbox.TabIndex = 1;
+            this.MinIdTextbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NumOnlyKeyHundle);
             // 
             // IdWaveLabel
             // 

@@ -84,6 +84,7 @@ namespace CarDatabase
             this.MaxIdTextbox.Name = "MaxIdTextbox";
             this.MaxIdTextbox.Size = new System.Drawing.Size(100, 22);
             this.MaxIdTextbox.TabIndex = 4;
+            this.MaxIdTextbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NumOnlyKeyHundle);
             // 
             // maxModelYearLabel
             // 
@@ -100,6 +101,7 @@ namespace CarDatabase
             this.MaxModelYearTextbox.Name = "MaxModelYearTextbox";
             this.MaxModelYearTextbox.Size = new System.Drawing.Size(100, 22);
             this.MaxModelYearTextbox.TabIndex = 4;
+            this.MaxModelYearTextbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NumOnlyKeyHundle);
             // 
             // minModelYearLabel
             // 
@@ -116,6 +118,7 @@ namespace CarDatabase
             this.MinModelYearTextbox.Name = "MinModelYearTextbox";
             this.MinModelYearTextbox.Size = new System.Drawing.Size(100, 22);
             this.MinModelYearTextbox.TabIndex = 1;
+            this.MinModelYearTextbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NumOnlyKeyHundle);
             // 
             // MaxIdLabel
             // 
@@ -132,6 +135,7 @@ namespace CarDatabase
             this.MinIdTextbox.Name = "MinIdTextbox";
             this.MinIdTextbox.Size = new System.Drawing.Size(100, 22);
             this.MinIdTextbox.TabIndex = 1;
+            this.MinIdTextbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NumOnlyKeyHundle);
             // 
             // DeleteVehicleButton
             // 
@@ -269,7 +273,7 @@ namespace CarDatabase
             // 
             this.ShowTopFormButton.Location = new System.Drawing.Point(12, 12);
             this.ShowTopFormButton.Name = "ShowTopFormButton";
-            this.ShowTopFormButton.Size = new System.Drawing.Size(130, 93);
+            this.ShowTopFormButton.Size = new System.Drawing.Size(130, 74);
             this.ShowTopFormButton.TabIndex = 0;
             this.ShowTopFormButton.Text = "トップ画面へ";
             this.ShowTopFormButton.UseVisualStyleBackColor = true;

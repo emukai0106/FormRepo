@@ -36,7 +36,7 @@ namespace CarDatabase
             // 
             // DeleteVehicleTableButton
             // 
-            this.DeleteVehicleTableButton.Location = new System.Drawing.Point(12, 111);
+            this.DeleteVehicleTableButton.Location = new System.Drawing.Point(148, 111);
             this.DeleteVehicleTableButton.Name = "DeleteVehicleTableButton";
             this.DeleteVehicleTableButton.Size = new System.Drawing.Size(266, 93);
             this.DeleteVehicleTableButton.TabIndex = 1;
@@ -45,7 +45,7 @@ namespace CarDatabase
             // 
             // CreateVehicleTableButton
             // 
-            this.CreateVehicleTableButton.Location = new System.Drawing.Point(12, 12);
+            this.CreateVehicleTableButton.Location = new System.Drawing.Point(148, 12);
             this.CreateVehicleTableButton.Name = "CreateVehicleTableButton";
             this.CreateVehicleTableButton.Size = new System.Drawing.Size(266, 93);
             this.CreateVehicleTableButton.TabIndex = 0;
@@ -54,7 +54,7 @@ namespace CarDatabase
             // 
             // ShowTopFormButton
             // 
-            this.ShowTopFormButton.Location = new System.Drawing.Point(284, 130);
+            this.ShowTopFormButton.Location = new System.Drawing.Point(12, 12);
             this.ShowTopFormButton.Name = "ShowTopFormButton";
             this.ShowTopFormButton.Size = new System.Drawing.Size(130, 74);
             this.ShowTopFormButton.TabIndex = 2;

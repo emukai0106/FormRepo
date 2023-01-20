@@ -82,7 +82,7 @@ namespace CarDatabase
         }
 
         /// <summary>
-        /// 車両情報登録ボタンが押されたときの動作
+        /// 車両情報登録ボタンが押されたとき
         /// </summary>
         private void RegisterVehicleButtonClick(object sender, EventArgs e)
         {
@@ -108,7 +108,13 @@ namespace CarDatabase
                     // 車両名が未入力だった場合
                     if (nameString == null)
                     {
-                        // エラー通知ダイアログ表示
+                        // ロールバック
+                        trans.Rollback();
+
+                        // コネクションを閉じる
+                        con.Close();
+
+                        // エラーメッセージを表示
                         MessageBox.Show("車両名が入力されていません。", "未入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
@@ -239,9 +245,19 @@ namespace CarDatabase
             }
         }
 
-        private void nameTextbox_TextChanged(object sender, EventArgs e)
+        private void NumOnlyKeyHundle(object sender, KeyPressEventArgs e)
         {
+            //バックスペース、Deleteが押された時は有効
+            if (e.KeyChar == '\b')
+            {
+                return;
+            }
 
+            //数値0～9以外が押された時は無効化する
+            if ((e.KeyChar < '0' || '9' < e.KeyChar))
+            {
+                e.Handled = true;
+            }
         }
     }
 }

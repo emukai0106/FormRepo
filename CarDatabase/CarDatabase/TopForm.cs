@@ -39,6 +39,15 @@ namespace CarDatabase
                     {
                         // SQL実行
                         cmd.ExecuteNonQuery();
+
+                        // ロールバック
+                        trans.Rollback();
+
+                        // コネクションを閉じる
+                        con.Close();
+
+                        // trueを返す
+                        return true;
                     }
 
                     // SQLの実行に失敗した場合
@@ -53,12 +62,7 @@ namespace CarDatabase
                         // falseを返す
                         return false;
                     }
-
-                    // trueを返す
-                    return true;
                 }
-                // コネクションを閉じる
-                con.Close();
             }
         }
 
@@ -83,11 +87,23 @@ namespace CarDatabase
                     {
                         // SQL実行
                         cmd.ExecuteNonQuery();
+
+                        // ロールバック
+                        trans.Rollback();
+
+                        // コネクションを閉じる
+                        con.Close();
+
+                        // trueを返す
+                        return true;
                     }
 
                     // SQLの実行に失敗した場合
                     catch (SQLiteException)
                     {
+                        // ロールバック
+                        trans.Rollback();
+
                         // コネクションを閉じる
                         con.Close();
 
@@ -97,12 +113,7 @@ namespace CarDatabase
                         // falseを返す
                         return false;
                     }
-
-                    // trueを返す
-                    return true;
                 }
-                // コネクションを閉じる
-                con.Close();
             }
         }
 
@@ -254,6 +265,34 @@ namespace CarDatabase
             // メーカー情報削除画面を表示
             DeleteManufacturer form = new DeleteManufacturer();
             form.Show();
+        }
+
+        /// <summary>
+        /// 終了ボタンが押されたとき
+        /// </summary>
+        private void QuitButtonClick(object sender, EventArgs e)
+        {
+            // すでに非表示なら何もしない
+            if (closing)
+            {
+                return;
+            }
+
+            // 終了確認ダイアログ表示
+            DialogResult dialogResult = MessageBox.Show("アプリケーションを終了します。\nよろしいですか？", "終了",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+
+            // はいが押された場合は終了
+            if (dialogResult == DialogResult.Yes)
+            {
+                closing = true;
+                Application.Exit();
+            }
+
+            else
+            {
+                return;
+            }
         }
 
         /// <summary>

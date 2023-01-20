@@ -80,6 +80,7 @@ namespace CarDatabase
             this.ModelYearTextbox.Name = "ModelYearTextbox";
             this.ModelYearTextbox.Size = new System.Drawing.Size(100, 22);
             this.ModelYearTextbox.TabIndex = 5;
+            this.ModelYearTextbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NumOnlyKeyHundle);
             // 
             // ManufacturerComboBox
             // 
@@ -96,7 +97,6 @@ namespace CarDatabase
             this.NameTextbox.Name = "NameTextbox";
             this.NameTextbox.Size = new System.Drawing.Size(234, 22);
             this.NameTextbox.TabIndex = 1;
-            this.NameTextbox.TextChanged += new System.EventHandler(this.nameTextbox_TextChanged);
             // 
             // nameLabel
             // 
@@ -121,7 +121,7 @@ namespace CarDatabase
             // 
             this.ShowTopFormButton.Location = new System.Drawing.Point(12, 12);
             this.ShowTopFormButton.Name = "ShowTopFormButton";
-            this.ShowTopFormButton.Size = new System.Drawing.Size(130, 93);
+            this.ShowTopFormButton.Size = new System.Drawing.Size(130, 74);
             this.ShowTopFormButton.TabIndex = 0;
             this.ShowTopFormButton.Text = "トップ画面へ";
             this.ShowTopFormButton.UseVisualStyleBackColor = true;

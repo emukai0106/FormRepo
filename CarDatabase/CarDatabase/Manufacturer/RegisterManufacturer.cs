@@ -40,7 +40,7 @@ namespace CarDatabase
         }
 
         /// <summary>
-        /// メーカー情報登録ボタンが押されたときの動作
+        /// メーカー情報登録ボタンが押されたとき
         /// </summary>
         private void RegisterManufacturerButtonClick(object sender, EventArgs e)
         {
@@ -62,7 +62,13 @@ namespace CarDatabase
                     // メーカー名が未入力だった場合
                     if (nameString == null)
                     {
-                        // エラー通知ダイアログ表示
+                        // ロールバック
+                        trans.Rollback();
+
+                        // コネクションを閉じる
+                        con.Close();
+
+                        // エラーメッセージを表示
                         MessageBox.Show("メーカー名が入力されていません。", "未入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
