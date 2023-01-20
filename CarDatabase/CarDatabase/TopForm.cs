@@ -57,7 +57,7 @@ namespace CarDatabase
                         con.Close();
 
                         // エラーメッセージを表示
-                        MessageBox.Show("メーカー情報テーブルが存在しません。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("車両情報テーブルが存在しません。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                         // falseを返す
                         return false;
